@@ -9,7 +9,7 @@ Blaise, LIU Tianmiao</br>
 - Use ***Camel Case*** to name functions and variables.
 - All decimal variables should be stored in `double` type.
 - Please write comment `//i am a very readable comment` (such that other people can understand your code).
-- Always remember to write documentation.
+- Always remember to write documentation. (https://docs.google.com/document/d/13uQGGi7WpBF1OvA0pr2PQz2koxENiWcGdmaEo99XVZk/edit?usp=sharing)
 - Use **MIL (Member Initialization List)** in class constructors
 
 ## Workflow
