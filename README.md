@@ -1,5 +1,5 @@
-# Underperforming-Students-vs-Teachers
-Author:
-Tim TSE Wai Chung (Leader)
-Thomas LI Ka Chun
-Blaise LIU Tianmiao
+# Underperforming Students vs Teachers
+## Author</br>
+Tim TSE Wai Chung (Leader)</br>
+Thomas LI Ka Chun</br>
+Blaise LIU Tianmiao</br>
