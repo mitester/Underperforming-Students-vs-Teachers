@@ -1,5 +1,5 @@
 # Underperforming Students vs Teachers
-## Author</br>
+## Authors</br>
 Tim, TSE Wai Chung</br>
 Thomas, LI Ka Chun</br>
 Blaise, LIU Tianmiao</br>
@@ -17,5 +17,5 @@ Blaise, LIU Tianmiao</br>
 1. All tasks are listed in `issue` section.
 2. Take tasks in `issue` by yourself.
 3. Feel free to add issues to `issue`.
-4. Create your own `branch` to commit your work.
+4. Create your own `branch` to commit your work. Name your branch as `[your github username]-patch`.
 5. After everything is finished, we merge branches together.
