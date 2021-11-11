@@ -4,7 +4,6 @@
 Human::Human()
 {
     hp = getMaxHp();
-    qDebug() << hp << endl;
 }
 
 int Human::getHp() {return hp;}
