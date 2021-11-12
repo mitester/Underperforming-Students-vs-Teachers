@@ -8,9 +8,9 @@
   - [Class Structue](#class-structue)
 
 ## Authors</br>
-Tim, TSE Wai Chung</br>
-Thomas, LI Ka Chun</br>
-Blaise, LIU Tianmiao</br>
+- Tim, TSE Wai Chung
+- Thomas, LI Ka Chun
+- Blaise, LIU Tianmiao
 
 ## Code Conventions
 - **DO NOT** write function definitions in header files, since the complier will not check mistakes.
