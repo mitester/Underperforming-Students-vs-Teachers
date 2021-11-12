@@ -10,19 +10,31 @@ CONFIG += c++11
 
 SOURCES += \
     attackstudent.cpp \
+    cgagod.cpp \
+    deadlinefighter.cpp \
+    gbusstudent.cpp \
     human.cpp \
     main.cpp \
     mainwindow.cpp \
+    shamelessstudent.cpp \
     sleepdeprivedstudent.cpp \
     student.cpp \
+    supportstudent.cpp \
+    teacherspet.cpp \
     timevariant.cpp
 
 HEADERS += \
     attackstudent.h \
+    cgagod.h \
+    deadlinefighter.h \
+    gbusstudent.h \
     human.h \
     mainwindow.h \
+    shamelessstudent.h \
     sleepdeprivedstudent.h \
     student.h \
+    supportstudent.h \
+    teacherspet.h \
     timevariant.h
 
 FORMS += \
