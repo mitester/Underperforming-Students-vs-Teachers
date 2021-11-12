@@ -1,5 +1,8 @@
 # Qt user config
-Underperforming-Students-vs-Teachers/*.pro.user
+*.pro.user
+
+# Qt compiled folder
+*-Debug/
 
 # MacOS stupid file
-Underperforming-Students-vs-Teachers/.DS_Store
+.DS_Store
