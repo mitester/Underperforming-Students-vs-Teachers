@@ -9,23 +9,33 @@
 
 class Human : public TimeVariant
 {
-public:
-    //restrict all subclasses to provide a name
-    virtual QString getName() = 0;
+protected:
+    //protected constructor, nobody could create a human instance except children
+    Human(QWidget *widget, QString name, int maxHp);
 
-    //restrict all subclasses to provide a max hp
-    virtual int getMaxHp() = 0;
+    QWidget *widget;
+
+    QString name;
+
+    int hp;
+
+    int maxHp;
+
+    //getter and setter for w
+    QWidget getWidget();
+    void setWidget(QWidget* widget);
+
+    //getter and setter for name
+    QString getName();
+    int setName(QString name);
+
+    //getter and setter for maxHp
+    int getMaxHp();
+    void setMaxHp(int maxHp);
 
     //getter and setter for hp
     int getHp();
     void setHp(int hp);
-
-protected:
-    //protected constructor, nobody could create a human instance except children
-    Human();
-
-private:
-    int hp;
 };
 
 #endif // HUMAN_H

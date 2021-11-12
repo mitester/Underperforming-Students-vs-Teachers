@@ -8,19 +8,26 @@
 
 class Student : public Human
 {
-public:
-    //restrict all subclasses to provide a deployment cost
-    virtual int getCost() = 0;
+protected:
+    //protected constructor
+    Student(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost);
 
-    //restrict all subclasses to provide a skill speed
-    virtual double getSkillSpeed() = 0;
+    //stores this student skillSpeed
+    double skillSpeed;
+
+    //stores this student deployment cost
+    int cost;
+
+    //getter and setter for skillSpeed
+    double getSkillSpeed();
+    void setSkillSpeed(double skillSpeed);
+
+    //getter and setter for skillSpeed
+    int getCost();
+    void setCost(int cost);
 
     //restrict all subclasses to provide a skill implementation
     virtual void skill() = 0;
-
-protected:
-    //protected constructor
-    Student();
 };
 
 #endif // STUDENT_H

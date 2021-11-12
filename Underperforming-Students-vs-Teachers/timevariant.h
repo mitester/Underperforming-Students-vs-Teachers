@@ -5,12 +5,23 @@
 #ifndef TIMEVARIANT_H
 #define TIMEVARIANT_H
 
+#include <QWidget>
 
 class TimeVariant
 {
-public:
-    TimeVariant();
-    virtual void update() = 0; //restricting all subclasses to react with the global timer signal
+protected:
+    TimeVariant(QWidget *widget);
+
+    QWidget *widget; //every TimeVariant owns a QWidget
+
+    //getter and setter for widget
+    QWidget* getWidget();
+    void setWidget(QWidget *widget);
+
+    //restricting all subclasses to react with the global timer signal
+    virtual void update() = 0;
+
+
 };
 
 #endif // TIMEVARIANT_H

@@ -1,11 +1,24 @@
 #include "human.h"
-#include <QDebug>
+#include "GameLiterals.h"
 
-Human::Human()
+Human::Human(QWidget *widget, QString name, int maxHp) : TimeVariant(widget), name(name), hp(maxHp), maxHp(maxHp)
 {
-    hp = getMaxHp();
+
 }
 
-int Human::getHp() {return hp;}
+//getter and setter for w
+QWidget getWidget();
+void setWidget(QWidget* widget);
 
-void Human::setHp(int hp) {this->hp = hp;}
+//getter and setter for name
+QString getName();
+int setName(QString name);
+
+//getter and setter for maxHp
+int getMaxHp();
+void setMaxHp(int maxHp);
+
+//getter and setter for hp
+int getHp();
+void setHp(int hp);
+
