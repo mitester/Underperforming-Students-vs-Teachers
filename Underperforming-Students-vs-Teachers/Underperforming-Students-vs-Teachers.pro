@@ -9,11 +9,33 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    attackstudent.cpp \
+    cgagod.cpp \
+    deadlinefighter.cpp \
+    gbusstudent.cpp \
+    human.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    shamelessstudent.cpp \
+    sleepdeprivedstudent.cpp \
+    student.cpp \
+    supportstudent.cpp \
+    teacherspet.cpp \
+    timevariant.cpp
 
 HEADERS += \
-    mainwindow.h
+    attackstudent.h \
+    cgagod.h \
+    deadlinefighter.h \
+    gbusstudent.h \
+    human.h \
+    mainwindow.h \
+    shamelessstudent.h \
+    sleepdeprivedstudent.h \
+    student.h \
+    supportstudent.h \
+    teacherspet.h \
+    timevariant.h
 
 FORMS += \
     mainwindow.ui
@@ -22,3 +44,7 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=
+
+RESOURCES +=

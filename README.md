@@ -1,4 +1,12 @@
 # Underperforming Students vs Teachers
+## Table of Contents
+- [Underperforming Students vs Teachers](#underperforming-students-vs-teachers)
+  - [Table of Contents](#table-of-contents)
+  - [Authors</br>](#authorsbr)
+  - [Code Conventions](#code-conventions)
+  - [Workflow](#workflow)
+  - [Class Structue](#class-structue)
+
 ## Authors</br>
 Tim, TSE Wai Chung</br>
 Thomas, LI Ka Chun</br>
@@ -18,3 +26,29 @@ Blaise, LIU Tianmiao</br>
 3. Feel free to add issues to `issue`.
 4. Create your own `branch` to commit your work. Name your branch as `[your github username]-patch`.
 5. After everything is finished, we merge branches together.
+
+## Class Structue
+```
+.
++-- TimeVariant
+|   +-- Human
+|       +-- Student
+|           +-- AttackStudent
+|               +-- SleepDeprivedStudent
+|               +-- DeadlineFighter
+|               +-- CgaGod
+|           +-- SupportStudent
+|               +-- ShamelessStudent
+|               +-- TeachersPet
+|               +-- GbusStudent
+|       +-- Teacher
+|           +-- TA
+|               +-- OverworkedTA
+|               +-- Kelvin
+|               +-- Pang
+|           +-- Desmond
+|       +-- Item
+|           +-- Redbull
+|           +-- Assignment
+|           +-- VendingMachine
+```

@@ -1,0 +1,9 @@
+# Qt user config
+*.pro.user
+
+# Qt compiled folder
+*-Debug/
+*-Release/
+
+# MacOS stupid file
+.DS_Store
