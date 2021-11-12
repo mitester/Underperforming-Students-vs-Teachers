@@ -1,6 +1,0 @@
-# Qt user config
-*.pro.user
-
-# MacOS stupid file
-.DS_Store
-
