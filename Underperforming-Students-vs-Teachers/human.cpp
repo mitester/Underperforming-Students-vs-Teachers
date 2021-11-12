@@ -1,5 +1,4 @@
 #include "human.h"
-#include "GameLiterals.h"
 
 Human::Human(QWidget *widget, QString name, int maxHp) : TimeVariant(widget), name(name), hp(maxHp), maxHp(maxHp)
 {

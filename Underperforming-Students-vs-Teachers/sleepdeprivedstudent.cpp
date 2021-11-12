@@ -1,19 +1,9 @@
 #include "sleepdeprivedstudent.h"
-#include "GameLiterals.h"
+
+const QString SleepDeprivedStudent::defaultName = "Sleep Deprived Student";
 
 SleepDeprivedStudent::SleepDeprivedStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)
     : AttackStudent(widget, name, maxHp, skillSpeed, cost, damage)
-{
-
-}
-
-SleepDeprivedStudent::SleepDeprivedStudent(QWidget *widget)
-    : AttackStudent(widget,
-                    sleepDeprivedStudentDefaultName,
-                    sleepDeprivedStudentDefaultMaxHp,
-                    sleepDeprivedStudentDefaultSkillSpeed,
-                    sleepDeprivedStudentDefaultCost,
-                    sleepDeprivedStudentDefaultDamage)
 {
 
 }

@@ -18,7 +18,6 @@ SOURCES += \
     timevariant.cpp
 
 HEADERS += \
-    GameLiterals.h \
     attackstudent.h \
     human.h \
     mainwindow.h \

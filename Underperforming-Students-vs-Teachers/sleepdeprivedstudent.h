@@ -10,10 +10,18 @@
 class SleepDeprivedStudent : public AttackStudent
 {
 public:
-    SleepDeprivedStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage);
+    static const QString defaultName;
+    static const int defaultMaxHp{10};
+    static constexpr double defaultSkillSpeed{10.0}; //compiler said it should be constexpr for static double
+    static const int defaultCost{10};
+    static const int defaultDamage{10};
 
-    //constructor for a Default SleepDeprivedStudent
-    SleepDeprivedStudent(QWidget* widget);
+    SleepDeprivedStudent(QWidget* widget,
+                         QString name = defaultName,
+                         int maxHp = defaultMaxHp,
+                         double skillSpeed = defaultSkillSpeed,
+                         int cost = defaultCost,
+                         int damage = defaultDamage);
 
     //the implementation of the pure virtual skill()
     void skill();
