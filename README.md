@@ -29,7 +29,6 @@ Blaise, LIU Tianmiao</br>
 
 ## Class Structue
 ```
-.
 +-- TimeVariant
 |   +-- Human
 |       +-- Student
