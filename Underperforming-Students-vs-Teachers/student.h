@@ -8,16 +8,6 @@
 
 class Student : public Human
 {
-protected:
-    //protected constructor
-    Student(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost);
-
-    //stores this student skillSpeed
-    double skillSpeed;
-
-    //stores this student deployment cost
-    int cost;
-
     //getter and setter for skillSpeed
     double getSkillSpeed() const;
     void setSkillSpeed(double skillSpeed);
@@ -28,6 +18,16 @@ protected:
 
     //restrict all subclasses to provide a skill implementation
     virtual void skill() = 0;
+
+protected:
+    //protected constructor
+    Student(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost);
+
+    //stores this student skillSpeed
+    double skillSpeed;
+
+    //stores this student deployment cost
+    int cost;
 };
 
 #endif // STUDENT_H

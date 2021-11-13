@@ -5,10 +5,6 @@ Human::Human(QWidget *widget, QString name, int maxHp) : TimeVariant(widget), na
 
 }
 
-//getter and setter for w
-QWidget* Human::getWidget() const {return widget;}
-void Human::setWidget(QWidget* widget) {this->widget = widget;}
-
 //getter and setter for name
 QString Human::getName() const {return name;}
 void Human::setName(QString name) {this->name = name;}

@@ -9,18 +9,18 @@
 
 class TimeVariant
 {
-protected:
-    TimeVariant(QWidget *widget);
-
-    QWidget *widget; //every TimeVariant owns a QWidget
-
+public:
     //getter and setter for widget
     QWidget* getWidget();
     void setWidget(QWidget *widget);
 
+protected:
+    TimeVariant(QWidget *widget);
+
     //restricting all subclasses to react with the global timer signal
     virtual void update() = 0;
 
+    QWidget *widget; //every TimeVariant owns a QWidget
 
 };
 
