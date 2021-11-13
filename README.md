@@ -45,7 +45,7 @@
 |           +-- Kelvin
 |           +-- Pang
 |           +-- Desmond
-|       +-- Item
+|   +-- Item
 |           +-- Redbull
 |           +-- Assignment
 |           +-- VendingMachine
