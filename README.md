@@ -46,7 +46,7 @@
 |           +-- Pang
 |           +-- Desmond
 |   +-- Item
-|           +-- Redbull
-|           +-- Assignment
-|           +-- VendingMachine
+|       +-- Redbull
+|       +-- Assignment
+|       +-- VendingMachine
 ```
