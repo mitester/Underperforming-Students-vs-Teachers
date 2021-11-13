@@ -7,8 +7,13 @@
 #include <QString>
 #include "timevariant.h"
 
+/*changed this a little bit: public get/set Hp*/
 class Human : public TimeVariant
 {
+public:
+    //getter and setter for hp
+    int getHp();
+    void setHp(int hp);
 protected:
     //protected constructor, nobody could create a human instance except children
     Human(QWidget *widget, QString name, int maxHp);
@@ -33,9 +38,7 @@ protected:
     int getMaxHp();
     void setMaxHp(int maxHp);
 
-    //getter and setter for hp
-    int getHp();
-    void setHp(int hp);
+
 };
 
 #endif // HUMAN_H

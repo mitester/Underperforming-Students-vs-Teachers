@@ -12,14 +12,19 @@ SOURCES += \
     attackstudent.cpp \
     cgagod.cpp \
     deadlinefighter.cpp \
+    desmond.cpp \
     gbusstudent.cpp \
     human.cpp \
+    kelvin.cpp \
     main.cpp \
     mainwindow.cpp \
+    overworkedta.cpp \
+    pang.cpp \
     shamelessstudent.cpp \
     sleepdeprivedstudent.cpp \
     student.cpp \
     supportstudent.cpp \
+    teacher.cpp \
     teacherspet.cpp \
     timevariant.cpp
 
@@ -27,13 +32,18 @@ HEADERS += \
     attackstudent.h \
     cgagod.h \
     deadlinefighter.h \
+    desmond.h \
     gbusstudent.h \
     human.h \
+    kelvin.h \
     mainwindow.h \
+    overworkedta.h \
+    pang.h \
     shamelessstudent.h \
     sleepdeprivedstudent.h \
     student.h \
     supportstudent.h \
+    teacher.h \
     teacherspet.h \
     timevariant.h
 
