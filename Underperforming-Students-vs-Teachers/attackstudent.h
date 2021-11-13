@@ -16,7 +16,7 @@ protected:
     int damage;
 
     //getter and setter for damage
-    int getDamage();
+    int getDamage() const;
     void setDamage(int damage);
 };
 

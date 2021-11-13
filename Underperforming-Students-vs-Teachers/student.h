@@ -19,11 +19,11 @@ protected:
     int cost;
 
     //getter and setter for skillSpeed
-    double getSkillSpeed();
+    double getSkillSpeed() const;
     void setSkillSpeed(double skillSpeed);
 
     //getter and setter for skillSpeed
-    int getCost();
+    int getCost() const;
     void setCost(int cost);
 
     //restrict all subclasses to provide a skill implementation

@@ -5,6 +5,6 @@ AttackStudent::AttackStudent(QWidget* widget, QString name, int maxHp, double sk
 {
 }
 
-int AttackStudent::getDamage() {return damage;}
+int AttackStudent::getDamage() const {return damage;}
 
 void AttackStudent::setDamage(int damage) {this->damage = damage;}

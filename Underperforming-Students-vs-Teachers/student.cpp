@@ -7,9 +7,9 @@ Student::Student(QWidget* widget, QString name, int maxHp, double skillSpeed, in
 }
 
 //getter and setter for skillSpeed
-double Student::getSkillSpeed() {return skillSpeed;}
+double Student::getSkillSpeed() const {return skillSpeed;}
 void Student::setSkillSpeed(double skillSpeed) {this->skillSpeed = skillSpeed;}
 
 //getter and setter for skillSpeed
-int Student::getCost() {return cost;}
+int Student::getCost() const {return cost;}
 void Student::setCost(int cost) {this->cost = cost;}

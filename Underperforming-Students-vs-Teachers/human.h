@@ -22,19 +22,19 @@ protected:
     int maxHp;
 
     //getter and setter for w
-    QWidget getWidget();
+    QWidget* getWidget() const;
     void setWidget(QWidget* widget);
 
     //getter and setter for name
-    QString getName();
-    int setName(QString name);
+    QString getName() const;
+    void setName(QString name);
 
     //getter and setter for maxHp
-    int getMaxHp();
+    int getMaxHp() const;
     void setMaxHp(int maxHp);
 
     //getter and setter for hp
-    int getHp();
+    int getHp() const;
     void setHp(int hp);
 };
 
