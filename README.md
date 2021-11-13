@@ -41,10 +41,9 @@
 |               +-- TeachersPet
 |               +-- GbusStudent
 |       +-- Teacher
-|           +-- TA
-|               +-- OverworkedTA
-|               +-- Kelvin
-|               +-- Pang
+|           +-- OverworkedTA
+|           +-- Kelvin
+|           +-- Pang
 |           +-- Desmond
 |       +-- Item
 |           +-- Redbull
