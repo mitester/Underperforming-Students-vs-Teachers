@@ -14,18 +14,18 @@ public:
     /* Mutators */
     double getSpeed() const;
     void setSpeed(double speed);
-    int getAtk() const;
-    void setAtk(int atk);
+    int getDamage() const;
+    void setDamage(int damage);
 
     // the default attack behaviour of teacher
     virtual void attack(Student& s);
     virtual void update() = 0;
 
 protected:
-    explicit Teacher(QWidget *widget, QString name, int maxHp, double speed, int atk);
+    explicit Teacher(QWidget *widget, QString name, int maxHp, double speed, int damage);
 private:
     double speed;
-    int atk;
+    int damage;
 };
 
 #endif // TEACHER_H
