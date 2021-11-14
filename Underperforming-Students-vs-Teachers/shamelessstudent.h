@@ -6,16 +6,16 @@
 class ShamelessStudent : public SupportStudent
 {
 public:
-    static const QString defaultName;
-    static const int defaultMaxHp{10};
-    static constexpr double defaultSkillSpeed{10.0}; //compiler said it should be constexpr for static double
-    static const int defaultCost{10};
+    static const QString DEFAULT_NAME;
+    static const int DEFAULT_MAX_HP{10};
+    static constexpr double DEFAULT_SKILL_SPEED{10.0}; //compiler said it should be constexpr for static double
+    static const int DEFAULT_COST{10};
 
     ShamelessStudent(QWidget* widget,
-                     QString name = defaultName,
-                     int maxHp = defaultMaxHp,
-                     double skillSpeed = defaultSkillSpeed,
-                     int cost = defaultCost);
+                     QString name = DEFAULT_NAME,
+                     int maxHp = DEFAULT_MAX_HP,
+                     double skillSpeed = DEFAULT_SKILL_SPEED,
+                     int cost = DEFAULT_COST);
 
     //the implementation of the pure virtual skill()
     void skill();
