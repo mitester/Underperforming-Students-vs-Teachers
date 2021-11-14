@@ -1,6 +1,6 @@
 #include "cgagod.h"
 
-const QString CgaGod::defaultName = "CGA God";
+const QString CgaGod::DEFAULT_NAME = "CGA God";
 
 
 CgaGod::CgaGod(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)

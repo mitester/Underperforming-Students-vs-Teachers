@@ -1,6 +1,6 @@
 #include "gbusstudent.h"
 
-const QString GbusStudent::defaultName = "GBUS Student";
+const QString GbusStudent::DEFAULT_NAME = "GBUS Student";
 
 GbusStudent::GbusStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost)
     : SupportStudent(widget, name, maxHp, skillSpeed, cost)
