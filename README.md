@@ -2,10 +2,10 @@
 ## Table of Contents
 - [Underperforming Students vs Teachers](#underperforming-students-vs-teachers)
   - [Table of Contents](#table-of-contents)
-  - [Authors</br>](#authorsbr)
+  - [Authors](#authors)
   - [Code Conventions](#code-conventions)
   - [Workflow](#workflow)
-  - [Class Structue](#class-structue)
+  - [Class Structure](#class-structure)
 
 ## Authors
 - Tim, TSE Wai Chung
@@ -26,31 +26,32 @@
 3. Feel free to add issues to `issue`.
 4. Create your own `branch` to commit your work. Name your branch as `[your github username]-patch`.
 5. Please send a **pull request from your branch into main** as long as you think your code you're working on should be well-known by everyone
-   - This pull request should be approved by all participants.
+   - This pull request should be approved by all participants before you merge.
 6. Please fetch **updates from main** every time using **GitHub Desktop** before you start working locally.
 
 ## Class Structure
 ```
-+-- TimeVariant
-|   +-- Human
-|       +-- Student
-|           +-- AttackStudent
-|               +-- SleepDeprivedStudent
-|               +-- DeadlineFighter
-|               +-- CgaGod
-|           +-- SupportStudent
-|               +-- ShamelessStudent
-|               +-- TeachersPet
-|               +-- GbusStudent
-|       +-- Teacher
-|           +-- OverworkedTA
-|           +-- Kelvin
-|           +-- Pang
-|           +-- Desmond
-|   +-- Item
-|       +-- Redbull
-|       +-- Assignment
-|       +-- VendingMachine
-+-- Game
-+-- Row
++-- QObject
+|   +-- TimeVariant
+|       +-- Human
+|           +-- Student
+|               +-- AttackStudent
+|                   +-- SleepDeprivedStudent
+|                   +-- DeadlineFighter
+|                   +-- CgaGod
+|               +-- SupportStudent
+|                   +-- ShamelessStudent
+|                   +-- TeachersPet
+|                   +-- GbusStudent
+|           +-- Teacher
+|               +-- OverworkedTA
+|               +-- Kelvin
+|               +-- Pang
+|               +-- Desmond
+|       +-- Item
+|           +-- Redbull
+|           +-- Assignment
+|           +-- VendingMachine
+|   +-- Game
+|   +-- Row
 ```
