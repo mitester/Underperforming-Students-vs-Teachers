@@ -10,6 +10,7 @@
 
 class Kelvin : public Teacher
 {
+    Q_OBJECT
 
 public:
     static const QString DEFAULT_NAME;

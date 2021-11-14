@@ -8,6 +8,9 @@
 
 class Student : public Human
 {
+    Q_OBJECT
+
+public:
     //getter and setter for skillSpeed
     double getSkillSpeed() const;
     void setSkillSpeed(double skillSpeed);

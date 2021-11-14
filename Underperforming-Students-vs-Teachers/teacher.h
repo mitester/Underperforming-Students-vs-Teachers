@@ -10,6 +10,8 @@
 */
 class Teacher : public Human
 {
+    Q_OBJECT
+
 public:
     /* Mutators */
     double getSpeed() const;
