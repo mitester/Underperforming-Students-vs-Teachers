@@ -27,7 +27,7 @@
 4. Create your own `branch` to commit your work. Name your branch as `[your github username]-patch`.
 5. After everything is finished, we merge branches together.
 
-## Class Structue
+## Class Structure
 ```
 +-- TimeVariant
 |   +-- Human
@@ -49,4 +49,6 @@
 |       +-- Redbull
 |       +-- Assignment
 |       +-- VendingMachine
++-- Game
++-- Row
 ```
