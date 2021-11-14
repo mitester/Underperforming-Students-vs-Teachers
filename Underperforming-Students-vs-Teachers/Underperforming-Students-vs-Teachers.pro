@@ -13,6 +13,7 @@ SOURCES += \
     cgagod.cpp \
     deadlinefighter.cpp \
     desmond.cpp \
+    game.cpp \
     gbusstudent.cpp \
     human.cpp \
     kelvin.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     cgagod.h \
     deadlinefighter.h \
     desmond.h \
+    game.h \
     gbusstudent.h \
     human.h \
     kelvin.h \

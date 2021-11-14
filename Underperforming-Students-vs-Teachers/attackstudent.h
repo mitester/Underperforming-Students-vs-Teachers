@@ -8,6 +8,8 @@
 
 class AttackStudent : public Student
 {
+    Q_OBJECT
+
 public:
     //getter and setter for damage
     int getDamage() const;

@@ -10,16 +10,17 @@
 
 class Kelvin : public Teacher
 {
+    Q_OBJECT
 
 public:
-    static const QString defaultName;
-    static const int defaultMaxHp{10};
-    constexpr static const double defaultSpeed{10.0};
-    static const int defaultDamage{10};
+    static const QString DEFAULT_NAME;
+    static const int DEFAULT_MAX_HP{10};
+    constexpr static const double DEFAULT_SPEED{10.0};
+    static const int DEFAULT_DAMAGE{10};
 
     Kelvin(QWidget *widget,
-           QString name = defaultName, int maxHp = defaultMaxHp,
-           double speed = defaultSpeed, int damage = defaultDamage);
+           QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
+           double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 
     void update(); // implementation of the virtual function update()
 };

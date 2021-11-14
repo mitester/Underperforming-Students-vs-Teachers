@@ -5,6 +5,8 @@
 
 class SupportStudent : public Student
 {
+    Q_OBJECT
+
 protected:
     SupportStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost);
 };
