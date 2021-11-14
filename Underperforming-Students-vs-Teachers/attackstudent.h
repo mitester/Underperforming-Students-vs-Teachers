@@ -8,6 +8,11 @@
 
 class AttackStudent : public Student
 {
+public:
+    //getter and setter for damage
+    int getDamage() const;
+    void setDamage(int damage);
+
 protected:
     AttackStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage);
 
@@ -15,9 +20,6 @@ protected:
     //It may change due to its skill
     int damage;
 
-    //getter and setter for damage
-    int getDamage();
-    void setDamage(int damage);
 };
 
 #endif // ATTACKSTUDENT_H
