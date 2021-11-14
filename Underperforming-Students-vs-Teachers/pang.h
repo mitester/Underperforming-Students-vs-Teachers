@@ -10,6 +10,8 @@
 
 class Pang : public Teacher
 {
+    Q_OBJECT
+
 public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};

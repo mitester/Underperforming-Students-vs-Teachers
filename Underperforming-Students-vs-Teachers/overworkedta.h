@@ -10,6 +10,8 @@
 
 class OverworkedTA : public Teacher
 {
+    Q_OBJECT
+
 public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};
@@ -21,8 +23,6 @@ public:
                           double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 
     void update(); // implementation of the virtual function update()
-protected:
-private:
 };
 
 #endif // OVERWORKEDTA_H

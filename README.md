@@ -7,7 +7,7 @@
   - [Workflow](#workflow)
   - [Class Structue](#class-structue)
 
-## Authors</br>
+## Authors
 - Tim, TSE Wai Chung
 - Thomas, LI Ka Chun
 - Blaise, LIU Tianmiao

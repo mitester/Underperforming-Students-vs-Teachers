@@ -9,6 +9,8 @@
 
 class Human : public TimeVariant
 {
+    Q_OBJECT
+
 public:
     //getter and setter for name
     QString getName() const;

@@ -10,6 +10,8 @@
 
 class Desmond : public Teacher
 {
+    Q_OBJECT
+
 public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};
@@ -23,9 +25,9 @@ public:
     Desmond(QWidget *widget,
            QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
            double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE, double skillSpeed = DEFAULT_SKILL_SPEED);
+    void skill();
 
     void update(); // implementation of the virtual function update()
-    void skill();
 private:
     double skillSpeed;
 };
