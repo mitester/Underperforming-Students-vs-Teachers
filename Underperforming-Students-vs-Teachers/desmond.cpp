@@ -13,3 +13,11 @@ double Desmond::getSkillSpeed() const {
 void Desmond::setSkillSpeed(double skillSpeed) {
     this->skillSpeed = skillSpeed;
 }
+
+void Desmond::skill() {
+
+}
+
+void Desmond::update() {
+
+}

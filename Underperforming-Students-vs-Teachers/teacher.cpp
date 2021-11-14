@@ -25,9 +25,6 @@ void Teacher::setSpeed(double speed) {
 
 //TODO
 void Teacher::attack(Student& s) {
-    int hp = s.getHp();
-    if(hp >= 0) {
-        s.setHp(std::max(0, hp - damage)); // if damage is more than the student's current hp, simply set it to 0
-    }
+
 }
 
