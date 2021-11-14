@@ -19,6 +19,9 @@
 - Please use `/* I am some detailed description */` to describe the class at the top of the header files
 - Please write comment `//i am a very readable comment` (such that other people can understand your code).
 - Use **MIL (Member Initialization List)** in class constructors.
+- When creating new class in Qt, please: (Especially when the class makes use of signal and slot)
+  - Make sure the class inherits from `QObject`
+  - Check the option `Add Q_Object`
 
 ## Workflow
 1. All tasks are listed in `issue` section.
