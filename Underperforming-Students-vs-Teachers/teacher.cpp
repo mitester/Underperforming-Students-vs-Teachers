@@ -1,5 +1,6 @@
 #include "teacher.h"
 #include <algorithm>
+#include <queue>
 
 Teacher::Teacher(QLabel *widget, QString name, int maxHp, double speed, int damage) :
     Human(widget, name, maxHp), speed(speed), damage(damage)
