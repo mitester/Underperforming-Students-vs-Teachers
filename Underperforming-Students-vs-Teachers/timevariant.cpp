@@ -1,8 +1,7 @@
 #include "timevariant.h"
 
-TimeVariant::TimeVariant(QWidget* widget) : widget(widget)
+TimeVariant::TimeVariant(QWidget* widget) : QObject(widget), widget(widget)
 {
-
 }
 
 QWidget* TimeVariant::getWidget() {return widget;}
