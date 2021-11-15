@@ -10,7 +10,6 @@
 
 
 /***
- *
  * Author: Tse Wai Chung
  * Date: 11/15/2021
  *
@@ -79,6 +78,7 @@ private:
         }
     };
 
+
     std::priority_queue<Student*, QVector<Student*>, lessStudent> studentQueue;             //the priority queue maintaining students
     std::priority_queue<Assignment*, QVector<Assignment*>, lessAssignment> assignmentQueue; //the priority queue maintaining assignments
     //Pointers are used to avoid the const access constriant
@@ -95,7 +95,5 @@ private:
 signals:
 
 };
-
-
 
 #endif // ROW_H

@@ -39,6 +39,7 @@ void Row::setRightMostStudentHp(int hp) {
     s->setHp(hp); // hp is not the priority property, so modifying it is safe.
 }
 
+
 Teacher* Row::getLeftMostTeacher() const {
     if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size())
         return nullptr;
@@ -62,6 +63,7 @@ void Row::addAssignment(Assignment *const a) {
 
 void Row::addTeacher(Teacher *const t) {
     teacherList.append(t);
+    updateLeftMostTeacher();
 }
 
 /**  --- Remove Operations ---  **/
@@ -101,7 +103,6 @@ void Row::removeTeacher(Teacher* t) {
     delete t;
     updateLeftMostTeacher();
 }
-
 
 bool Row::isEmptyStudent() const {
     return studentQueue.empty();
@@ -171,6 +172,7 @@ void Row::updateLeftMostTeacher() {
     }
     leftMostTeacherIndex = leftmost;
 }
+
 
 
 
