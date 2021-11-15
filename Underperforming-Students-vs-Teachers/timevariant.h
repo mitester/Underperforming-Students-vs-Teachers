@@ -12,9 +12,27 @@ class TimeVariant : public QObject
 {
     Q_OBJECT
 public:
+
+    enum class Type{
+        SLEEP_DEPRIVED_STUDENT,
+        DEADLINE_FIGHTER,
+        CGA_GOD,
+        SHAMELESS_STUDENT,
+        TEACHERS_PET,
+        GBUS_STUDENT,
+        OVERWORKED_TA,
+        KELVIN,
+        PANG,
+        DESMOND,
+        REDBULL,
+        ASSIGNMENT,
+        VENDING_MACHINE
+    };
+
     //getter and setter for widget
     QWidget* getWidget();
     void setWidget(QWidget *widget);
+    double getDistanceFromLeft() const;
 
     //restricting all subclasses to react with the global timer signal
     virtual void update() = 0;
