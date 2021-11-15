@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    assignment.cpp \
     attackstudent.cpp \
     cgagod.cpp \
     deadlinefighter.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     mainwindow.cpp \
     overworkedta.cpp \
     pang.cpp \
+    row.cpp \
     shamelessstudent.cpp \
     sleepdeprivedstudent.cpp \
     student.cpp \
@@ -30,6 +32,7 @@ SOURCES += \
     timevariant.cpp
 
 HEADERS += \
+    assignment.h \
     attackstudent.h \
     cgagod.h \
     deadlinefighter.h \
@@ -41,6 +44,7 @@ HEADERS += \
     mainwindow.h \
     overworkedta.h \
     pang.h \
+    row.h \
     shamelessstudent.h \
     sleepdeprivedstudent.h \
     student.h \
