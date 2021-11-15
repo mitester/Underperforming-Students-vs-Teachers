@@ -15,8 +15,10 @@ public:
     int getDamage() const;
     void setDamage(int damage);
 
+    TimeVariant::Category getCategory() const;
+
 protected:
-    AttackStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage);
+    AttackStudent(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost, int damage);
 
     //the number of damage the Attack Student can make
     //It may change due to its skill

@@ -2,20 +2,23 @@
 
 #include <QTimer>
 
-Game::Game()
+Game::Game(QObject* parent) : QObject(parent)
 {
-    timer = new QTimer(nullptr);
+    timer = new QTimer(parent);
     timer->start(BASIC_TIME_UNIT);
-}
-
-Game::~Game()
-{
-    delete timer;
 }
 
 int Game::getRedbullNum() const {return redbullNum;}
 
-void Game::addRedbull(int n) {redbullNum += n;}
+bool Game::addRedbull(int n)
+{
+    int temp = redbullNum + n;
+
+    if(temp < 0) return false;
+
+    redbullNum = temp;
+    return true;
+}
 
 void Game::registerTimeVariant(TimeVariant *timeVariant)
 {
