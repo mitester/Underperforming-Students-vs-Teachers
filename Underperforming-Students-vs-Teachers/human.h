@@ -1,4 +1,4 @@
-/*
+/***
 * This is a superclass of Student and Teacher
 */
 #ifndef HUMAN_H
