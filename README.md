@@ -22,6 +22,7 @@
 - When creating new class in Qt, please: (Especially when the class makes use of signal and slot)
   - Make sure the class inherits from `QObject`
   - Check the option `Add Q_Object`
+- For any resource needed for this program, please use Qt Resource File(`.qrc` file)
 
 ## Workflow
 1. All tasks are listed in `issue` section.
