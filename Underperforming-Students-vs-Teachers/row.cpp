@@ -1,9 +1,11 @@
 #include "row.h"
 #include "overworkedta.h"
+#include "game.h"
 
 Row::Row(int size, QObject *parent) : QObject(parent), grid_size(size)
 {
     grid = new Student*[size];
+    updateLeftMostTeacher();
 }
 
 /**  --- Right Most Operations ---  **/
@@ -37,9 +39,12 @@ void Row::setRightMostStudentHp(int hp) {
     s->setHp(hp); // hp is not the priority property, so modifying it is safe.
 }
 
-Teacher* Row::popLeftMostTeacher() {
-    Teacher* t = teacherQueue.top();
-    return t;
+
+Teacher* Row::getLeftMostTeacher() const {
+    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size())
+        return nullptr;
+    else
+        return teacherList.at(leftMostTeacherIndex);
 }
 
 /**  --- Add Operations ---  **/
@@ -57,8 +62,8 @@ void Row::addAssignment(Assignment *const a) {
 }
 
 void Row::addTeacher(Teacher *const t) {
-    if(t != nullptr)
-        teacherQueue.push(t);
+    teacherList.append(t);
+    updateLeftMostTeacher();
 }
 
 /**  --- Remove Operations ---  **/
@@ -90,6 +95,14 @@ void Row::removeStudent(int pos) {
     //the behaviour of "removing student at pos" rarely happens
 }
 
+void Row::removeTeacher(Teacher* t) {
+    for(int i = 0; i < teacherList.size(); i++) {
+        if(teacherList.at(i) == t)
+            teacherList.remove(i);
+    }
+    delete t;
+    updateLeftMostTeacher();
+}
 
 bool Row::isEmptyStudent() const {
     return studentQueue.empty();
@@ -112,8 +125,9 @@ int Row::getGridSize() const {
 }
 
 bool Row::hasReachedEnd() const {
-    Teacher* t = teacherQueue.top(); //teacher is ordered from left to right, so the top of teacher is the leftmost teacher
-    return t != nullptr && t->getDistanceFromLeft() <= 0; //Subject to change
+    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size())
+        return false;
+    return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() == 0; // check the leftmost position
 }
 
 
@@ -128,10 +142,9 @@ Row::~Row() {
         delete a;
     }
 
-    while(!teacherQueue.empty()) { // delete all teachers in the queue
-        Teacher* t = popLeftMostTeacher();
-        delete t;
-    }
+    for(int i = 0; i < teacherList.size(); i++)
+        if(teacherList[i] != nullptr)
+            delete teacherList[i];
 }
 
 /** Private **/
@@ -147,6 +160,19 @@ void Row::deregisterFromGrid(Student *s) {
         }
     }
 }
+
+void Row::updateLeftMostTeacher() {
+    int leftmost = -1;
+    double leftmost_val = Game::MAX;
+    for(int i = 0; i < teacherList.size(); i++) {
+        if(teacherList[i] && teacherList[i]->getDistanceFromLeft() < leftmost_val) {
+            leftmost_val = teacherList[i]->getDistanceFromLeft();
+            leftmost = i;
+        }
+    }
+    leftMostTeacherIndex = leftmost;
+}
+
 
 
 
