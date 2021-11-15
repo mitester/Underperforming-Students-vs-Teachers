@@ -14,12 +14,14 @@ public:
     static const int DEFAULT_COST{10};
     static const int DEFAULT_DAMAGE{10};
 
-    CgaGod(QWidget* widget,
+    CgaGod(QLabel* widget,
                          QString name = DEFAULT_NAME,
                          int maxHp = DEFAULT_MAX_HP,
                          double skillSpeed = DEFAULT_SKILL_SPEED,
                          int cost = DEFAULT_COST,
                          int damage = DEFAULT_DAMAGE);
+
+    TimeVariant::Type getType() const;
 
     //the implementation of the pure virtual skill()
     void skill();

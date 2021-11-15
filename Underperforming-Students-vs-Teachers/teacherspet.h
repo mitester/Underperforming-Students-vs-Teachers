@@ -13,11 +13,13 @@ public:
     static constexpr double DEFAULT_SKILL_SPEED{10.0}; //compiler said it should be constexpr for static double
     static const int DEFAULT_COST{10};
 
-    TeachersPet(QWidget* widget,
+    TeachersPet(QLabel* widget,
                      QString name = DEFAULT_NAME,
                      int maxHp = DEFAULT_MAX_HP,
                      double skillSpeed = DEFAULT_SKILL_SPEED,
                      int cost = DEFAULT_COST);
+
+    TimeVariant::Type getType() const;
 
     //the implementation of the pure virtual skill()
     void skill();

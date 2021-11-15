@@ -2,11 +2,14 @@
 
 const QString SleepDeprivedStudent::DEFAULT_NAME = "Sleep Deprived Student";
 
-SleepDeprivedStudent::SleepDeprivedStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)
+SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)
     : AttackStudent(widget, name, maxHp, skillSpeed, cost, damage)
 {
 
 }
+
+TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Type::SLEEP_DEPRIVED_STUDENT;}
+
 
 void SleepDeprivedStudent::skill() {}
 

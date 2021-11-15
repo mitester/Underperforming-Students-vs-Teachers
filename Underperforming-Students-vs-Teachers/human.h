@@ -26,7 +26,7 @@ public:
 
 protected:
     //protected constructor, nobody could create a human instance except children
-    Human(QWidget *widget, QString name, int maxHp);
+    Human(QLabel *widget, QString name, int maxHp);
 
     QString name;
 

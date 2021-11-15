@@ -9,6 +9,7 @@
 #include "teacher.h"
 
 #include <QTimer>
+#include <QProgressBar>
 
 class Game : public QObject
 {
@@ -30,9 +31,6 @@ public:
     //and will call his update() function when timeout()
     void registerTimeVariant(TimeVariant *timeVariant);
 
-    //it returns an array of teacher for a row which is dynamically allocated
-    Teacher* generateTeacher();
-
     //it checks if the game terminated
     bool isTerminated();
 
@@ -42,6 +40,8 @@ private:
     int redbullNum = DEFAULT_REDBULL_NUMBER; //stores how many Redbulls user have
 
     //TODO: add an array of Row
+
+
 };
 
 #endif // GAME_H

@@ -13,7 +13,9 @@ int Game::getRedbullNum() const {return redbullNum;}
 bool Game::addRedbull(int n)
 {
     int temp = redbullNum + n;
+
     if(temp < 0) return false;
+
     redbullNum = temp;
     return true;
 }
@@ -21,9 +23,4 @@ bool Game::addRedbull(int n)
 void Game::registerTimeVariant(TimeVariant *timeVariant)
 {
     timer->callOnTimeout(timeVariant, &TimeVariant::update);
-}
-
-Teacher* Game::generateTeacher()
-{
-
 }
