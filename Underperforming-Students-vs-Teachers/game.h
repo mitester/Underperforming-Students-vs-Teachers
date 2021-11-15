@@ -19,6 +19,7 @@ public:
     static const int BASIC_TIME_UNIT{1}; //it is the basic time unit of QTimer
     static const int DEFAULT_REDBULL_NUMBER{10}; // it is the default redbull number
     static const int NUMBER_OF_ROW{4}; //it is the number of row of the map
+    static const int MAX{2147483646}; //the maximum integer
 
     explicit Game(QObject* parent = nullptr);
 
