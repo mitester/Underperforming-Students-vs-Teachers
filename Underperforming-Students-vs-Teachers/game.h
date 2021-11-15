@@ -6,6 +6,7 @@
 #define GAME_H
 
 #include "timevariant.h"
+#include "teacher.h"
 
 #include <QTimer>
 
@@ -29,7 +30,11 @@ public:
     //and will call his update() function when timeout()
     void registerTimeVariant(TimeVariant *timeVariant);
 
-    void generateTeacher();
+    //it returns an array of teacher for a row which is dynamically allocated
+    Teacher* generateTeacher();
+
+    //it checks if the game terminated
+    bool isTerminated();
 
 private:
     QTimer *timer; //It emits timeout() every BASIC_TIME_UNIT millisecond

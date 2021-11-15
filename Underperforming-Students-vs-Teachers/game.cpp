@@ -22,3 +22,8 @@ void Game::registerTimeVariant(TimeVariant *timeVariant)
 {
     timer->callOnTimeout(timeVariant, &TimeVariant::update);
 }
+
+Teacher* Game::generateTeacher()
+{
+
+}
