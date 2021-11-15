@@ -1,6 +1,6 @@
 #include "timevariant.h"
 
-TimeVariant::TimeVariant(QLabel* widget) : widget(widget)
+TimeVariant::TimeVariant(QLabel* widget) : QObject(widget), widget(widget)
 {
 
 }
