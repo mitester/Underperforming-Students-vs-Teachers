@@ -6,6 +6,7 @@
 #include "student.h"
 #include "assignment.h"
 #include <QVector>
+#include "teacher.h"
 
 
 /***
@@ -13,12 +14,13 @@
  * Date: 11/15/2021
  *
  * ---- Description -----
- * Row is a class representing a row of the game map.
- * In the game, each row of the map is independent of other rows. namely, all rows behaves exactly the same and there will be no "inter-row" actions.
- * Hence, Row is extracted as a class. Providing all necessary information/utilities for a row.
+ * A Row Maintains all the objects (Student, Assignment, Teacher) in a row using three heaps and an array.
+ * Row provides fast accessors/mutators, but removing specific elements can be expensive.
+ * Objects should be created outside, and be added to row only after creation.
+ * Row will manage it and delete it properly.
+ * Please do not delete objects in a row from outside. It will create serious trouble.
  *
- * ---- Mechanism ----
- * The core of Row is two priority queues. One is a student queue while the other is an assignment queue.
+ * !!! - this version has not been proven to be bug-free - !!!
  *
  */
 
@@ -26,41 +28,73 @@ class Row : public QObject
 {
     Q_OBJECT
 public:
-    explicit Row(double yPos, QObject *parent = nullptr);
 
-    const Student* getRightMostStudent() const;
-    const Assignment* getRightMostAssignment() const;
+    explicit Row(int size, QObject *parent = nullptr);
 
-    void removeRightMostStudent();
-    void removeRightMostAssignment();
+    /** RightMost operations **/
+    const Student* getRightMostStudent() const;         // returns a const reference of right most student.
+    const Assignment* getRightMostAssignment() const;   // returns a const reference of right most assignment.
+    Student* popRightMostStudent();               // returns the reference of right most student, and remove it from the row.
+    Assignment* popRightMostAssignment();         // returns the reference of right most assignment, and remove it from the row.
+    Teacher* popLeftMostTeacher();                      // returns the reference of left most teacher, and remove it from the row.
+    void setRightMostStudentHp(int hp);                 // set the Hp of right most student.
 
-    void addStudent(Student* const s);
-    void addAssignment(Assignment* const a);
 
-    bool isEmptyStudent();
-    bool isEmptyAssignment();
+    /** Add operations**/
+    void addStudent(Student* const s, int pos);         // add a student at certain pos
+    void addAssignment(Assignment* const a);            // add an assignment
+    void addTeacher(Teacher* const t);                  // add a teacher to the row
 
-    int getNumStudent();
-    int getNumAssignment();
 
-    void generateTeacher(TimeVariant::Type a);
+    /** Remove operations (! Note: remove according to index is expensive)**/
+    void removeStudent(int pos);
+
+    /** Status accessors **/
+    bool isEmptyStudent() const;
+    bool isEmptyAssignment() const;
+    int getNumStudent() const;
+    int getNumAssignment() const;
+    int getGridSize() const;
+    bool hasReachedEnd() const;
+
+    ~Row();
 
 private:
-    // A Dummy structure for priority comparison
-    struct greaterThan {
-        bool operator()(const TimeVariant* t1, const TimeVariant* t2) { //Both students and assignments are TimeVariant
+
+    // Dummy structures for priority comparison
+    struct lessStudent {
+        bool operator()(const Student* t1, const Student* t2) { //Both students and assignments are TimeVariant
+            return t1->getDistanceFromLeft() < t2->getDistanceFromLeft();
+        }
+    };
+
+    struct lessAssignment {
+        bool operator()(const Assignment* t1, const Assignment* t2) { //Both students and assignments are TimeVariant
+            return t1->getDistanceFromLeft() < t2->getDistanceFromLeft();
+        }
+    };
+
+    struct greaterTeacher {
+        bool operator()(const Teacher* t1, const Teacher* t2) { //Both students and assignments are TimeVariant
             return t1->getDistanceFromLeft() > t2->getDistanceFromLeft();
         }
     };
 
-    std::priority_queue<Student*, QVector<Student*>, greaterThan> studentQueue;
-    std::priority_queue<Assignment*, QVector<Assignment*>, greaterThan> assignmentQueue;
+    std::priority_queue<Student*, QVector<Student*>, lessStudent> studentQueue;
+    std::priority_queue<Assignment*, QVector<Assignment*>, lessAssignment> assignmentQueue;
+    std::priority_queue<Teacher*, QVector<Teacher*>, greaterTeacher> teacherQueue;
     //Pointers are used to avoid the const access constriant
 
-    double y;
+    Student** grid; //stores a pointer pointing to each student.
+    int grid_size;
+
+    bool inBound(int pos) const;
+    void deregisterFromGrid(Student* s);
 
 signals:
 
 };
+
+
 
 #endif // ROW_H
