@@ -23,8 +23,10 @@ public:
     virtual void attack(Student& s);
     virtual void update() = 0;
 
+    TimeVariant::Category getCategory() const;
+
 protected:
-    explicit Teacher(QWidget *widget, QString name, int maxHp, double speed, int damage);
+    explicit Teacher(QLabel *widget, QString name, int maxHp, double speed, int damage);
 private:
     double speed;
     int damage;

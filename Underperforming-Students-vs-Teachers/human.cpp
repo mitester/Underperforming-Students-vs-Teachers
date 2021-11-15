@@ -1,6 +1,6 @@
 #include "human.h"
 
-Human::Human(QWidget *widget, QString name, int maxHp) : TimeVariant(widget), name(name), hp(maxHp), maxHp(maxHp)
+Human::Human(QLabel *widget, QString name, int maxHp) : TimeVariant(widget), name(name), hp(maxHp), maxHp(maxHp)
 {
 
 }

@@ -24,7 +24,7 @@ public:
 
 protected:
     //protected constructor
-    Student(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost);
+    Student(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost);
 
     //stores this student skillSpeed
     double skillSpeed;

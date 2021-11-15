@@ -22,9 +22,12 @@ public:
     double getSkillSpeed() const;
     void setSkillSpeed(double skillSpeed);
 
-    Desmond(QWidget *widget,
+    Desmond(QLabel *widget,
            QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
            double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE, double skillSpeed = DEFAULT_SKILL_SPEED);
+
+    TimeVariant::Type getType() const;
+
     void skill();
 
     void update(); // implementation of the virtual function update()
