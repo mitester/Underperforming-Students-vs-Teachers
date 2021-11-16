@@ -1,4 +1,4 @@
-/*
+/***
 * This is a class of Attack Student
 * It can be instantiated
 */

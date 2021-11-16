@@ -1,4 +1,4 @@
-/*
+/***
 * This is the student class
 */
 #ifndef STUDENT_H

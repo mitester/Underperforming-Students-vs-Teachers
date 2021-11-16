@@ -1,4 +1,4 @@
-/*
+/***
 * This is the superclass of all students which attack
 */
 #ifndef ATTACKSTUDENT_H

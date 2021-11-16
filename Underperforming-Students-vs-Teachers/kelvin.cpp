@@ -1,5 +1,8 @@
 #include "kelvin.h"
 
+const QString Kelvin::DEFAULT_NAME = "Kelvin";
+
+
 Kelvin::Kelvin(QLabel *widget, QString name, int maxHp, double speed, int damage) :
     Teacher(widget, name, maxHp, speed, damage)
 {

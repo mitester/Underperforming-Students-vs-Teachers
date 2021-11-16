@@ -1,4 +1,4 @@
-/*
+/***
 * All classes should be inherited from this
 */
 
