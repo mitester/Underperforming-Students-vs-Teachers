@@ -13,18 +13,20 @@ Game* Game::instance = nullptr;
 
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
-    timer = new QTimer(parent);
-    timer->setInterval(BASIC_TIME_UNIT);
+    mainTimer = new QTimer(parent);
+    mainTimer->setInterval(BASIC_TIME_UNIT);
 
     //it bounds with the slot which guards the game progress
-    timer->callOnTimeout(this, &Game::update);
+    mainTimer->callOnTimeout(this, &Game::update);
+
+    generatingTimer = new QTimer(parent);
+    generatingTimer->setInterval(getRandomInterval());
+    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
+
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(NUMBER_OF_COLUMN, parent);
     progressBar = new QProgressBar(parent);
-
-    //evaluate the prob. using the default values
-    reCalculateGenerateTeacherProb();
 }
 
 Game::~Game()
@@ -52,7 +54,7 @@ bool Game::addRedbull(int n)
 
 void Game::registerTimeVariant(TimeVariant *timeVariant)
 {
-    timer->callOnTimeout(timeVariant, &TimeVariant::update);
+    mainTimer->callOnTimeout(timeVariant, &TimeVariant::update);
 }
 
 Row* Game::getRowAt(int i) const
@@ -65,19 +67,11 @@ bool Game::start()
     if(isStart) return false; //game is unable to re-start
 
     //game start init
-    timer->start();
+    mainTimer->start();
+    generatingTimer->start();
     isStart = true;
     gameStatus = Game::GameStatus::BATTLING;
 
-    //generate teachers for each and add it to rows[i]
-    for(int i = 0; i < NUMBER_OF_ROW; i++)
-    {
-        int num = QRandomGenerator::securelySeeded().bounded(numberOfTeachers.min, numberOfTeachers.max + 1);
-        for(int j = 0; j < num; j++)
-        {
-            rows[i]->addTeacher(generateTeacher());
-        }
-    }
     return true;
 }
 
@@ -85,7 +79,7 @@ bool Game::pause()
 {
     if(!isStart) return false; //game is unable to pause if not started
 
-    timer->stop(); //timer will not reset after stop(). Therefore, it is a pause.
+    mainTimer->stop(); //timer will not reset after stop(). Therefore, it is a pause.
     isStart = false;
     gameStatus = Game::GameStatus::PAUSED;
     return true;
@@ -120,6 +114,11 @@ bool Game::checkTerminated()
     return false;
 }
 
+int Game::getRandomInterval() const
+{
+    return QRandomGenerator::securelySeeded().bounded(generatingTimerLowerBound, generatingTimerUpperBound);
+}
+
 Game::GameStatus Game::getGameStatus() const
 {
     return gameStatus;
@@ -130,58 +129,28 @@ void Game::setGameStatus(GameStatus status)
     gameStatus = status;
 }
 
-void Game::reCalculateGenerateTeacherProb()
-{
-    generateOverworkedTAEvents.clear();
-    generateKelvinEvents.clear();
-    generatePangEvents.clear();
-    generateDesmondEvents.clear();
-
-    for(int i = 0; i < totalNumberofEvents; i++)
-    {
-        if(overworkedTAEventsInterval.contains(i))
-        {
-            generateOverworkedTAEvents.insert(i);
-        }
-        else if(KelvinEventsInterval.contains(i))
-        {
-            generateKelvinEvents.insert(i);
-        }
-        else if(PangEventsInterval.contains(i))
-        {
-            generatePangEvents.insert(i);
-        }
-        else if(DesmondEventsInterval.contains(i))
-        {
-            generateDesmondEvents.insert(i);
-        }
-    }
-}
-
 Teacher* Game::generateTeacher()
 {
-    //get a securely seeded generator
-    QRandomGenerator generator = QRandomGenerator::securelySeeded();
-
-    //bounded() is 0(inclusive) to max(exclusive)
-    int num = generator.bounded(totalNumberofEvents);
-    if(generateOverworkedTAEvents.contains(num))
+    int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
+    if(num >= 0 && num <= 4)
+    {
         return new OverworkedTA(new QLabel(parent));
-    else if(generateKelvinEvents.contains(num))
+    }
+    if(num >= 5 && num <= 6)
+    {
         return new Kelvin(new QLabel(parent));
-    else if(generatePangEvents.contains(num))
+    }
+    if(num >= 7 && num <= 8)
+    {
         return new Pang(new QLabel(parent));
-    else if(generateDesmondEvents.contains(num))
+    }
+    if(num == 9)
+    {
         return new Desmond(new QLabel(parent));
-
+    }
+    generatingTimer->setInterval(getRandomInterval());
     return nullptr;
 }
-
-
-
-
-
-
 
 
 

@@ -13,7 +13,6 @@
 #include <QTimer>
 #include <QProgressBar>
 #include <climits>
-#include <QSet>
 
 class Game : public QObject
 {
@@ -60,7 +59,7 @@ private:
 
     static Game* instance;
 
-    QTimer *timer; //It emits timeout() every BASIC_TIME_UNIT millisecond
+    QTimer *mainTimer; //It emits timeout() every BASIC_TIME_UNIT millisecond
 
     int redbullNum = DEFAULT_REDBULL_NUMBER; //stores how many Redbulls user have
 
@@ -72,41 +71,14 @@ private:
 
     //it generates teacher randomly
     Teacher* generateTeacher();
+    QTimer* generatingTimer; //it handles the teacher generating frequency
+    int generatingTimerUpperBound = 10001; //exclusive upper bound
+    int generatingTimerLowerBound = 5000; //inclusive upper bound
+    int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
-    //They store the number that leads to create themselves
-    //They change as progress value changes
-    QSet<int> generateOverworkedTAEvents;
-    QSet<int> generateKelvinEvents;
-    QSet<int> generatePangEvents;
-    QSet<int> generateDesmondEvents;
-
-    //for recording the bounds of the sorted set
-    //it is an close interval -> [a,b]
-    struct Interval
-    {
-        Interval(int a, int b) {setInterval(a,b);}
-        int min;
-        int max;
-
-        //return if x is in between the interval, both inclusive
-        bool contains(int x) {return x >= min && x <= max;}
-        void setMin(int a) {min = a;}
-        void setMax(int b) {max = b;}
-        void setInterval(int a, int b) {min = a; max = b;}
-    };
-
-    //intervals indicating the boundaries in their sets
-    //changes as progress changes
-    //total of 20 events
-    int totalNumberofEvents = 20;
-    Interval overworkedTAEventsInterval{0,14};
-    Interval KelvinEventsInterval{15,16};
-    Interval PangEventsInterval{17,18};
-    Interval DesmondEventsInterval{19,19};
-
-    //Interval indicating number of teachers should be generated
-    //changes as progress changes
-    Interval numberOfTeachers{1,3};
+    //it holds and teacher kind boundaries
+    int generatingTeacherUpperBound = 4;
+    int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;
 
@@ -119,10 +91,6 @@ private:
     //it checks if the game ended. Return true if terminated. Otherwise, false.
     //By calling getGameStatus() to get the terminated reason
     bool checkTerminated();
-
-    //re-calculate the prob. of generating each teacher
-    //call it after their events number is changed
-    void reCalculateGenerateTeacherProb();
 
     QWidget* parent;
 };
