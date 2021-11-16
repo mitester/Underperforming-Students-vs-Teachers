@@ -10,8 +10,5 @@ GbusStudent::GbusStudent(QLabel* widget, QString name, int maxHp, double skillSp
 
 TimeVariant::Type GbusStudent::getType() const {return TimeVariant::Type::GBUS_STUDENT;}
 
-//the implementation of the pure virtual skill()
-void GbusStudent::skill() {}
-
 //the implementation of the pure virtual update()
 void GbusStudent::update() {}

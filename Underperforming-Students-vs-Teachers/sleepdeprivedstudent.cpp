@@ -1,4 +1,5 @@
 #include "sleepdeprivedstudent.h"
+#include "assignment.h"
 
 const QString SleepDeprivedStudent::DEFAULT_NAME = "Sleep Deprived Student";
 
@@ -10,7 +11,7 @@ SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, QString name, int max
 
 TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Type::SLEEP_DEPRIVED_STUDENT;}
 
+void SleepDeprivedStudent::update()
+{
 
-void SleepDeprivedStudent::skill() {}
-
-void SleepDeprivedStudent::update() {}
+}
