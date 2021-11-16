@@ -1,4 +1,4 @@
-/*
+/***
 * This is the student class
 */
 #ifndef STUDENT_H
@@ -18,9 +18,6 @@ public:
     //getter and setter for skillSpeed
     int getCost() const;
     void setCost(int cost);
-
-    //restrict all subclasses to provide a skill implementation
-    virtual void skill() = 0;
 
 protected:
     //protected constructor

@@ -15,6 +15,7 @@ SOURCES += \
     deadlinefighter.cpp \
     desmond.cpp \
     game.cpp \
+    gamewindow.cpp \
     gbusstudent.cpp \
     human.cpp \
     kelvin.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     deadlinefighter.h \
     desmond.h \
     game.h \
+    gamewindow.h \
     gbusstudent.h \
     human.h \
     kelvin.h \
@@ -54,6 +56,7 @@ HEADERS += \
     timevariant.h
 
 FORMS += \
+    gamewindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.

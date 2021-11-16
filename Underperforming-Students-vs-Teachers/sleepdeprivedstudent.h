@@ -1,4 +1,4 @@
-/*
+/***
 * This is a class of Attack Student
 * It can be instantiated
 */
@@ -26,9 +26,6 @@ public:
                          int damage = DEFAULT_DAMAGE);
 
     TimeVariant::Type getType() const;
-
-    //the implementation of the pure virtual skill()
-    void skill();
 
     //the implementation of the pure virtual update()
     void update();

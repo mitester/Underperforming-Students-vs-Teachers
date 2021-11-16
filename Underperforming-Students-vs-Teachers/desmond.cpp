@@ -1,5 +1,7 @@
 #include "desmond.h"
 
+const QString Desmond::DEFAULT_NAME = "Desmond";
+
 Desmond::Desmond(QLabel *widget, QString name, int maxHp, double speed, int damage, double skillSpeed) :
     Teacher(widget, name, maxHp, speed, damage), skillSpeed(skillSpeed)
 {

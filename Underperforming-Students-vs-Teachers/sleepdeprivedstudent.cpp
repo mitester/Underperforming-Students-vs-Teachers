@@ -10,7 +10,4 @@ SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, QString name, int max
 
 TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Type::SLEEP_DEPRIVED_STUDENT;}
 
-
-void SleepDeprivedStudent::skill() {}
-
 void SleepDeprivedStudent::update() {}
