@@ -11,4 +11,6 @@ CgaGod::CgaGod(QLabel* widget, QString name, int maxHp, double skillSpeed, int c
 
 TimeVariant::Type CgaGod::getType() const {return TimeVariant::Type::CGA_GOD;}
 
+void CgaGod::skill() {}
+
 void CgaGod::update() {}
