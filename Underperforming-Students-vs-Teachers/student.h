@@ -19,9 +19,6 @@ public:
     int getCost() const;
     void setCost(int cost);
 
-    //restrict all subclasses to provide a skill implementation
-    virtual void skill() = 0;
-
 protected:
     //protected constructor
     Student(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost);

@@ -11,7 +11,4 @@ DeadlineFighter::DeadlineFighter(QLabel* widget, QString name, int maxHp, double
 
 TimeVariant::Type DeadlineFighter::getType() const {return TimeVariant::Type::DEADLINE_STUDENT;}
 
-
-void DeadlineFighter::skill() {}
-
 void DeadlineFighter::update() {}

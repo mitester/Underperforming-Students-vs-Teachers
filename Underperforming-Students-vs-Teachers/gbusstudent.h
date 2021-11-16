@@ -21,9 +21,6 @@ public:
 
     TimeVariant::Type getType() const;
 
-    //the implementation of the pure virtual skill()
-    void skill();
-
     //the implementation of the pure virtual update()
     void update();
 };

@@ -10,8 +10,5 @@ TeachersPet::TeachersPet(QLabel* widget, QString name, int maxHp, double skillSp
 
 TimeVariant::Type TeachersPet::getType() const {return TimeVariant::Type::TEACHERS_PET;}
 
-//the implementation of the pure virtual skill()
-void TeachersPet::skill() {}
-
 //the implementation of the pure virtual update()
 void TeachersPet::update() {}
