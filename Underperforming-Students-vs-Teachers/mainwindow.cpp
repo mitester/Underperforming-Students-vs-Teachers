@@ -1,13 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gamewindow.h"
+#include "game.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Underperforming Students VS Teachers");
+    setWindowTitle(Game::GAME_NAME);
 }
 
 MainWindow::~MainWindow()
