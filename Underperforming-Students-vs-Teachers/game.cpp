@@ -11,6 +11,8 @@
 //default value for Game::instance
 Game* Game::instance = nullptr;
 
+const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
+
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     mainTimer = new QTimer(parent);

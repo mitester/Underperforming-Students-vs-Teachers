@@ -19,6 +19,7 @@ class Game : public QObject
     Q_OBJECT
 
 public:
+    static const QString GAME_NAME;
     static const int BASIC_TIME_UNIT{20}; //it is the basic time unit of QTimer
                                           //emit timeout() signal in 50Hz
     static const int DEFAULT_REDBULL_NUMBER{10}; // it is the default redbull number
