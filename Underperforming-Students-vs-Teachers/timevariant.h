@@ -8,6 +8,8 @@
 #include <QLabel>
 #include <QObject>
 
+class Row;
+
 class TimeVariant : public QObject
 {
     Q_OBJECT
@@ -48,12 +50,14 @@ public:
     virtual TimeVariant::Type getType() const = 0;
     virtual TimeVariant::Category getCategory() const = 0;
     double getDistanceFromLeft() const;
+    Row* getRow() const;
 
 
 protected:
-    TimeVariant(QLabel *widget);
+    TimeVariant(QLabel *widget, Row* row);
 
     QLabel* widget; //every TimeVariant owns a QWidget
+    Row* row; //stores which row that TimeVariant belongs
 
 };
 

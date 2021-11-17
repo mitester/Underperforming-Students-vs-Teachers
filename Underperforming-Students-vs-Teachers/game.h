@@ -13,6 +13,7 @@
 #include <QTimer>
 #include <QProgressBar>
 #include <climits>
+#include <QSize>
 
 class Game : public QObject
 {
@@ -20,12 +21,16 @@ class Game : public QObject
 
 public:
     static const QString GAME_NAME;
-    static const int BASIC_TIME_UNIT{20}; //it is the basic time unit of QTimer
-                                          //emit timeout() signal in 50Hz
-    static const int DEFAULT_REDBULL_NUMBER{10}; // it is the default redbull number
-    static const int NUMBER_OF_ROW{4}; //it is the number of row of the map
+    static const int BASIC_TIME_UNIT{20};           //it is the basic time unit of QTimer
+                                                    //emit timeout() signal in 50Hz
+    static const int DEFAULT_REDBULL_NUMBER{10};    // it is the default redbull number
+    static const int NUMBER_OF_ROW{4};              //it is the number of row of the map
     static const int NUMBER_OF_COLUMN{10};
-    static const int MAX{INT_MAX}; //the maximum integer
+    static const int MAX{INT_MAX}; //the maximum integer 
+
+    static QSize currentSize;
+    static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position
+    //How to use: pass in (w, 10, 15.7) means move w, 10% and 15.7%
 
     enum class GameStatus {STUDENT_WON, TEACHER_WON, BATTLING, PAUSED};
 

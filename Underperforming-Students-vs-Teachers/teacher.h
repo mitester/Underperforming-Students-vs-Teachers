@@ -4,10 +4,14 @@
 #include "human.h"
 #include "student.h"
 
+
 /***
     Author: Tse Wai Chung
     Date: 11/13/2021
 */
+
+class Row;
+
 class Teacher : public Human
 {
     Q_OBJECT
@@ -26,7 +30,7 @@ public:
     TimeVariant::Category getCategory() const;
 
 protected:
-    explicit Teacher(QLabel *widget, QString name, int maxHp, double speed, int damage);
+    explicit Teacher(QLabel *widget, Row* row, QString name, int maxHp, double speed, int damage);
 private:
     double speed;
     int damage;
