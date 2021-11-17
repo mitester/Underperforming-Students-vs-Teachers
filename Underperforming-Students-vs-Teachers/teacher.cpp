@@ -1,9 +1,10 @@
 #include "teacher.h"
+#include "human.h"
 #include <algorithm>
 #include <queue>
 
-Teacher::Teacher(QLabel *widget, QString name, int maxHp, double speed, int damage) :
-    Human(widget, name, maxHp), speed(speed), damage(damage)
+Teacher::Teacher(QLabel *widget, Row* row, QString name, int maxHp, double speed, int damage) :
+    Human(widget, row, name, maxHp), speed(speed), damage(damage)
 {
 
 }

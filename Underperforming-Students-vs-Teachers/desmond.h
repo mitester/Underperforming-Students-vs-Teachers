@@ -22,7 +22,7 @@ public:
     double getSkillSpeed() const;
     void setSkillSpeed(double skillSpeed);
 
-    Desmond(QLabel *widget,
+    Desmond(QLabel *widget, Row* row,
            QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
            double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE, double skillSpeed = DEFAULT_SKILL_SPEED);
 

@@ -7,6 +7,8 @@
 #include <QString>
 #include "timevariant.h"
 
+class Row;
+
 class Human : public TimeVariant
 {
     Q_OBJECT
@@ -24,9 +26,11 @@ public:
     int getHp() const;
     void setHp(int hp);
 
+    Row* getRow();
+
 protected:
     //protected constructor, nobody could create a human instance except children
-    Human(QLabel *widget, QString name, int maxHp);
+    Human(QLabel *widget, Row* row, QString name, int maxHp);
 
     QString name;
 

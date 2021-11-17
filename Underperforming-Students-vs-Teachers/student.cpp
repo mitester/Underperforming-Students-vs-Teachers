@@ -1,6 +1,6 @@
 #include "student.h"
 
-Student::Student(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost) : Human(widget, name, maxHp)
+Student::Student(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost) : Human(widget, row, name, maxHp)
   ,skillSpeed(skillSpeed), cost(cost)
 {
 

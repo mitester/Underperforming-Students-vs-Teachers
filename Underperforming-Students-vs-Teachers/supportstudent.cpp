@@ -1,7 +1,7 @@
 #include "supportstudent.h"
 
-SupportStudent::SupportStudent(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost)
-    : Student(widget, name, maxHp, skillSpeed, cost)
+SupportStudent::SupportStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost)
+    : Student(widget, row, name, maxHp, skillSpeed, cost)
 {
 
 }

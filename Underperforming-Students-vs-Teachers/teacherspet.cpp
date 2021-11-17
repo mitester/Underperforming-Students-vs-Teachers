@@ -2,8 +2,8 @@
 
 const QString TeachersPet::DEFAULT_NAME = "Teachers' Pet";
 
-TeachersPet::TeachersPet(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost)
-    : SupportStudent(widget, name, maxHp, skillSpeed, cost)
+TeachersPet::TeachersPet(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost)
+    : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 
 }

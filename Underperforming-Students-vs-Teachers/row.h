@@ -8,7 +8,6 @@
 #include <QVector>
 #include "teacher.h"
 
-
 /***
  * Author: Tse Wai Chung
  * Date: 11/15/2021
@@ -27,9 +26,14 @@
  * added more comments
  */
 
+class Teacher;
+class Student;
+class Assignment;
+
 class Row : public QObject
 {
     Q_OBJECT
+
 public:
 
     explicit Row(int size, QObject *parent = nullptr);

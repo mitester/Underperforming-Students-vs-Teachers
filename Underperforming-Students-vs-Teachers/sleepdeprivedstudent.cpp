@@ -2,8 +2,8 @@
 
 const QString SleepDeprivedStudent::DEFAULT_NAME = "Sleep Deprived Student";
 
-SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)
-    : AttackStudent(widget, name, maxHp, skillSpeed, cost, damage)
+SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost, int damage)
+    : AttackStudent(widget, row, name, maxHp, skillSpeed, cost, damage)
 {
 
 }
