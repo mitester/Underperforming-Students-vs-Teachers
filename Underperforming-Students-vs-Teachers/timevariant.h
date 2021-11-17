@@ -50,7 +50,7 @@ public:
     virtual TimeVariant::Type getType() const = 0;
     virtual TimeVariant::Category getCategory() const = 0;
     double getDistanceFromLeft() const;
-    Row* getRow();
+    Row* getRow() const;
 
 
 protected:

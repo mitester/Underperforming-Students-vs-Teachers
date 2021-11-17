@@ -13,6 +13,6 @@ double TimeVariant::getDistanceFromLeft() const {
     return this->widget->x();
 }
 
-Row* TimeVariant::getRow() {
+Row* TimeVariant::getRow() const {
     return row;
 }
