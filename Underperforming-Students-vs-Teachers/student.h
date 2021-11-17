@@ -6,6 +6,8 @@
 
 #include "human.h"
 
+class Row;
+
 class Student : public Human
 {
     Q_OBJECT
@@ -21,7 +23,7 @@ public:
 
 protected:
     //protected constructor
-    Student(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost);
+    Student(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost);
 
     //stores this student skillSpeed
     double skillSpeed;

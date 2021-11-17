@@ -18,7 +18,7 @@ public:
     constexpr static const double DEFAULT_SPEED{10.0};
     static const int DEFAULT_DAMAGE{10};
 
-    Kelvin(QLabel *widget,
+    Kelvin(QLabel *widget, Row* row,
            QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
            double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 

@@ -12,6 +12,11 @@
 Game* Game::instance = nullptr;
 
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
+QSize Game::currentSize;
+
+void Game::move(QWidget *w, double xPercent, double yPercent) {
+    w->move(xPercent * 100.0 * currentSize.width(), yPercent * 100.0 * currentSize.height());
+}
 
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
@@ -133,6 +138,7 @@ void Game::setGameStatus(GameStatus status)
 
 Teacher* Game::generateTeacher()
 {
+    /* Disable due to its incompletion
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
     if(num >= 0 && num <= 4)
     {
@@ -151,6 +157,7 @@ Teacher* Game::generateTeacher()
         return new Desmond(new QLabel(parent));
     }
     generatingTimer->setInterval(getRandomInterval());
+    */
     return nullptr;
 }
 

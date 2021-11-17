@@ -62,6 +62,7 @@ void Row::addAssignment(Assignment *const a) {
 }
 
 void Row::addTeacher(Teacher *const t) {
+    if(t == nullptr)    return;
     teacherList.append(t);
     updateLeftMostTeacher();
 }
@@ -96,10 +97,9 @@ void Row::removeStudent(int pos) {
 }
 
 void Row::removeTeacher(Teacher* t) {
-    for(int i = 0; i < teacherList.size(); i++) {
-        if(teacherList.at(i) == t)
-            teacherList.remove(i);
-    }
+    for(QVector<Teacher*>::iterator i = teacherList.begin(); i != teacherList.end(); i++)
+        if(*i == t)
+            i = teacherList.erase(i);
     delete t;
     updateLeftMostTeacher();
 }

@@ -13,7 +13,7 @@ public:
     static constexpr double DEFAULT_SKILL_SPEED{10.0}; //compiler said it should be constexpr for static double
     static const int DEFAULT_COST{10};
 
-    ShamelessStudent(QLabel* widget,
+    ShamelessStudent(QLabel* widget, Row* row,
                      QString name = DEFAULT_NAME,
                      int maxHp = DEFAULT_MAX_HP,
                      double skillSpeed = DEFAULT_SKILL_SPEED,

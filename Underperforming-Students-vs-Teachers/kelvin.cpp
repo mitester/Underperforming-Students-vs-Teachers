@@ -3,8 +3,8 @@
 const QString Kelvin::DEFAULT_NAME = "Kelvin";
 
 
-Kelvin::Kelvin(QLabel *widget, QString name, int maxHp, double speed, int damage) :
-    Teacher(widget, name, maxHp, speed, damage)
+Kelvin::Kelvin(QLabel *widget, Row* row, QString name, int maxHp, double speed, int damage) :
+    Teacher(widget, row, name, maxHp, speed, damage)
 {
 
 }

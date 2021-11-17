@@ -2,8 +2,8 @@
 
 const QString ShamelessStudent::DEFAULT_NAME = "Shameless Student";
 
-ShamelessStudent::ShamelessStudent(QLabel* widget, QString name, int maxHp, double skillSpeed, int cost)
-    : SupportStudent(widget, name, maxHp, skillSpeed, cost)
+ShamelessStudent::ShamelessStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost)
+    : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 
 }

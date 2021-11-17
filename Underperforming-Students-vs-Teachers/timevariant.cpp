@@ -1,6 +1,6 @@
 #include "timevariant.h"
 
-TimeVariant::TimeVariant(QLabel* widget) : QObject(widget), widget(widget)
+TimeVariant::TimeVariant(QLabel* widget, Row* row) : QObject(widget), widget(widget), row(row)
 {
 
 }
@@ -11,4 +11,8 @@ void TimeVariant::setWidget(QLabel* widget) {this->widget = widget;}
 
 double TimeVariant::getDistanceFromLeft() const {
     return this->widget->x();
+}
+
+Row* TimeVariant::getRow() const {
+    return row;
 }
