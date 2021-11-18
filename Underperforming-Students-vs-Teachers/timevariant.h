@@ -39,6 +39,9 @@ public:
         ITEM
     };
 
+    static const int spriteWidth{100};
+    static const int spriteHeight{130};
+
     //getter and setter for widget
     QLabel* getWidget();
     void setWidget(QLabel *widget);

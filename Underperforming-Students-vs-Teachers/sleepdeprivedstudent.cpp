@@ -7,8 +7,6 @@ SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, Row* row, QString nam
     : AttackStudent(widget, row, name, maxHp, skillSpeed, cost, damage)
 {
     widget->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
-    widget->setGeometry(0,0, 50,50);
-    widget->show();
 }
 
 TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Type::SLEEP_DEPRIVED_STUDENT;}

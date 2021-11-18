@@ -3,6 +3,7 @@
 TimeVariant::TimeVariant(QLabel* widget, Row* row) : QObject(widget), widget(widget), row(row)
 {
     widget->setScaledContents(true);
+    widget->setFixedSize(spriteWidth, spriteHeight);
 }
 
 QLabel* TimeVariant::getWidget() {return widget;}
