@@ -15,26 +15,25 @@ const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
 
 void Game::move(QWidget *w, double xPercent, double yPercent) {
-    w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
+    w->move(xPercent * 100.0 * currentSize.width(), yPercent * 100.0 * currentSize.height());
 }
 
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
-//    mainTimer = new QTimer(parent);
-//    mainTimer->setInterval(BASIC_TIME_UNIT);
+    mainTimer = new QTimer(parent);
+    mainTimer->setInterval(BASIC_TIME_UNIT);
 
-//    //it bounds with the slot which guards the game progress
-//    mainTimer->callOnTimeout(this, &Game::update);
+    //it bounds with the slot which guards the game progress
+    mainTimer->callOnTimeout(this, &Game::update);
 
-//    generatingTimer = new QTimer(parent);
-//    generatingTimer->setInterval(getRandomInterval());
-//    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
+    generatingTimer = new QTimer(parent);
+    generatingTimer->setInterval(getRandomInterval());
+    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(NUMBER_OF_COLUMN, parent);
-
-//    progressBar = new QProgressBar(parent);
+    progressBar = new QProgressBar(parent);
 }
 
 Game::~Game()
@@ -137,27 +136,29 @@ void Game::setGameStatus(GameStatus status)
     gameStatus = status;
 }
 
-void Game::generateTeacher()
+Teacher* Game::generateTeacher()
 {
+    /* Disable due to its incompletion
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
-    int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
     if(num >= 0 && num <= 4)
     {
-        rows[rowNum]->addTeacher(new OverworkedTA(new QLabel(parent), rows[rowNum]));
+        return new OverworkedTA(new QLabel(parent));
     }
     if(num >= 5 && num <= 6)
     {
-        rows[rowNum]->addTeacher(new Kelvin(new QLabel(parent), rows[rowNum]));
+        return new Kelvin(new QLabel(parent));
     }
     if(num >= 7 && num <= 8)
     {
-        rows[rowNum]->addTeacher(new Pang(new QLabel(parent), rows[rowNum]));
+        return new Pang(new QLabel(parent));
     }
     if(num == 9)
     {
-        rows[rowNum]->addTeacher(new Desmond(new QLabel(parent), rows[rowNum]));
+        return new Desmond(new QLabel(parent));
     }
     generatingTimer->setInterval(getRandomInterval());
+    */
+    return nullptr;
 }
 
 

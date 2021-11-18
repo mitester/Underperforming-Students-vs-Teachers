@@ -1,6 +1,13 @@
 #include "row.h"
 #include "overworkedta.h"
 #include "game.h"
+#include "cgagod.h"
+#include "gbusstudent.h"
+#include "shamelessstudent.h"
+#include "sleepdeprivedstudent.h"
+#include "teacher.h"
+#include "teacherspet.h"
+#include "QDebug"
 
 Row::Row(int size, QObject *parent) : QObject(parent), grid_size(size)
 {
@@ -67,6 +74,32 @@ void Row::addTeacher(Teacher *const t) {
     updateLeftMostTeacher();
 }
 
+/***
+void addStudent(int tile_pos);                      // create a new student at tile_pos
+void addTeacher(TimeVariant::Type type);            // create a teacher at the right side of the row
+void addAssignment(int tile_pos);                   // create a new assignment at tile_pos
+***/
+
+void addStudent(TimeVariant::Type type, int tile_pos) {
+    Student* s = nullptr;
+    switch (type) {
+    case TimeVariant::Type::CGA_GOD:
+        break;
+    case TimeVariant::Type::GBUS_STUDENT:
+        break;
+    case TimeVariant::Type::SHAMELESS_STUDENT:
+        break;
+    case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
+        break;
+    case TimeVariant::Type::TEACHERS_PET:
+        break;
+    default:
+        qDebug() << "Non student type passed in to addStudent() function";
+        return;
+    }
+}
+
+
 /**  --- Remove Operations ---  **/
 
 void Row::removeStudent(int pos) {
@@ -132,7 +165,19 @@ bool Row::hasReachedEnd() const {
 
 
 Row::~Row() {
+    for(int i = 0; i < grid_size; i++) // delete all students in grid
+        if(grid[i] != nullptr)
+            delete grid[i];
     delete[] grid;
+
+    while(!assignmentQueue.empty()) { // delete all assignments in the queue
+        Assignment* a = popRightMostAssignment();
+        delete a;
+    }
+
+    for(int i = 0; i < teacherList.size(); i++)
+        if(teacherList[i] != nullptr)
+            delete teacherList[i];
 }
 
 /** Private **/
