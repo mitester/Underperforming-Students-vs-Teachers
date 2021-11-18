@@ -24,9 +24,9 @@ public:
     static const int BASIC_TIME_UNIT{20};           //it is the basic time unit of QTimer
                                                     //emit timeout() signal in 50Hz
     static const int DEFAULT_REDBULL_NUMBER{10};    // it is the default redbull number
-    static const int NUMBER_OF_ROW{4};              //it is the number of row of the map
-    static const int NUMBER_OF_COLUMN{10};
-    static const int MAX{INT_MAX}; //the maximum integer 
+    static const int NUMBER_OF_ROW{5};              //it is the number of row of the map
+    static const int NUMBER_OF_COLUMN{9};
+    static const int MAX{INT_MAX}; //the maximum integer
 
     static QSize currentSize;
     static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position
@@ -76,7 +76,7 @@ private:
     bool isStart = false;
 
     //it generates teacher randomly
-    Teacher* generateTeacher();
+    void generateTeacher();
     QTimer* generatingTimer; //it handles the teacher generating frequency
     int generatingTimerUpperBound = 10001; //exclusive upper bound
     int generatingTimerLowerBound = 5000; //inclusive upper bound

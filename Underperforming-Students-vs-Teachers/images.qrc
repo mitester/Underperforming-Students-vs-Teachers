@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/students/stu_cga_0.png</file>
+        <file>images/students/stu_cga_1.png</file>
+        <file>images/students/stu_cga_2.png</file>
+        <file>images/students/stu_deadline_0.png</file>
+        <file>images/students/stu_deadline_1.png</file>
+        <file>images/students/stu_deadline_2.png</file>
+        <file>images/students/stu_deadline_3.png</file>
+        <file>images/students/stu_deadline_4.png</file>
+        <file>images/students/stu_deadline_5.png</file>
+        <file>images/students/stu_gbus_0.png</file>
+        <file>images/students/stu_gbus_1.png</file>
+        <file>images/students/stu_gbus_2.png</file>
+        <file>images/students/stu_pet_0.png</file>
+        <file>images/students/stu_shameless_0.png</file>
+        <file>images/students/stu_sleep_0.png</file>
+        <file>images/students/stu_sleep_1.png</file>
+        <file>images/students/stu_sleep_2.png</file>
+        <file>images/items/item_assignment_0.png</file>
+    </qresource>
+</RCC>

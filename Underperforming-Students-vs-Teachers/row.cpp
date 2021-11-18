@@ -132,19 +132,7 @@ bool Row::hasReachedEnd() const {
 
 
 Row::~Row() {
-    for(int i = 0; i < grid_size; i++) // delete all students in grid
-        if(grid[i] != nullptr)
-            delete grid[i];
     delete[] grid;
-
-    while(!assignmentQueue.empty()) { // delete all assignments in the queue
-        Assignment* a = popRightMostAssignment();
-        delete a;
-    }
-
-    for(int i = 0; i < teacherList.size(); i++)
-        if(teacherList[i] != nullptr)
-            delete teacherList[i];
 }
 
 /** Private **/

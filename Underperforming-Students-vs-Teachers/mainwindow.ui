@@ -47,6 +47,12 @@
         </item>
         <item>
          <widget class="QPushButton" name="btn_start">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>Start</string>
           </property>
