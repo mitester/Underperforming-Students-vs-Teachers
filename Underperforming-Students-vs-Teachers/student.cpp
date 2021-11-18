@@ -1,9 +1,9 @@
 #include "student.h"
+#include "row.h"
 
 Student::Student(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost) : Human(widget, row, name, maxHp)
   ,skillSpeed(skillSpeed), cost(cost)
 {
-
 }
 
 //getter and setter for skillSpeed
