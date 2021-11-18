@@ -2,7 +2,7 @@
 
 TimeVariant::TimeVariant(QLabel* widget, Row* row) : QObject(widget), widget(widget), row(row)
 {
-
+    widget->setScaledContents(true);
 }
 
 QLabel* TimeVariant::getWidget() {return widget;}
