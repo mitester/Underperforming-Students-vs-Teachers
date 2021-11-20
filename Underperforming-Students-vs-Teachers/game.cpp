@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QProgressBar>
+#include <QDebug>
 
 //default value for Game::instance
 Game* Game::instance = nullptr;
@@ -20,21 +21,23 @@ void Game::move(QWidget *w, double xPercent, double yPercent) {
 
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
-//    mainTimer = new QTimer(parent);
-//    mainTimer->setInterval(BASIC_TIME_UNIT);
+    currentSize = parent->size(); //save the size of parent
 
-//    //it bounds with the slot which guards the game progress
-//    mainTimer->callOnTimeout(this, &Game::update);
+    mainTimer = new QTimer(parent);
+    mainTimer->setInterval(BASIC_TIME_UNIT);
 
-//    generatingTimer = new QTimer(parent);
-//    generatingTimer->setInterval(getRandomInterval());
-//    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
+    //it bounds with the slot which guards the game progress
+    mainTimer->callOnTimeout(this, &Game::update);
+
+    generatingTimer = new QTimer(parent);
+    generatingTimer->setInterval(getRandomInterval());
+    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(NUMBER_OF_COLUMN, parent);
 
-//    progressBar = new QProgressBar(parent);
+    progressBar = new QProgressBar(parent);
 }
 
 Game::~Game()
@@ -158,6 +161,11 @@ void Game::generateTeacher()
         rows[rowNum]->addTeacher(new Desmond(new QLabel(parent), rows[rowNum]));
     }
     generatingTimer->setInterval(getRandomInterval());
+}
+
+QProgressBar* Game::getProgressBar() const
+{
+    return progressBar;
 }
 
 

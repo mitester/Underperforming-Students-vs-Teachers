@@ -5,6 +5,9 @@
 #include "game.h"
 #include <QString>
 #include <QDebug>
+#include <QResizeEvent>
+#include <QPaintEvent>
+#include <QPainter>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,14 +16,27 @@ GameWindow::GameWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(Game::GAME_NAME);
 
-    this->game = Game::getInstance(this);
-    game->currentSize = size();
+    setFixedSize(windowWidth, windowHeight);
 
-    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr);
+    this->game = Game::getInstance(this); //get the Singleton Game object
+
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
+    QMainWindow::resizeEvent(ev);
     this->game->currentSize = ev->size();
+
+    int w = ev->size().width();
+    int h = ev->size().height();
+
+    game->getProgressBar()->move(w * 0.5, h * 0.5);
+
+}
+
+void GameWindow::paintEvent(QPaintEvent *ev)
+{
+    QPainter p(this);
+    p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.jpg"));
 }
 
 GameWindow::~GameWindow()

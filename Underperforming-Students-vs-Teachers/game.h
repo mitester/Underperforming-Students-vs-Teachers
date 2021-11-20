@@ -59,8 +59,12 @@ public:
     bool pause();
     //bool stop(); no need for this. Just close the window bounded with this game
 
+    QProgressBar* getProgressBar() const;
+
 private:
     explicit Game(QWidget* parent = nullptr);
+    Game(Game& game) = delete;
+    void operator=(const Game&) = delete;
     ~Game();
 
     static Game* instance;
