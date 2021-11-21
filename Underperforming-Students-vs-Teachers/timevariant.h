@@ -49,7 +49,7 @@ public:
     //restricting all subclasses to provide an interface to return back their type & category
     virtual TimeVariant::Type getType() const = 0;
     virtual TimeVariant::Category getCategory() const = 0;
-    double getDistanceFromLeft() const;
+    int getDistanceFromLeft() const;
     Row* getRow() const;
 
 

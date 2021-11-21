@@ -7,11 +7,12 @@
 #include "sleepdeprivedstudent.h"
 #include "teacher.h"
 #include "teacherspet.h"
+#include "kelvin.h"
+#include "pang.h"
+#include "desmond.h"
 #include "QDebug"
 
-const QString Row::dummy = "dummy";
-
-Row::Row(int size, QObject *parent) : QObject(parent), grid_size(size)
+Row::Row(int yPos, int size, QWidget *parent) : QObject(parent), grid_size(size), yPos(yPos), parent(parent)
 {
     grid = new Student*[size];
     updateLeftMostTeacher();
@@ -57,48 +58,81 @@ Teacher* Row::getLeftMostTeacher() const {
 }
 
 /**  --- Add Operations ---  **/
-
-void Row::addStudent(Student* const s, int pos) {
-    if( !inBound(pos) || s==nullptr || grid[pos]!=nullptr)
-        return;
-    grid[pos] = s;
-    studentQueue.push(s);
-}
-
-void Row::addAssignment(Assignment *const a) {
-    if(a != nullptr)
-        assignmentQueue.push(a);
-}
-
-void Row::addTeacher(Teacher *const t) {
-    if(t == nullptr)    return;
-    teacherList.append(t);
-    updateLeftMostTeacher();
-}
-
 /***
 void addStudent(int tile_pos);                      // create a new student at tile_pos
 void addTeacher(TimeVariant::Type type);            // create a teacher at the right side of the row
 void addAssignment(int tile_pos);                   // create a new assignment at tile_pos
 ***/
 
-void addStudent(TimeVariant::Type type, int tile_pos) {
+void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     Student* s = nullptr;
+    QLabel* label = new QLabel(parent);
     switch (type) {
     case TimeVariant::Type::CGA_GOD:
+        label->setPixmap(QPixmap(":/images/students/stu_cga_0.png"));
+        s = new CgaGod(label, this);
         break;
     case TimeVariant::Type::GBUS_STUDENT:
+        label->setPixmap(QPixmap(":/images/students/stu_gbus_0.png"));
+        s = new GbusStudent(label, this);
         break;
     case TimeVariant::Type::SHAMELESS_STUDENT:
+        label->setPixmap(QPixmap(":/images/students/stu_shameless_0.png"));
+        s = new ShamelessStudent(label, this);
         break;
     case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
+        label->setPixmap(QPixmap(":/images/students/stu_cga_0.png"));
+        s = new SleepDeprivedStudent(label, this);
         break;
     case TimeVariant::Type::TEACHERS_PET:
+        label->setPixmap(QPixmap(":/images/students/stu_pet_0.png"));
+        s = new TeachersPet(label,this);
         break;
     default:
         qDebug() << "Non student type passed in to addStudent() function";
+        delete label;
         return;
     }
+
+    addStudent(s, tile_pos); //register student to the grid
+    label->setGeometry(GRID_LEFT + GRID_INTERVAL * tile_pos, yPos, STD_WIDTH, STD_HEIGHT);
+}
+
+void Row::addTeacher(TimeVariant::Type type) {
+    Teacher* t = nullptr;
+    QLabel* label = new QLabel(parent);
+    switch(type) {
+    case TimeVariant::Type::OVERWORKED_TA:
+        label->setPixmap(QPixmap(":/images/teachers/tea_overworked_ta_0.png"));
+        t = new OverworkedTA(label, this);
+        break;
+    case TimeVariant::Type::KELVIN:
+        label->setPixmap(QPixmap(":/images/teachers/tea_kelvin_0.png"));
+        t = new Kelvin(label, this);
+        break;
+    case TimeVariant::Type::PANG:
+        label->setPixmap(QPixmap(":/images/teachers/tea_pang_0.png"));
+        t = new Pang(label, this);
+        break;
+    case TimeVariant::Type::DESMOND:
+        label->setPixmap(QPixmap(":/images/teachers/tea_desmond_0.png"));
+        t = new Desmond(label, this);
+        break;
+    default:
+        qDebug() << "Non teacher type passed in to addTeacher() function";
+        return;
+    }
+    addTeacher(t);
+    label->setGeometry(TEA_GEN_POS, yPos, STD_WIDTH, STD_HEIGHT);
+}
+
+void Row::addAssignment(int tile_pos) {
+    QLabel* label = new QLabel(parent);
+    label->setPixmap(QPixmap(":/images/items/item_assignment_0.png"));
+    label->setGeometry(GRID_LEFT + GRID_INTERVAL * tile_pos, yPos, ASS_WIDTH, ASS_HEIGHT);
+    Assignment* a = new Assignment();
+    //TODO Complete add Assignment
+    addAssignment(a);
 }
 
 
@@ -160,26 +194,14 @@ int Row::getGridSize() const {
 }
 
 bool Row::hasReachedEnd() const {
-    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size())
+    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size() || teacherList.empty())
         return false;
     return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() == 0; // check the leftmost position
 }
 
 
 Row::~Row() {
-    for(int i = 0; i < grid_size; i++) // delete all students in grid
-        if(grid[i] != nullptr)
-            delete grid[i];
     delete[] grid;
-
-    while(!assignmentQueue.empty()) { // delete all assignments in the queue
-        Assignment* a = popRightMostAssignment();
-        delete a;
-    }
-
-    for(int i = 0; i < teacherList.size(); i++)
-        if(teacherList[i] != nullptr)
-            delete teacherList[i];
 }
 
 /** Private **/
@@ -207,6 +229,25 @@ void Row::updateLeftMostTeacher() {
     }
     leftMostTeacherIndex = leftmost;
 }
+
+void Row::addStudent(Student* const s, int pos) {
+    if( !inBound(pos) || s==nullptr || grid[pos]!=nullptr)
+        return;
+    grid[pos] = s;
+    studentQueue.push(s);
+}
+
+void Row::addAssignment(Assignment *const a) {
+    if(a != nullptr)
+        assignmentQueue.push(a);
+}
+
+void Row::addTeacher(Teacher *const t) {
+    if(t == nullptr)    return;
+    teacherList.append(t);
+    updateLeftMostTeacher();
+}
+
 
 
 

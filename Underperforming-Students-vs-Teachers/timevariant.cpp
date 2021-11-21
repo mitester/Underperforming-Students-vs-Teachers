@@ -9,7 +9,7 @@ QLabel* TimeVariant::getWidget() {return widget;}
 
 void TimeVariant::setWidget(QLabel* widget) {this->widget = widget;}
 
-double TimeVariant::getDistanceFromLeft() const {
+int TimeVariant::getDistanceFromLeft() const {
     return this->widget->x();
 }
 

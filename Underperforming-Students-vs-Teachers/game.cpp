@@ -35,7 +35,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
-        rows[i] = new Row(NUMBER_OF_COLUMN, parent);
+        // rows[i] = new Row(NUMBER_OF_COLUMN, parent); invalid due to change of row
 
     progressBar = new QProgressBar(parent);
 }
@@ -142,6 +142,7 @@ void Game::setGameStatus(GameStatus status)
 
 void Game::generateTeacher()
 {
+    /*** Invalid code due to change of Row.
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
     int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
     if(num >= 0 && num <= 4)
@@ -161,6 +162,7 @@ void Game::generateTeacher()
         rows[rowNum]->addTeacher(new Desmond(new QLabel(parent), rows[rowNum]));
     }
     generatingTimer->setInterval(getRandomInterval());
+    */
 }
 
 QProgressBar* Game::getProgressBar() const
