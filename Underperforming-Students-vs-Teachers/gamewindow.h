@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "game.h"
-#include <QResizeEvent>
 
 namespace Ui {
 class GameWindow;
@@ -19,10 +18,13 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent* ev);
+    void paintEvent(QPaintEvent* ev);
 
 private:
     Ui::GameWindow *ui;
     Game* game;
+    int windowWidth = 1280;
+    int windowHeight = 720;
 };
 
 #endif // GAMEWINDOW_H

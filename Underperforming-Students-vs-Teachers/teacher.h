@@ -18,8 +18,8 @@ class Teacher : public Human
 
 public:
     /* Mutators */
-    double getSpeed() const;
-    void setSpeed(double speed);
+    int getSpeed() const;
+    void setSpeed(int speed);
     int getDamage() const;
     void setDamage(int damage);
 
@@ -30,9 +30,9 @@ public:
     TimeVariant::Category getCategory() const;
 
 protected:
-    explicit Teacher(QLabel *widget, Row* row, QString name, int maxHp, double speed, int damage);
+    explicit Teacher(QLabel *widget, Row* row, QString name, int maxHp, int speed, int damage);
 private:
-    double speed;
+    int speed;
     int damage;
 };
 

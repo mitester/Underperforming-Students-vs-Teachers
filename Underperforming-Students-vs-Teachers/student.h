@@ -14,8 +14,8 @@ class Student : public Human
 
 public:
     //getter and setter for skillSpeed
-    double getSkillSpeed() const;
-    void setSkillSpeed(double skillSpeed);
+    int getSkillSpeed() const;
+    void setSkillSpeed(int skillSpeed);
 
     //getter and setter for skillSpeed
     int getCost() const;
@@ -23,10 +23,10 @@ public:
 
 protected:
     //protected constructor
-    Student(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost);
+    Student(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost);
 
     //stores this student skillSpeed
-    double skillSpeed;
+    int skillSpeed;
 
     //stores this student deployment cost
     int cost;

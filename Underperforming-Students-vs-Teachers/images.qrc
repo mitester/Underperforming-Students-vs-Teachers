@@ -18,5 +18,6 @@
         <file>images/students/stu_sleep_1.png</file>
         <file>images/students/stu_sleep_2.png</file>
         <file>images/items/item_assignment_0.png</file>
+        <file>images/scene/game_scene.jpg</file>
     </qresource>
 </RCC>

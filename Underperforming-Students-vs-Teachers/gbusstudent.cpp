@@ -2,7 +2,7 @@
 
 const QString GbusStudent::DEFAULT_NAME = "GBUS Student";
 
-GbusStudent::GbusStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost)
+GbusStudent::GbusStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost)
     : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 

@@ -18,7 +18,7 @@ public:
     TimeVariant::Category getCategory() const;
 
 protected:
-    AttackStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost, int damage);
+    AttackStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost, int damage);
 
     //the number of damage the Attack Student can make
     //It may change due to its skill

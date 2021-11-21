@@ -62,6 +62,14 @@ protected:
     QLabel* widget; //every TimeVariant owns a QWidget
     Row* row; //stores which row that TimeVariant belongs
 
+    int timeConcept = 0; //every TimeVariant has time concept
+                            //it adds one basic unit time after receive one timeout()
+                            //it belongs to [0,speed)
+
+    int attackMode = 0; //stores which attackMode is using
+                        //equivalent to store which picture is using (default 0)
+                        //need to use it with modulo arithemtic
+
 };
 
 #endif // TIMEVARIANT_H
