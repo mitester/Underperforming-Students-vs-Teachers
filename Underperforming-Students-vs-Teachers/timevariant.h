@@ -9,7 +9,6 @@
 #include <QObject>
 
 class Row;
-class Game;
 
 class TimeVariant : public QObject
 {
