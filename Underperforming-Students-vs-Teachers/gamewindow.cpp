@@ -22,7 +22,7 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
-    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr, game);
+    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr);
     game->registerTimeVariant(s);
 }
 

@@ -18,7 +18,7 @@ public:
     static const int DEFAULT_COST{10};
     static const int DEFAULT_DAMAGE{10};
 
-    SleepDeprivedStudent(QLabel* widget, Row* row, Game* game,
+    SleepDeprivedStudent(QLabel* widget, Row* row,
                          QString name = DEFAULT_NAME,
                          int maxHp = DEFAULT_MAX_HP,
                          int skillSpeed = DEFAULT_SKILL_SPEED,
@@ -29,8 +29,6 @@ public:
 
     //the implementation of the pure virtual update()
     void update();
-
-    Game* game;
 
 };
 
