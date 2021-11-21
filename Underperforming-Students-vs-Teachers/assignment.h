@@ -1,12 +1,23 @@
 #ifndef ASSIGNMENT_H
 #define ASSIGNMENT_H
 
+#include "item.h"
 
-class Assignment
+class Assignment : public Item
 {
+    Q_OBJECT
 public:
-    Assignment();
-    double getDistanceFromLeft() const { return 0.0; };
+    static const int spriteWidth{45};
+    static const int spriteHeight{37};
+
+    Assignment(QLabel* widget, Row* row, int damage, int assignmentX, int assignmentY);
+
+    void update(); //implement update() from TimeVariant
+
+    TimeVariant::Type getType() const;
+
+private:
+    int damage = 0;
 };
 
 #endif // ASSIGNMENT_H

@@ -8,6 +8,7 @@
 #include <QResizeEvent>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QThread>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,7 +22,7 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
-    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr);
+    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr, game);
     game->registerTimeVariant(s);
 }
 
@@ -36,7 +37,7 @@ void GameWindow::resizeEvent(QResizeEvent *ev) {
 
 }
 
-void GameWindow::paintEvent(QPaintEvent *ev)
+void GameWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.jpg"));

@@ -61,6 +61,8 @@ public:
 
     QProgressBar* getProgressBar() const;
 
+    QWidget* getParent() const;
+
 private:
     explicit Game(QWidget* parent = nullptr);
     Game(Game& game) = delete;
@@ -103,6 +105,8 @@ private:
     bool checkTerminated();
 
     QWidget* parent;
+    void setParent(QObject *parent); // overload father's setParent to private
+
 };
 
 #endif // GAME_H

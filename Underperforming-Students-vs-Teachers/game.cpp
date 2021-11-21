@@ -48,7 +48,9 @@ Game::~Game()
 //parent will be ignored if instance exists
 Game* Game::getInstance(QWidget *parent)
 {
-    return instance ? instance : new Game(parent);
+    if(instance != nullptr) return instance;
+    instance = new Game(parent);
+    return instance;
 }
 
 int Game::getRedbullNum() const {return redbullNum;}
@@ -98,11 +100,11 @@ bool Game::pause()
 
 void Game::update()
 {
-    if(checkTerminated())
-    {
-        pause(); //pause the game immediately cuz nobody should move
-        //some dialog should pop up afterwards
-    }
+//    if(checkTerminated())
+//    {
+//        pause(); //pause the game immediately cuz nobody should move
+//        //some dialog should pop up afterwards
+//    }
     //TODO: change the progress bar value
 }
 
@@ -166,6 +168,16 @@ void Game::generateTeacher()
 QProgressBar* Game::getProgressBar() const
 {
     return progressBar;
+}
+
+QWidget* Game::getParent() const
+{
+    return parent;
+}
+
+void Game::setParent(QObject *parent)
+{
+    QObject::setParent(parent);
 }
 
 

@@ -35,6 +35,7 @@ class Row : public QObject
     Q_OBJECT
 
 public:
+    static const QString dummy;
 
     explicit Row(int size, QObject *parent = nullptr);
 
