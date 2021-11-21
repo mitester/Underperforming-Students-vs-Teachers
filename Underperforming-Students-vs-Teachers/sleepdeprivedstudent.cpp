@@ -14,10 +14,9 @@ TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Typ
 
 void SleepDeprivedStudent::update()
 {
-    if(row->getLeftMostTeacher() && timeConcept == 0) //there is at least one teacher approaching
+    if(true) //there is at least one teacher approaching
     {
         attackMode = (attackMode + 1) % 3;
-        Assignment* a = new Assignment();
     }
     else
     {
