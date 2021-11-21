@@ -11,7 +11,7 @@ public:
     TimeVariant::Category getCategory() const;
 
 protected:
-    SupportStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost);
+    SupportStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost);
 };
 
 #endif // SUPPORTSTUDENT_H

@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QProgressBar>
+#include <QDebug>
 
 //default value for Game::instance
 Game* Game::instance = nullptr;
@@ -15,11 +16,13 @@ const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
 
 void Game::move(QWidget *w, double xPercent, double yPercent) {
-    w->move(xPercent * 100.0 * currentSize.width(), yPercent * 100.0 * currentSize.height());
+    w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
 }
 
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
+    currentSize = parent->size(); //save the size of parent
+
     mainTimer = new QTimer(parent);
     mainTimer->setInterval(BASIC_TIME_UNIT);
 
@@ -33,6 +36,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(NUMBER_OF_COLUMN, parent);
+
     progressBar = new QProgressBar(parent);
 }
 
@@ -136,29 +140,32 @@ void Game::setGameStatus(GameStatus status)
     gameStatus = status;
 }
 
-Teacher* Game::generateTeacher()
+void Game::generateTeacher()
 {
-    /* Disable due to its incompletion
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
+    int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
     if(num >= 0 && num <= 4)
     {
-        return new OverworkedTA(new QLabel(parent));
+        rows[rowNum]->addTeacher(new OverworkedTA(new QLabel(parent), rows[rowNum]));
     }
     if(num >= 5 && num <= 6)
     {
-        return new Kelvin(new QLabel(parent));
+        rows[rowNum]->addTeacher(new Kelvin(new QLabel(parent), rows[rowNum]));
     }
     if(num >= 7 && num <= 8)
     {
-        return new Pang(new QLabel(parent));
+        rows[rowNum]->addTeacher(new Pang(new QLabel(parent), rows[rowNum]));
     }
     if(num == 9)
     {
-        return new Desmond(new QLabel(parent));
+        rows[rowNum]->addTeacher(new Desmond(new QLabel(parent), rows[rowNum]));
     }
     generatingTimer->setInterval(getRandomInterval());
-    */
-    return nullptr;
+}
+
+QProgressBar* Game::getProgressBar() const
+{
+    return progressBar;
 }
 
 

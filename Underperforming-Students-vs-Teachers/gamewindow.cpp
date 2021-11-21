@@ -1,9 +1,13 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
+#include "sleepdeprivedstudent.h"
 
 #include "game.h"
 #include <QString>
 #include <QDebug>
+#include <QResizeEvent>
+#include <QPaintEvent>
+#include <QPainter>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,12 +16,30 @@ GameWindow::GameWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(Game::GAME_NAME);
 
-    this->game = Game::getInstance(this);
+    setFixedSize(windowWidth, windowHeight);
+
+    this->game = Game::getInstance(this); //get the Singleton Game object
+
+    game->start();
+    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr);
+    game->registerTimeVariant(s);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
+    QMainWindow::resizeEvent(ev);
     this->game->currentSize = ev->size();
-    qDebug() << QString::number(this->game->currentSize.width()) << " " << QString::number(this->game->currentSize.height());
+
+    int w = ev->size().width();
+    int h = ev->size().height();
+
+    game->getProgressBar()->move(w * 0.5, h * 0.5);
+
+}
+
+void GameWindow::paintEvent(QPaintEvent *ev)
+{
+    QPainter p(this);
+    p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.jpg"));
 }
 
 GameWindow::~GameWindow()

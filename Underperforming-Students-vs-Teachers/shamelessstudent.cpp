@@ -2,7 +2,7 @@
 
 const QString ShamelessStudent::DEFAULT_NAME = "Shameless Student";
 
-ShamelessStudent::ShamelessStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost)
+ShamelessStudent::ShamelessStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost)
     : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 

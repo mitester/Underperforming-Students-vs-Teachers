@@ -9,6 +9,8 @@
 #include "teacherspet.h"
 #include "QDebug"
 
+const QString Row::dummy = "dummy";
+
 Row::Row(int size, QObject *parent) : QObject(parent), grid_size(size)
 {
     grid = new Student*[size];

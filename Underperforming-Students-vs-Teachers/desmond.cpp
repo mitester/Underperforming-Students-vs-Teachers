@@ -2,17 +2,17 @@
 
 const QString Desmond::DEFAULT_NAME = "Desmond";
 
-Desmond::Desmond(QLabel *widget, Row* row, QString name, int maxHp, double speed, int damage, double skillSpeed) :
+Desmond::Desmond(QLabel *widget, Row* row, QString name, int maxHp, int speed, int damage, int skillSpeed) :
     Teacher(widget, row, name, maxHp, speed, damage), skillSpeed(skillSpeed)
 {
 
 }
 
-double Desmond::getSkillSpeed() const {
+int Desmond::getSkillSpeed() const {
     return skillSpeed;
 }
 
-void Desmond::setSkillSpeed(double skillSpeed) {
+void Desmond::setSkillSpeed(int skillSpeed) {
     this->skillSpeed = skillSpeed;
 }
 
