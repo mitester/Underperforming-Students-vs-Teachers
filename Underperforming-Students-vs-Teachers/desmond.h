@@ -15,16 +15,16 @@ class Desmond : public Teacher
 public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};
-    constexpr static const double DEFAULT_SPEED{10.0};
+    static const int DEFAULT_SPEED{1000};
     static const int DEFAULT_DAMAGE{10};
-    constexpr static const double DEFAULT_SKILL_SPEED{10.0};
+    static const int DEFAULT_SKILL_SPEED{1000};
 
-    double getSkillSpeed() const;
-    void setSkillSpeed(double skillSpeed);
+    int getSkillSpeed() const;
+    void setSkillSpeed(int skillSpeed);
 
     Desmond(QLabel *widget, Row* row,
            QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
-           double speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE, double skillSpeed = DEFAULT_SKILL_SPEED);
+           int speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE, int skillSpeed = DEFAULT_SKILL_SPEED);
 
     TimeVariant::Type getType() const;
 
@@ -32,7 +32,7 @@ public:
 
     void update(); // implementation of the virtual function update()
 private:
-    double skillSpeed;
+    int skillSpeed;
 };
 
 #endif // DESMOND_H

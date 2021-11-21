@@ -3,7 +3,7 @@
 const QString Pang::DEFAULT_NAME = "Pang";
 
 
-Pang::Pang(QLabel *widget, Row* row,QString name, int maxHp, double speed, int damage) :
+Pang::Pang(QLabel *widget, Row* row,QString name, int maxHp, int speed, int damage) :
     Teacher(widget, row, name, maxHp, speed, damage)
 {
 

@@ -1,6 +1,6 @@
 #include "attackstudent.h"
 
-AttackStudent::AttackStudent(QLabel* widget, Row* row, QString name, int maxHp, double skillSpeed, int cost, int damage)
+AttackStudent::AttackStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost, int damage)
     : Student (widget, row, name, maxHp, skillSpeed, cost), damage(damage)
 {
 }
