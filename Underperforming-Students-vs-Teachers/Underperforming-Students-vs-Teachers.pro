@@ -12,6 +12,7 @@ SOURCES += \
     assignment.cpp \
     attackstudent.cpp \
     cgagod.cpp \
+    clickablelabel.cpp \
     deadlinefighter.cpp \
     desmond.cpp \
     game.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
     mainwindow.cpp \
     overworkedta.cpp \
     pang.cpp \
+    redbull.cpp \
     row.cpp \
     shamelessstudent.cpp \
     sleepdeprivedstudent.cpp \
@@ -31,12 +33,14 @@ SOURCES += \
     supportstudent.cpp \
     teacher.cpp \
     teacherspet.cpp \
-    timevariant.cpp
+    timevariant.cpp \
+    vendingmachine.cpp
 
 HEADERS += \
     assignment.h \
     attackstudent.h \
     cgagod.h \
+    clickablelabel.h \
     deadlinefighter.h \
     desmond.h \
     game.h \
@@ -48,6 +52,7 @@ HEADERS += \
     mainwindow.h \
     overworkedta.h \
     pang.h \
+    redbull.h \
     row.h \
     shamelessstudent.h \
     sleepdeprivedstudent.h \
@@ -55,7 +60,8 @@ HEADERS += \
     supportstudent.h \
     teacher.h \
     teacherspet.h \
-    timevariant.h
+    timevariant.h \
+    vendingmachine.h
 
 FORMS += \
     gamewindow.ui \

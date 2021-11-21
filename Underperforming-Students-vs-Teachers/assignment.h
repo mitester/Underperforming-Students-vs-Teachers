@@ -10,12 +10,11 @@ public:
     static const int spriteWidth{45};
     static const int spriteHeight{37};
 
-    Assignment(QLabel* widget, Row* row, int damage, int assignmentX, int assignmentY);
+    Assignment(QLabel* widget, Row* row, int damage);
 
     void update(); //implement update() from TimeVariant
 
     TimeVariant::Type getType() const;
-
 private:
     int damage = 0;
 };

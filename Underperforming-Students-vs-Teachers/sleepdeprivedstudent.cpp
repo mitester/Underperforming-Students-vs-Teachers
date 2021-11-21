@@ -8,7 +8,6 @@ const QString SleepDeprivedStudent::DEFAULT_NAME = "Sleep Deprived Student";
 SleepDeprivedStudent::SleepDeprivedStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost, int damage)
     : AttackStudent(widget, row, name, maxHp, skillSpeed, cost, damage)
 {
-    widget->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
 }
 
 TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Type::SLEEP_DEPRIVED_STUDENT;}
@@ -29,8 +28,15 @@ void SleepDeprivedStudent::update()
 
             Game* game = Game::getInstance();
 
-            Assignment* s = new Assignment(new QLabel(game->getParent()), nullptr,
-                                           damage, widget->x() + widget->width(), widget->y() + 0.5*widget->height());
+            QLabel* label = new QLabel(game->getParent());
+            label->setScaledContents(true);
+            label->setFixedSize(Assignment::spriteWidth, Assignment::spriteWidth);
+            label->setPixmap(QPixmap(":/images/items/item_assignment_0.png"));
+            label->setGeometry(widget->x() + widget->width(), widget->y() + 0.5*widget->height(),
+                               spriteWidth,spriteHeight);
+            label->setVisible(true);
+
+            Assignment* s = new Assignment(label, nullptr, damage);
             game->registerTimeVariant(s);
             timeConcept = 0;
         }

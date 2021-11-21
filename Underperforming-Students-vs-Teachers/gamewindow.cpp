@@ -22,18 +22,18 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
-    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr);
+    QLabel* label = new QLabel(this);
+    label->setScaledContents(true);
+    label->setFixedSize(Human::spriteWidth, Human::spriteHeight);
+    label->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
+
+    SleepDeprivedStudent* s = new SleepDeprivedStudent(label, nullptr);
     game->registerTimeVariant(s);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
     QMainWindow::resizeEvent(ev);
     this->game->currentSize = ev->size();
-
-    int w = ev->size().width();
-    int h = ev->size().height();
-
-    game->getProgressBar()->move(w * 0.5, h * 0.5);
 
 }
 

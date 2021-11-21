@@ -59,8 +59,6 @@ public:
     bool pause();
     //bool stop(); no need for this. Just close the window bounded with this game
 
-    QProgressBar* getProgressBar() const;
-
     QWidget* getParent() const;
 
 private:
@@ -93,8 +91,6 @@ private:
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;
-
-    QProgressBar* progressBar;
 
     //this is not the same as the one in TimeVariant
     //tho it guards the game progress by listening to the global timer signal

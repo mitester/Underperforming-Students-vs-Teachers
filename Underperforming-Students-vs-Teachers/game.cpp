@@ -37,7 +37,6 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(NUMBER_OF_COLUMN, parent);
 
-    progressBar = new QProgressBar(parent);
 }
 
 Game::~Game()
@@ -119,7 +118,7 @@ bool Game::checkTerminated()
         }
     }
 
-    if(progressBar->value() >= progressBar->maximum()) //student cleared all teacher
+    if(false) //TODO: student cleared all teacher
     {
         gameStatus = GameStatus::STUDENT_WON;
         return true;
@@ -163,11 +162,6 @@ void Game::generateTeacher()
         rows[rowNum]->addTeacher(new Desmond(new QLabel(parent), rows[rowNum]));
     }
     generatingTimer->setInterval(getRandomInterval());
-}
-
-QProgressBar* Game::getProgressBar() const
-{
-    return progressBar;
 }
 
 QWidget* Game::getParent() const
