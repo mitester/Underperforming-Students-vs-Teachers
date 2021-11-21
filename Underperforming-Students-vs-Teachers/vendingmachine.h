@@ -7,7 +7,7 @@ class VendingMachine : public Item
 {
     Q_OBJECT
 public:
-    VendingMachine(QLabel* widget, Row* row = nullptr);
+    VendingMachine(QLabel* widget);
 
     TimeVariant::Type getType() const;
 

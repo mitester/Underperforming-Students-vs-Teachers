@@ -1,6 +1,6 @@
 #include "vendingmachine.h"
 
-VendingMachine::VendingMachine(QLabel* widget, Row* row) : Item(widget, row)
+VendingMachine::VendingMachine(QLabel* widget) : Item(widget, nullptr)
 {
 
 }

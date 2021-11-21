@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
-#include "sleepdeprivedstudent.h"
+#include "redbull.h"
+#include "clickablelabel.h"
 
 #include "game.h"
 #include <QString>
@@ -22,12 +23,17 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
-    QLabel* label = new QLabel(this);
+    ClickableLabel* label = new ClickableLabel(this);
     label->setScaledContents(true);
     label->setFixedSize(Human::spriteWidth, Human::spriteHeight);
     label->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
+    label->move(100,100);
 
-    SleepDeprivedStudent* s = new SleepDeprivedStudent(label, nullptr);
+    //SleepDeprivedStudent* s = new SleepDeprivedStudent(label, nullptr);
+
+    Redbull *s = new Redbull(label);
+
+
     game->registerTimeVariant(s);
 }
 

@@ -47,7 +47,7 @@ Game::~Game()
 //parent will be ignored if instance exists
 Game* Game::getInstance(QWidget *parent)
 {
-    if(instance != nullptr) return instance;
+    if(instance) return instance;
     instance = new Game(parent);
     return instance;
 }
