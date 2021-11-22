@@ -18,6 +18,7 @@ void SleepDeprivedStudent::update()
     //there is at least one teacher approaching
     if(row->getLeftMostTeacher())
     {
+
         if(timeConcept == skillSpeed / 2)
         {
             widget->setPixmap(QPixmap(":/images/students/stu_sleep_1.png"));
@@ -33,5 +34,6 @@ void SleepDeprivedStudent::update()
     else
     {
         timeConcept = 0;
+        widget->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
     }
 }

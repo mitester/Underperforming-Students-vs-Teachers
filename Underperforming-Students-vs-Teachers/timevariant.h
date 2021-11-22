@@ -17,7 +17,7 @@ public:
     enum class Type
     {
         SLEEP_DEPRIVED_STUDENT,
-        DEADLINE_STUDENT,
+        DEADLINE_FIGHTER,
         CGA_GOD,
         SHAMELESS_STUDENT,
         TEACHERS_PET,
@@ -55,6 +55,7 @@ public:
 
 protected:
     TimeVariant(QLabel *widget, Row* row);
+    ~TimeVariant();
 
     QLabel* widget; //every TimeVariant owns a QWidget
     Row* row; //stores which row that TimeVariant belongs
