@@ -30,6 +30,9 @@ protected:
 
     //stores this student deployment cost
     int cost;
+
+    //stores the position of the student in the row
+    int tilePos;
 };
 
 #endif // STUDENT_H

@@ -40,7 +40,7 @@ public:
     };
 
     //getter and setter for widget
-    QLabel* getWidget();
+    QLabel* getWidget() const;
     void setWidget(QLabel *widget);
 
     //restricting all subclasses to react with the global timer signal

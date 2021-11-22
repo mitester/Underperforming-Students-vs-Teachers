@@ -46,18 +46,9 @@ public:
      *  The right most position is NUMBER_OF_COLUMNS - 1
      * **/
 
-    explicit Row(int yPos, int size, QWidget *parent = nullptr);
+    Row(int yPos, int size, QWidget *parent = nullptr);
 
     /** Static Constant Fields **/ // All numbers used are in "percentage coordinate"
-    const static int GRID_INTERVAL {8};     // the interval between two tiles
-    const static int GRID_LEFT {8};        // the position of the leftmost tile
-    const static int GRID_RIGHT {80};         // the position of the rightmost tile
-    const static int TEA_GEN_POS {100};     // the generation position of teachers
-    const static int TEA_END_POS {0};       // the end position of teachers (reached this point implies teacher victory)
-    const static int STD_HEIGHT {100};
-    const static int STD_WIDTH {50};
-    const static int ASS_HEIGHT {30};
-    const static int ASS_WIDTH {30};
 
     /** RightMost operations **/
     const Student* getRightMostStudent() const;         // returns a const reference of right most student.
@@ -71,7 +62,7 @@ public:
     /** Add operations**/
     void addStudent(TimeVariant::Type type, int tile_pos); // create a new student at tile_pos
     void addTeacher(TimeVariant::Type type);            // create a teacher at the right side of the row
-    void addAssignment(int tile_pos);                   // create a new assignment at tile_pos
+    void addAssignment(Student* shooter, int damage);                   // create a new assignment at tile_pos
 
 
     /** Remove operations (! Note: remove according to index is expensive)**/
@@ -86,6 +77,9 @@ public:
     int getGridSize() const;            // the size of the grid
     bool hasReachedEnd() const;         // if any teacher has reached the end of this row
     int getYPos() const;
+
+    /** Utilities **/
+    void updateLeftMostTeacher();
 
     ~Row();
 
@@ -115,7 +109,6 @@ private:
 
     bool inBound(int pos) const;
     void deregisterFromGrid(Student* s);
-    void updateLeftMostTeacher();
     QLabel* generateQLabelAtPos(int x); //generate a null
 
     void addStudent(Student* const s, int pos);         // add a student at certain pos

@@ -26,12 +26,7 @@ void SleepDeprivedStudent::update()
         else if(timeConcept == skillSpeed)
         {
             widget->setPixmap(QPixmap(":/images/students/stu_sleep_2.png"));
-
-            Game* game = Game::getInstance();
-
-            Assignment* s = new Assignment(new QLabel(game->getParent()), nullptr,
-                                           damage, widget->x() + widget->width(), widget->y() + 0.5*widget->height());
-            game->registerTimeVariant(s);
+            row->addAssignment(this, damage);
             timeConcept = 0;
         }
         timeConcept += Game::BASIC_TIME_UNIT;
