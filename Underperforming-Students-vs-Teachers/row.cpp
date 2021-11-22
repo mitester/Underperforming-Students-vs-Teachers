@@ -5,6 +5,7 @@
 #include "gbusstudent.h"
 #include "shamelessstudent.h"
 #include "sleepdeprivedstudent.h"
+#include "deadlinefighter.h"
 #include "teacher.h"
 #include "teacherspet.h"
 #include "kelvin.h"
@@ -91,6 +92,10 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     case TimeVariant::Type::TEACHERS_PET:
         label->setPixmap(QPixmap(":/images/students/stu_pet_0.png"));
         s = new TeachersPet(label,this);
+        break;
+    case TimeVariant::Type::DEADLINE_FIGHTER:
+        label->setPixmap(QPixmap(":/images/students/stu_deadline_0.png"));
+        s = new DeadlineFighter(label,this);
         break;
     default:
         qDebug() << "Non student type passed in to addStudent() function";
