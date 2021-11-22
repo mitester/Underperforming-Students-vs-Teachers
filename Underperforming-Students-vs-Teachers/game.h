@@ -35,10 +35,10 @@ public:
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
     const static int TEA_GEN_POS {1000};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
-    const static int SPRITE_HEIGHT {128};
-    const static int SPRITE_WIDTH {100};
-    const static int ASS_HEIGHT {37};
-    const static int ASS_WIDTH {45};
+//    const static int SPRITE_HEIGHT {128};
+//    const static int SPRITE_WIDTH {100};
+//    const static int ASS_HEIGHT {37};
+//    const static int ASS_WIDTH {45};
 
     static QSize currentSize;
     static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position
