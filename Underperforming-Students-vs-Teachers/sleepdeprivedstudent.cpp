@@ -16,8 +16,7 @@ TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Typ
 void SleepDeprivedStudent::update()
 {
     //there is at least one teacher approaching
-    //if(row->getLeftMostTeacher())
-    if(true)
+    if(row->getLeftMostTeacher())
     {
         if(timeConcept == skillSpeed / 2)
         {
