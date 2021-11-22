@@ -10,7 +10,3 @@ Kelvin::Kelvin(QLabel *widget, Row* row, QString name, int maxHp, int speed, int
 }
 
 TimeVariant::Type Kelvin::getType() const {return TimeVariant::Type::KELVIN;}
-
-void Kelvin::update() {
-
-}

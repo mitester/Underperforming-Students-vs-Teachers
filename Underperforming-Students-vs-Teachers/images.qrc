@@ -19,5 +19,13 @@
         <file>images/students/stu_sleep_2.png</file>
         <file>images/items/item_assignment_0.png</file>
         <file>images/scene/game_scene.jpg</file>
+        <file>images/teachers/tea_desmond_0.png</file>
+        <file>images/teachers/tea_desmond_1.png</file>
+        <file>images/teachers/tea_kelvin_0.png</file>
+        <file>images/teachers/tea_kelvin_1.png</file>
+        <file>images/teachers/tea_overworked_ta_0.png</file>
+        <file>images/teachers/tea_overworked_ta_1.png</file>
+        <file>images/teachers/tea_pang_0.png</file>
+        <file>images/teachers/tea_pang_1.png</file>
     </qresource>
 </RCC>

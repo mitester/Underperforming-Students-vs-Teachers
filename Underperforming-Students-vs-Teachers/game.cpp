@@ -30,12 +30,13 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     mainTimer->callOnTimeout(this, &Game::update);
 
     generatingTimer = new QTimer(parent);
-    generatingTimer->setInterval(getRandomInterval());
+    //generatingTimer->setInterval(getRandomInterval());
+    generatingTimer->setInterval(1000);
     generatingTimer->callOnTimeout(this, &Game::generateTeacher);
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
-        rows[i] = new Row(NUMBER_OF_COLUMN, parent);
+        rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
 }
 
@@ -143,25 +144,28 @@ void Game::setGameStatus(GameStatus status)
 
 void Game::generateTeacher()
 {
+    rows[0]->addTeacher(TimeVariant::Type::PANG);
+    /*
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
     int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
     if(num >= 0 && num <= 4)
     {
-        rows[rowNum]->addTeacher(new OverworkedTA(new QLabel(parent), rows[rowNum]));
+        rows[rowNum]->addTeacher(TimeVariant::Type::OVERWORKED_TA);
     }
     if(num >= 5 && num <= 6)
     {
-        rows[rowNum]->addTeacher(new Kelvin(new QLabel(parent), rows[rowNum]));
+        rows[rowNum]->addTeacher(TimeVariant::Type::KELVIN);
     }
     if(num >= 7 && num <= 8)
     {
-        rows[rowNum]->addTeacher(new Pang(new QLabel(parent), rows[rowNum]));
+        rows[rowNum]->addTeacher(TimeVariant::Type::PANG);
     }
     if(num == 9)
     {
-        rows[rowNum]->addTeacher(new Desmond(new QLabel(parent), rows[rowNum]));
+        rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
     }
     generatingTimer->setInterval(getRandomInterval());
+    */
 }
 
 QWidget* Game::getParent() const

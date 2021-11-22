@@ -4,6 +4,7 @@
 #include "clickablelabel.h"
 
 #include "game.h"
+#include "pang.h"
 #include <QString>
 #include <QDebug>
 #include <QResizeEvent>
@@ -23,18 +24,12 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
-    ClickableLabel* label = new ClickableLabel(this);
-    label->setScaledContents(true);
-    label->setFixedSize(Human::spriteWidth, Human::spriteHeight);
-    label->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
-    label->move(100,100);
-
-    //SleepDeprivedStudent* s = new SleepDeprivedStudent(label, nullptr);
-
-    Redbull *s = new Redbull(label);
-
-
-    game->registerTimeVariant(s);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::CGA_GOD, 5);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 8);
+    game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 2);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {

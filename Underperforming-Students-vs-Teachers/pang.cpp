@@ -11,6 +11,3 @@ Pang::Pang(QLabel *widget, Row* row,QString name, int maxHp, int speed, int dama
 
 TimeVariant::Type Pang::getType() const {return TimeVariant::Type::PANG;}
 
-void Pang::update() {
-
-}

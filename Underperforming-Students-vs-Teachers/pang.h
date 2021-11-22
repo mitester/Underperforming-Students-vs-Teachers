@@ -15,7 +15,7 @@ class Pang : public Teacher
 public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};
-    static const int DEFAULT_SPEED{1000};
+    static const int DEFAULT_SPEED{4};
     static const int DEFAULT_DAMAGE{10};
 
     Pang(QLabel *widget, Row* row,
@@ -24,7 +24,6 @@ public:
 
     TimeVariant::Type getType() const;
 
-    void update(); // implementation of the virtual function update()
 };
 
 #endif // PANG_H

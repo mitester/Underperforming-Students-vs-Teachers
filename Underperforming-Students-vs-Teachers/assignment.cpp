@@ -15,3 +15,8 @@ TimeVariant::Type Assignment::getType() const
 {
     return TimeVariant::Type::ASSIGNMENT;
 }
+
+int Assignment::getDamage() const
+{
+    return this->damage;
+}

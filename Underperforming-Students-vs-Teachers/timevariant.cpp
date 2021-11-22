@@ -6,7 +6,7 @@ TimeVariant::TimeVariant(QLabel* widget, Row* row) : QObject(widget), widget(wid
 
 }
 
-QLabel* TimeVariant::getWidget() {return widget;}
+QLabel* TimeVariant::getWidget() const {return widget;}
 
 void TimeVariant::setWidget(QLabel* widget) {this->widget = widget;}
 

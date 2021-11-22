@@ -15,6 +15,9 @@ public:
     void update(); //implement update() from TimeVariant
 
     TimeVariant::Type getType() const;
+
+    int getDamage() const;
+
 private:
     int damage = 0;
 };

@@ -28,6 +28,18 @@ public:
     static const int NUMBER_OF_COLUMN{9};
     static const int MAX{INT_MAX}; //the maximum integer
 
+    const static int GRID_UP = 50;
+    const static int GRID_INTERVAL_VERTICAL {125};     // the interval between two tiles
+    const static int GRID_INTERVAL_HORIZONTAL {75};
+    const static int GRID_LEFT {220};        // the position of the leftmost tile
+    const static int GRID_RIGHT {1500};         // the position of the rightmost tile
+    const static int TEA_GEN_POS {1000};     // the generation position of teachers
+    const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
+    const static int SPRITE_HEIGHT {128};
+    const static int SPRITE_WIDTH {100};
+    const static int ASS_HEIGHT {37};
+    const static int ASS_WIDTH {45};
+
     static QSize currentSize;
     static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position
     //How to use: pass in (w, 10, 15.7) means move w, 10% and 15.7%
