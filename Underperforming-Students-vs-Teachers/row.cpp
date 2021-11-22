@@ -11,6 +11,7 @@
 #include "pang.h"
 #include "desmond.h"
 #include "QDebug"
+#include "QObject"
 
 Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QObject(parent), parent(parent)
 {
@@ -22,16 +23,22 @@ Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QOb
 
 const Student* Row::getRightMostStudent() const {
     // const ref is returned because external modification may disturb the internal order of queue, not safe
+    if(studentQueue.empty())
+        return nullptr;
     return studentQueue.top();
 }
 
 const Assignment* Row::getRightMostAssignment() const {
     // const ref is returned because external modification may disturb the internal order of queue, not safe
+    if(assignmentQueue.empty())
+        return nullptr;
     return assignmentQueue.top();
 }
 
 Student* Row::popRightMostStudent() {
     // pop a student will remove it from all records in Row, but will not make it deleted
+    if(studentQueue.empty())
+        return nullptr;
     Student* s = studentQueue.top();
     studentQueue.pop();
     deregisterFromGrid(s);
@@ -39,6 +46,8 @@ Student* Row::popRightMostStudent() {
 }
 
 Assignment* Row::popRightMostAssignment() {
+    if(assignmentQueue.empty())
+        return nullptr;
     Assignment* a = assignmentQueue.top();
     assignmentQueue.pop();
     return a;
@@ -51,18 +60,13 @@ void Row::setRightMostStudentHp(int hp) {
 
 
 Teacher* Row::getLeftMostTeacher() const {
-    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size())
+    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size() || teacherList.empty())
         return nullptr;
     else
         return teacherList.at(leftMostTeacherIndex);
 }
 
 /**  --- Add Operations ---  **/
-/***
-void addStudent(int tile_pos);                      // create a new student at tile_pos
-void addTeacher(TimeVariant::Type type);            // create a teacher at the right side of the row
-void addAssignment(int tile_pos);                   // create a new assignment at tile_pos
-***/
 
 void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     Student* s = nullptr;
@@ -173,7 +177,7 @@ void Row::removeStudent(int pos) {
     {
         if(grid[i] != nullptr) {
             if(i == pos) { // at the user given location, delete the student and set the pointer to nullptr
-                delete grid[i];
+                grid[i]->deleteLater();
                 grid[i] = nullptr;
             } else { // otherwise, push the student back to queue
                 studentQueue.push(grid[i]);
@@ -184,10 +188,8 @@ void Row::removeStudent(int pos) {
 }
 
 void Row::removeTeacher(Teacher* t) {
-    for(QVector<Teacher*>::iterator i = teacherList.begin(); i != teacherList.end(); i++)
-        if(*i == t)
-            i = teacherList.erase(i);
-    delete t;
+    teacherList.removeOne(t);
+    t->deleteLater();
     updateLeftMostTeacher();
 }
 

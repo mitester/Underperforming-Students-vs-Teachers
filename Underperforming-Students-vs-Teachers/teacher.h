@@ -25,7 +25,7 @@ public:
 
     // the default attack behaviour of teacher
     virtual void attack(Student& s);
-    virtual void update() = 0;
+    virtual void update();
 
     TimeVariant::Category getCategory() const;
 
