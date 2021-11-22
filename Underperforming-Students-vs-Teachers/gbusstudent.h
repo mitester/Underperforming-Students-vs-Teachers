@@ -13,6 +13,10 @@ public:
     static const int DEFAULT_SKILL_SPEED{1000};
     static const int DEFAULT_COST{10};
 
+    static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+    static QPixmap* PIC_2;
+
     GbusStudent(QLabel* widget, Row* row,
                      QString name = DEFAULT_NAME,
                      int maxHp = DEFAULT_MAX_HP,

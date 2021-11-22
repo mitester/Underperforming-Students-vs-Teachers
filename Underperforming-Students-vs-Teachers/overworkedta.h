@@ -18,6 +18,9 @@ public:
     static const int DEFAULT_SPEED{1};
     static const int DEFAULT_DAMAGE{10};
 
+    static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+
     explicit OverworkedTA(QLabel *widget, Row* row,
                           QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
                           int speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);

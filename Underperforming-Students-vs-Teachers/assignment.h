@@ -12,6 +12,8 @@ public:
     static const int DEFAULT_DAMAGE{0};
     static const int DEFAULT_SPEED{3};
 
+    static QPixmap* PIC_0;
+
     Assignment(QLabel* widget, Row* row, int damage = DEFAULT_DAMAGE, int speed = DEFAULT_SPEED);
 
     void update(); //implement update() from TimeVariant

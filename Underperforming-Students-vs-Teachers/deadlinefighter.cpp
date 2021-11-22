@@ -4,6 +4,13 @@
 
 const QString DeadlineFighter::DEFAULT_NAME = "Deadline Fighter";
 
+QPixmap* DeadlineFighter::PIC_0 = nullptr;
+QPixmap* DeadlineFighter::PIC_1 = nullptr;
+QPixmap* DeadlineFighter::PIC_2 = nullptr;
+QPixmap* DeadlineFighter::PIC_3 = nullptr;
+QPixmap* DeadlineFighter::PIC_4 = nullptr;
+QPixmap* DeadlineFighter::PIC_5 = nullptr;
+
 
 DeadlineFighter::DeadlineFighter(QLabel* widget, Row* row, QString name, int maxHp, int normalSkillSpeed, int triggeredSkillSpeed,
                                  int cost, int damage, int triggerSkillDistance)

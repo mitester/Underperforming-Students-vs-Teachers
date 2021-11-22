@@ -27,21 +27,35 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
 
     game->getRowAt(1)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
     game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 1);
 
+
     game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
     game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
     game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
 
     game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
     game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
     game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
 
     game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
     game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
     game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
+
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {

@@ -1,18 +1,21 @@
 #include "row.h"
-#include "overworkedta.h"
 #include "game.h"
+#include "teacher.h"
+
 #include "cgagod.h"
 #include "gbusstudent.h"
 #include "shamelessstudent.h"
 #include "sleepdeprivedstudent.h"
 #include "deadlinefighter.h"
-#include "teacher.h"
 #include "teacherspet.h"
+
+#include "overworkedta.h"
 #include "kelvin.h"
 #include "pang.h"
 #include "desmond.h"
-#include "QDebug"
-#include "QObject"
+
+#include <QDebug>
+#include <QObject>
 
 Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QObject(parent), parent(parent)
 {
@@ -77,27 +80,27 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     QLabel* label = new QLabel(parent);
     switch (type) {
     case TimeVariant::Type::CGA_GOD:
-        label->setPixmap(QPixmap(":/images/students/stu_cga_0.png"));
+        label->setPixmap(*CgaGod::PIC_0);
         s = new CgaGod(label, this);
         break;
     case TimeVariant::Type::GBUS_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_gbus_0.png"));
+        label->setPixmap(*GbusStudent::PIC_0);
         s = new GbusStudent(label, this);
         break;
     case TimeVariant::Type::SHAMELESS_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_shameless_0.png"));
+        label->setPixmap(*ShamelessStudent::PIC_0);
         s = new ShamelessStudent(label, this);
         break;
     case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
+        label->setPixmap(*SleepDeprivedStudent::PIC_0);
         s = new SleepDeprivedStudent(label, this);
         break;
     case TimeVariant::Type::TEACHERS_PET:
-        label->setPixmap(QPixmap(":/images/students/stu_pet_0.png"));
+        label->setPixmap(*TeachersPet::PIC_0);
         s = new TeachersPet(label,this);
         break;
     case TimeVariant::Type::DEADLINE_FIGHTER:
-        label->setPixmap(QPixmap(":/images/students/stu_deadline_0.png"));
+        label->setPixmap(*DeadlineFighter::PIC_0);
         s = new DeadlineFighter(label,this);
         break;
     default:
@@ -118,19 +121,19 @@ void Row::addTeacher(TimeVariant::Type type) {
     QLabel* label = new QLabel(parent);
     switch(type) {
     case TimeVariant::Type::OVERWORKED_TA:
-        label->setPixmap(QPixmap(":/images/teachers/tea_overworked_ta_0.png"));
+        label->setPixmap(*OverworkedTA::PIC_0);
         t = new OverworkedTA(label, this);
         break;
     case TimeVariant::Type::KELVIN:
-        label->setPixmap(QPixmap(":/images/teachers/tea_kelvin_0.png"));
+        label->setPixmap(*Kelvin::PIC_0);
         t = new Kelvin(label, this);
         break;
     case TimeVariant::Type::PANG:
-        label->setPixmap(QPixmap(":/images/teachers/tea_pang_0.png"));
+        label->setPixmap(*Pang::PIC_0);
         t = new Pang(label, this);
         break;
     case TimeVariant::Type::DESMOND:
-        label->setPixmap(QPixmap(":/images/teachers/tea_desmond_0.png"));
+        label->setPixmap(*Desmond::PIC_0);
         t = new Desmond(label, this);
         break;
     default:

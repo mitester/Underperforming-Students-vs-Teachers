@@ -16,6 +16,13 @@ public:
     static const int DEFAULT_DAMAGE{10};
     static const int DEFAULT_TRIGGER_SKILL_DISTANCE{380};
 
+    static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+    static QPixmap* PIC_2;
+    static QPixmap* PIC_3;
+    static QPixmap* PIC_4;
+    static QPixmap* PIC_5;
+
     DeadlineFighter(QLabel* widget, Row* row,
                          QString name = DEFAULT_NAME,
                          int maxHp = DEFAULT_MAX_HP,
