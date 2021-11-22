@@ -29,6 +29,10 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 8);
     game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
     game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 2);
+
+    //const Student* s = game->getRowAt(0)->getRightMostStudent();
+    //qDebug() << s->getDistanceFromLeft();
+    //qDebug() << game->getRowAt(0)->get
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {

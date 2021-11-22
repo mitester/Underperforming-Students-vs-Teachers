@@ -7,8 +7,8 @@ class Assignment : public Item
 {
     Q_OBJECT
 public:
-    static const int spriteWidth{45};
-    static const int spriteHeight{37};
+    static const int SPRITE_WIDTH{45};
+    static const int SPRITE_HEIGHT{37};
 
     Assignment(QLabel* widget, Row* row, int damage);
 
