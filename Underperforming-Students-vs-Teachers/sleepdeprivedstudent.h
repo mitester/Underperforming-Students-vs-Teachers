@@ -6,6 +6,7 @@
 #define SLEEPDEPRIVEDSTUDENT_H
 
 #include "attackstudent.h"
+#include <QPixmap>
 
 class SleepDeprivedStudent : public AttackStudent
 {
@@ -17,6 +18,9 @@ public:
     static const int DEFAULT_SKILL_SPEED{2000};
     static const int DEFAULT_COST{10};
     static const int DEFAULT_DAMAGE{10};
+    static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+    static QPixmap* PIC_2;
 
     SleepDeprivedStudent(QLabel* widget, Row* row,
                          QString name = DEFAULT_NAME,

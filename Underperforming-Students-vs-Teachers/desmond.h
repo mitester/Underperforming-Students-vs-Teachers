@@ -19,6 +19,9 @@ public:
     static const int DEFAULT_DAMAGE{10};
     static const int DEFAULT_SKILL_SPEED{1000};
 
+    static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+
     int getSkillSpeed() const;
     void setSkillSpeed(int skillSpeed);
 
