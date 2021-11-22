@@ -54,7 +54,7 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
     game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
     game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 5);
 
 }
 

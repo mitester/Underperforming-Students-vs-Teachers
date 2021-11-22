@@ -155,7 +155,7 @@ void Row::addAssignment(Student* shooter, int damage) {
 
     Game* game = Game::getInstance();
     QLabel* label = new QLabel(game->getParent());
-    label->setPixmap(QPixmap(":/images/items/item_assignment_0.png"));
+    label->setPixmap(*Assignment::PIC_0);
     label->setGeometry(shooter->getDistanceFromLeft() + Human::SPRITE_WIDTH*0.5,
                        yPos + Human::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
                        Assignment::SPRITE_HEIGHT);

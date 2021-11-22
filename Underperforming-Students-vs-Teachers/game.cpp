@@ -79,6 +79,8 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     Desmond::PIC_0 = new QPixmap(":/images/teachers/tea_desmond_0.png");
     Desmond::PIC_1 = new QPixmap(":/images/teachers/tea_desmond_1.png");
+
+    Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
 }
 
 Game::~Game()
@@ -120,6 +122,8 @@ Game::~Game()
     delete Desmond::PIC_0;
     delete Desmond::PIC_1;
 
+    delete Assignment::PIC_0;
+
     //nullptr
     SleepDeprivedStudent::PIC_0 = nullptr;
     SleepDeprivedStudent::PIC_1 = nullptr;
@@ -155,6 +159,8 @@ Game::~Game()
 
     Desmond::PIC_0 = nullptr;
     Desmond::PIC_1 = nullptr;
+
+    Assignment::PIC_0 = nullptr;
 }
 
 //parent will be ignored if instance exists

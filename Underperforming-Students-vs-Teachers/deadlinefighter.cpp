@@ -51,11 +51,11 @@ void DeadlineFighter::update()
 
             if(timeConcept == skillSpeed / 2)
             {
-                widget->setPixmap(QPixmap(":/images/students/stu_deadline_4.png"));
+                widget->setPixmap(*PIC_4);
             }
             else if(timeConcept == skillSpeed)
             {
-                widget->setPixmap(QPixmap(":/images/students/stu_deadline_5.png"));
+                widget->setPixmap(*PIC_5);
                 row->addAssignment(this, damage);
                 timeConcept = 0;
             }
@@ -65,11 +65,11 @@ void DeadlineFighter::update()
             skillSpeed = normalSkillSpeed;
             if(timeConcept == skillSpeed / 2)
             {
-                widget->setPixmap(QPixmap(":/images/students/stu_deadline_1.png"));
+                widget->setPixmap(*PIC_1);
             }
             else if(timeConcept == skillSpeed)
             {
-                widget->setPixmap(QPixmap(":/images/students/stu_deadline_2.png"));
+                widget->setPixmap(*PIC_2);
                 row->addAssignment(this, damage);
                 timeConcept = 0;
             }
@@ -80,7 +80,7 @@ void DeadlineFighter::update()
     else
     {
         timeConcept = 0;
-        widget->setPixmap(QPixmap(":/images/students/stu_deadline_0.png"));
+        widget->setPixmap(*PIC_0);
         isTriggered = false;
         skillSpeed = normalSkillSpeed;
     }

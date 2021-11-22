@@ -15,4 +15,7 @@ GbusStudent::GbusStudent(QLabel* widget, Row* row, QString name, int maxHp, int 
 TimeVariant::Type GbusStudent::getType() const {return TimeVariant::Type::GBUS_STUDENT;}
 
 //the implementation of the pure virtual update()
-void GbusStudent::update() {}
+void GbusStudent::update()
+{
+
+}
