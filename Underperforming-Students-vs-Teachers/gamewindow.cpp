@@ -31,15 +31,7 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
     game->getRowAt(3)->addStudent(TimeVariant::Type::CGA_GOD, 5);
     game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 8);
-    //game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
     game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 2);
-
-    const Student* s = game->getRowAt(0)->getRightMostStudent();
-    const Student* ss = game->getRowAt(0)->grid[0];
-    const Student* sss = game->getRowAt(0)->grid[3];
-    qDebug() << s->getDistanceFromLeft();
-    qDebug() << ss->getDistanceFromLeft();
-    qDebug() << sss->getDistanceFromLeft();
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {

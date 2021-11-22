@@ -23,8 +23,6 @@ public:
                           int speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 
     TimeVariant::Type getType() const;
-
-    void update(); // implementation of the virtual function update()
 };
 
 #endif // OVERWORKEDTA_H

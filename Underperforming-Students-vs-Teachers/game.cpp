@@ -145,7 +145,7 @@ void Game::setGameStatus(GameStatus status)
 void Game::generateTeacher()
 {
     rows[0]->addTeacher(TimeVariant::Type::PANG);
-    /*
+
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
     int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
     if(num >= 0 && num <= 4)
@@ -165,7 +165,7 @@ void Game::generateTeacher()
         rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
     }
     generatingTimer->setInterval(getRandomInterval());
-    */
+
 }
 
 QWidget* Game::getParent() const

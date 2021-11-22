@@ -10,8 +10,5 @@ OverworkedTA::OverworkedTA(QLabel *widget, Row* row, QString name, int maxHp, in
 
 TimeVariant::Type OverworkedTA::getType() const {return TimeVariant::Type::OVERWORKED_TA;}
 
-void OverworkedTA::update() {
-
-}
 
 
