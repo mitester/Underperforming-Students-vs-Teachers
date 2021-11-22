@@ -7,10 +7,12 @@ class Assignment : public Item
 {
     Q_OBJECT
 public:
-    static const int spriteWidth{45};
-    static const int spriteHeight{37};
+    static const int SPRITE_WIDTH{45};
+    static const int SPRITE_HEIGHT{37};
+    static const int DEFAULT_DAMAGE{0};
+    static const int DEFAULT_SPEED{3};
 
-    Assignment(QLabel* widget, Row* row, int damage);
+    Assignment(QLabel* widget, Row* row, int damage = DEFAULT_DAMAGE, int speed = DEFAULT_SPEED);
 
     void update(); //implement update() from TimeVariant
 
@@ -19,7 +21,8 @@ public:
     int getDamage() const;
 
 private:
-    int damage = 0;
+    int damage;
+    int speed;
 };
 
 #endif // ASSIGNMENT_H

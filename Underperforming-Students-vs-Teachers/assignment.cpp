@@ -2,7 +2,7 @@
 #include <QDebug>
 #include "game.h"
 
-Assignment::Assignment(QLabel* widget, Row* row, int damage) : Item(widget, row), damage(damage)
+Assignment::Assignment(QLabel* widget, Row* row, int damage, int speed) : Item(widget, row), damage(damage), speed(speed)
 {
 }
 
