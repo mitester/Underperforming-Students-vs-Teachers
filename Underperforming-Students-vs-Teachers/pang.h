@@ -16,7 +16,7 @@ public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};
     static const int DEFAULT_SPEED{4};
-    static const int DEFAULT_DAMAGE{10};
+    static const int DEFAULT_DAMAGE{1};
 
     Pang(QLabel *widget, Row* row,
            QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,

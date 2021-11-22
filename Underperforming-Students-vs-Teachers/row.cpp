@@ -16,6 +16,9 @@
 Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QObject(parent), parent(parent)
 {
     grid = new Student*[size];
+    for(int i = 0; i < size; i++) {
+        grid[i] = nullptr;
+    }
     updateLeftMostTeacher();
 }
 
@@ -98,10 +101,10 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
         return;
     }
 
-    addStudent(s, tile_pos); //register student to the grid
     label->setGeometry(Game::GRID_LEFT + Game::GRID_INTERVAL_HORIZONTAL * tile_pos, yPos, Human::SPRITE_WIDTH, Human::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
+    addStudent(s, tile_pos); //register student to the grid
     game->registerTimeVariant(s);
 }
 
@@ -154,7 +157,6 @@ void Row::addAssignment(Student* shooter, int damage) {
     addAssignment(a);
     game->registerTimeVariant(a);
     label->show();
-
 }
 
 
@@ -219,6 +221,16 @@ bool Row::hasReachedEnd() const {
     return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() == 0; // check the leftmost position
 }
 
+void Row::printTeacherList() {
+    qDebug() << "=== start printing all teacher's location ===";
+    for(int i = 0; i < teacherList.size(); i++)
+    {
+        if(!teacherList[i])
+            qDebug() << "A Teacher at: " << teacherList[i]->getDistanceFromLeft();
+    }
+    qDebug() << "=== pirnt end ===";
+}
+
 
 Row::~Row() {
     delete[] grid;
@@ -253,6 +265,7 @@ void Row::updateLeftMostTeacher() {
 void Row::addStudent(Student* const s, int pos) {
     if( !inBound(pos) || s==nullptr || grid[pos]!=nullptr)
         return;
+
     grid[pos] = s;
     studentQueue.push(s);
 }

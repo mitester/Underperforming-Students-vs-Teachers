@@ -31,7 +31,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     generatingTimer = new QTimer(parent);
     //generatingTimer->setInterval(getRandomInterval());
-    generatingTimer->setInterval(1000);
+    generatingTimer->setInterval(3000);
     generatingTimer->callOnTimeout(this, &Game::generateTeacher);
 
 
@@ -100,11 +100,11 @@ bool Game::pause()
 
 void Game::update()
 {
-//    if(checkTerminated())
-//    {
-//        pause(); //pause the game immediately cuz nobody should move
-//        //some dialog should pop up afterwards
-//    }
+    if(checkTerminated())
+    {
+        pause(); //pause the game immediately cuz nobody should move
+        //some dialog should pop up afterwards
+    }
     //TODO: change the progress bar value
 }
 

@@ -62,11 +62,11 @@ void Teacher::update() {
             this->widget->hide();
             row->removeTeacher(this);
         }
+
         Assignment* preRemove = row->popRightMostAssignment();
         preRemove->getWidget()->setEnabled(false);
         preRemove->getWidget()->hide();
         preRemove->deleteLater();
-
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
 
     }
