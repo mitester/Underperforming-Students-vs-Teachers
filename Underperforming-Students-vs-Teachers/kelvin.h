@@ -14,8 +14,8 @@ class Kelvin : public Teacher
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{100000};
-    static const int DEFAULT_SPEED{3};
+    static const int DEFAULT_MAX_HP{600};
+    static const int DEFAULT_SPEED{1};
     static const int DEFAULT_DAMAGE{10};
 
     Kelvin(QLabel *widget, Row* row,

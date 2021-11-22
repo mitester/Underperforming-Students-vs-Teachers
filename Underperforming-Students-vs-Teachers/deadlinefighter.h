@@ -9,7 +9,7 @@ class DeadlineFighter : public AttackStudent
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{10};
+    static const int DEFAULT_MAX_HP{200};
     static const int DEFAULT_SKILL_SPEED{2200};
     static const int DEFAULT_TRIGGERED_SKILL_SPEED{600};
     static const int DEFAULT_COST{10};

@@ -9,7 +9,7 @@ class ShamelessStudent : public SupportStudent
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{10};
+    static const int DEFAULT_MAX_HP{700};
     static const int DEFAULT_SKILL_SPEED{1000};
     static const int DEFAULT_COST{10};
 
