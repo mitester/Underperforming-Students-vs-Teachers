@@ -94,8 +94,8 @@ private:
     //it generates teacher randomly
     void generateTeacher();
     QTimer* generatingTimer; //it handles the teacher generating frequency
-    int generatingTimerUpperBound = 10001; //exclusive upper bound
-    int generatingTimerLowerBound = 1000; //inclusive upper bound
+    int generatingTimerUpperBound = 5001; //exclusive upper bound
+    int generatingTimerLowerBound = 2000; //inclusive upper bound
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries

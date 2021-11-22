@@ -75,5 +75,6 @@ void DeadlineFighter::update()
         timeConcept = 0;
         widget->setPixmap(QPixmap(":/images/students/stu_deadline_0.png"));
         isTriggered = false;
+        skillSpeed = normalSkillSpeed;
     }
 }
