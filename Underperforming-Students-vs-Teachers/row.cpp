@@ -85,7 +85,7 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
         s = new ShamelessStudent(label, this);
         break;
     case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_cga_0.png"));
+        label->setPixmap(QPixmap(":/images/students/stu_sleep_0.png"));
         s = new SleepDeprivedStudent(label, this);
         break;
     case TimeVariant::Type::TEACHERS_PET:

@@ -38,7 +38,6 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
-    progressBar = new QProgressBar(parent);
 }
 
 Game::~Game()
@@ -49,7 +48,7 @@ Game::~Game()
 //parent will be ignored if instance exists
 Game* Game::getInstance(QWidget *parent)
 {
-    if(instance != nullptr) return instance;
+    if(instance) return instance;
     instance = new Game(parent);
     return instance;
 }
@@ -120,7 +119,7 @@ bool Game::checkTerminated()
         }
     }
 
-    if(progressBar->value() >= progressBar->maximum()) //student cleared all teacher
+    if(false) //TODO: student cleared all teacher
     {
         gameStatus = GameStatus::STUDENT_WON;
         return true;
@@ -167,11 +166,6 @@ void Game::generateTeacher()
     }
     generatingTimer->setInterval(getRandomInterval());
     */
-}
-
-QProgressBar* Game::getProgressBar() const
-{
-    return progressBar;
 }
 
 QWidget* Game::getParent() const

@@ -2,7 +2,7 @@
 
 Human::Human(QLabel *widget, Row* row, QString name, int maxHp) : TimeVariant(widget, row), name(name), hp(maxHp), maxHp(maxHp)
 {
-    widget->setFixedSize(SPRITE_WDITH, SPRITE_HEIGHT);
+
 }
 
 //getter and setter for name

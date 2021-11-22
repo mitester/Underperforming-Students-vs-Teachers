@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
-#include "sleepdeprivedstudent.h"
+#include "redbull.h"
+#include "clickablelabel.h"
 
 #include "game.h"
 #include "pang.h"
@@ -38,11 +39,6 @@ GameWindow::GameWindow(QWidget *parent) :
 void GameWindow::resizeEvent(QResizeEvent *ev) {
     QMainWindow::resizeEvent(ev);
     this->game->currentSize = ev->size();
-
-    int w = ev->size().width();
-    int h = ev->size().height();
-
-    game->getProgressBar()->move(w * 0.5, h * 0.5);
 
 }
 
