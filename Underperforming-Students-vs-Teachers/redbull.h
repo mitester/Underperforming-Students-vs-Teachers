@@ -12,6 +12,10 @@ public:
     static const int DEFAULT_INITIAL_VELOCITY_X{7};
     static const int DEFAULT_INITIAL_VELOCITY_Y{-14};
     static const int DEFAULT_INITIAL_ACCELERATION_Y{1};
+    static const int SPRITE_WIDTH{50};
+    static const int SPRITE_HEIGHT{42};
+
+    static QPixmap* PIC_0;
 
     Redbull(ClickableLabel* widget, int energy = DEFAULT_ENERGY,
             int vx = DEFAULT_INITIAL_VELOCITY_X, int vy = DEFAULT_INITIAL_VELOCITY_Y,

@@ -11,6 +11,9 @@
 #include "pang.h"
 #include "desmond.h"
 
+#include "redbull.h"
+#include "vendingmachine.h"
+
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QProgressBar>
@@ -81,6 +84,10 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     Desmond::PIC_1 = new QPixmap(":/images/teachers/tea_desmond_1.png");
 
     Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
+
+    Redbull::PIC_0 = new QPixmap(":/images/items/item_redbull_0.png");
+
+    VendingMachine::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
 }
 
 Game::~Game()
@@ -124,6 +131,10 @@ Game::~Game()
 
     delete Assignment::PIC_0;
 
+    delete Redbull::PIC_0;
+
+    delete VendingMachine::PIC_0;
+
     //nullptr
     SleepDeprivedStudent::PIC_0 = nullptr;
     SleepDeprivedStudent::PIC_1 = nullptr;
@@ -161,6 +172,10 @@ Game::~Game()
     Desmond::PIC_1 = nullptr;
 
     Assignment::PIC_0 = nullptr;
+
+    Redbull::PIC_0 = nullptr;
+
+    VendingMachine::PIC_0 = nullptr;
 }
 
 //parent will be ignored if instance exists

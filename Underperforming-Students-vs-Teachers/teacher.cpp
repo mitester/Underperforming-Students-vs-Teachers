@@ -77,7 +77,6 @@ void Teacher::update() {
     } else { // hit nothing, move forward.
 
         widget->move(widget->x() - speed, widget->y());
-
     }
 
 
