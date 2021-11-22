@@ -3,11 +3,13 @@
 #include "sleepdeprivedstudent.h"
 
 #include "game.h"
+#include "pang.h"
 #include <QString>
 #include <QDebug>
 #include <QResizeEvent>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QThread>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,8 +23,12 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
-    SleepDeprivedStudent* s = new SleepDeprivedStudent(new QLabel(this), nullptr);
-    game->registerTimeVariant(s);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::CGA_GOD, 5);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 8);
+    game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 2);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
@@ -36,7 +42,7 @@ void GameWindow::resizeEvent(QResizeEvent *ev) {
 
 }
 
-void GameWindow::paintEvent(QPaintEvent *ev)
+void GameWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.jpg"));

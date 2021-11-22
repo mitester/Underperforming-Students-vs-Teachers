@@ -18,6 +18,7 @@ SOURCES += \
     gamewindow.cpp \
     gbusstudent.cpp \
     human.cpp \
+    item.cpp \
     kelvin.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     gamewindow.h \
     gbusstudent.h \
     human.h \
+    item.h \
     kelvin.h \
     mainwindow.h \
     overworkedta.h \

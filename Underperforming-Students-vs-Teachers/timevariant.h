@@ -39,11 +39,8 @@ public:
         ITEM
     };
 
-    static const int spriteWidth{100};
-    static const int spriteHeight{130};
-
     //getter and setter for widget
-    QLabel* getWidget();
+    QLabel* getWidget() const;
     void setWidget(QLabel *widget);
 
     //restricting all subclasses to react with the global timer signal
@@ -52,7 +49,7 @@ public:
     //restricting all subclasses to provide an interface to return back their type & category
     virtual TimeVariant::Type getType() const = 0;
     virtual TimeVariant::Category getCategory() const = 0;
-    double getDistanceFromLeft() const;
+    int getDistanceFromLeft() const;
     Row* getRow() const;
 
 
@@ -65,11 +62,6 @@ protected:
     int timeConcept = 0; //every TimeVariant has time concept
                             //it adds one basic unit time after receive one timeout()
                             //it belongs to [0,speed)
-
-    int attackMode = 0; //stores which attackMode is using
-                        //equivalent to store which picture is using (default 0)
-                        //need to use it with modulo arithemtic
-
 };
 
 #endif // TIMEVARIANT_H
