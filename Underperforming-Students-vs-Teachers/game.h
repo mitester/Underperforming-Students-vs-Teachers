@@ -40,6 +40,8 @@ public:
 //    const static int ASS_HEIGHT {37};
 //    const static int ASS_WIDTH {45};
 
+    static TimeVariant::Type selectedSprite;
+
     static QSize currentSize;
     static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position
     //How to use: pass in (w, 10, 15.7) means move w, 10% and 15.7%

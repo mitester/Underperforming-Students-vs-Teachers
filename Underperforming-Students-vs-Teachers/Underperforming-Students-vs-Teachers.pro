@@ -29,6 +29,7 @@ SOURCES += \
     row.cpp \
     shamelessstudent.cpp \
     sleepdeprivedstudent.cpp \
+    spritecard.cpp \
     student.cpp \
     supportstudent.cpp \
     teacher.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
     row.h \
     shamelessstudent.h \
     sleepdeprivedstudent.h \
+    spritecard.h \
     student.h \
     supportstudent.h \
     teacher.h \

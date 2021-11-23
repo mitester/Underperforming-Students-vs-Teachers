@@ -43,6 +43,10 @@ void Teacher::update() {
     if(!widget->isEnabled())
         return ;
 
+    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {
+        row->removeTeacher(this);
+    }
+
     QRect shape = widget->geometry();
     const Teacher* leftTeacher = this->row->getLeftMostTeacher();
     const Assignment* rightAssignment = this->row->getRightMostAssignment();
@@ -68,11 +72,17 @@ void Teacher::update() {
 
     if (rightStudent && shape.intersects(rightStudent->getWidget()->geometry())) {   // hit a student
 
-        row->setRightMostStudentHp(rightStudent->getHp() - damage);
+        if(rightStudent->getType() == TimeVariant::Type::TEACHERS_PET) {
+            speed = -speed;
+            row->setRightMostStudentHp(0);
+        } else
+            row->setRightMostStudentHp(rightStudent->getHp() - damage);
+
         if(rightStudent->getHp() <= 0) {
             Student* preRemove = row->popRightMostStudent();
             preRemove->deleteLater();
         }
+
 
     } else { // hit nothing, move forward.
 
