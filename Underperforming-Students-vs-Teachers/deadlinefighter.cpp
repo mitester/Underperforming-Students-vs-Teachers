@@ -33,15 +33,11 @@ void DeadlineFighter::update()
         * it is not guaranteed that timeConcept will be restored. However, it needs to be.
         * It is the reason for this code to exist
         */
-        //distance close enough to trigger
-        if(!isTriggered) //if not triggered before
+        //previous state is different from the current state
+        if(isTriggered ^ (leftMostTeacher->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
-            //if triggered after the condition
-            //implies isTriggered changed from false to true
-            if((isTriggered = leftMostTeacher->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
-            {
-                timeConcept = 0;
-            }
+            isTriggered = !isTriggered;
+            timeConcept = 0;
         }
 
         if(isTriggered)
