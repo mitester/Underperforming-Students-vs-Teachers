@@ -1,15 +1,22 @@
 #include "assignment.h"
 #include <QDebug>
 #include "game.h"
+#include "row.h"
 
-Assignment::Assignment(QLabel* widget, Row* row, int damage) : Item(widget, row), damage(damage)
+QPixmap* Assignment::PIC_0 = nullptr;
+
+Assignment::Assignment(QLabel* widget, Row* row, int damage, int speed) : Item(widget, row), damage(damage), speed(speed)
 {
-
 }
 
 void Assignment::update()
 {
-    widget->move(widget->x() + 3, widget->y());
+    if(widget->x() >= Game::TEA_GEN_POS)
+    {
+        row->popRightMostAssignment();
+        deleteLater();
+    }
+    widget->move(widget->x() + speed, widget->y());
 }
 
 TimeVariant::Type Assignment::getType() const

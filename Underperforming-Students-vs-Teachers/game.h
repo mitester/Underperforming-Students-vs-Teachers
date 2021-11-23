@@ -35,10 +35,10 @@ public:
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
     const static int TEA_GEN_POS {1000};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
-    const static int SPRITE_HEIGHT {128};
-    const static int SPRITE_WIDTH {100};
-    const static int ASS_HEIGHT {37};
-    const static int ASS_WIDTH {45};
+//    const static int SPRITE_HEIGHT {128};
+//    const static int SPRITE_WIDTH {100};
+//    const static int ASS_HEIGHT {37};
+//    const static int ASS_WIDTH {45};
 
     static QSize currentSize;
     static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position
@@ -71,8 +71,6 @@ public:
     bool pause();
     //bool stop(); no need for this. Just close the window bounded with this game
 
-    QProgressBar* getProgressBar() const;
-
     QWidget* getParent() const;
 
 private:
@@ -96,17 +94,15 @@ private:
     //it generates teacher randomly
     void generateTeacher();
     QTimer* generatingTimer; //it handles the teacher generating frequency
-    int generatingTimerUpperBound = 10001; //exclusive upper bound
-    int generatingTimerLowerBound = 5000; //inclusive upper bound
+    int generatingTimerUpperBound = 3000; //exclusive upper bound
+    int generatingTimerLowerBound = 1000; //inclusive upper bound
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 4;
+    int generatingTeacherUpperBound = 8;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;
-
-    QProgressBar* progressBar;
 
     //this is not the same as the one in TimeVariant
     //tho it guards the game progress by listening to the global timer signal

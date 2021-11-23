@@ -1,6 +1,9 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
-#include "sleepdeprivedstudent.h"
+#include "clickablelabel.h"
+
+#include "redbull.h"
+#include "vendingmachine.h"
 
 #include "game.h"
 #include "pang.h"
@@ -25,20 +28,48 @@ GameWindow::GameWindow(QWidget *parent) :
     game->start();
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
-    game->getRowAt(3)->addStudent(TimeVariant::Type::CGA_GOD, 5);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 8);
-    game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
-    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 2);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
+
+    game->getRowAt(1)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 1);
+
+
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 5);
+
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::GBUS_STUDENT, 5);
+
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 1);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 2);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 3);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 4);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 5);
+
+    QLabel* label = new QLabel(this);
+    label->setPixmap(*VendingMachine::PIC_0);
+    label->move(label->width() + 80, height() - label->height() - 80);
+    label->setFixedSize(Assignment::SPRITE_WIDTH, Assignment::SPRITE_HEIGHT);
+    VendingMachine* v = new VendingMachine(label);
+    game->registerTimeVariant(v);
+
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
     QMainWindow::resizeEvent(ev);
     this->game->currentSize = ev->size();
-
-    int w = ev->size().width();
-    int h = ev->size().height();
-
-    game->getProgressBar()->move(w * 0.5, h * 0.5);
 
 }
 

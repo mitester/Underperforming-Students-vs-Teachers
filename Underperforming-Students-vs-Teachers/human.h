@@ -14,8 +14,6 @@ class Human : public TimeVariant
     Q_OBJECT
 
 public:
-    static const int spriteWidth{100};
-    static const int spriteHeight{130};
 
     //getter and setter for name
     QString getName() const;

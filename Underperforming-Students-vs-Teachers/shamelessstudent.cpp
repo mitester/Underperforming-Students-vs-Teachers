@@ -1,6 +1,7 @@
 #include "shamelessstudent.h"
 
 const QString ShamelessStudent::DEFAULT_NAME = "Shameless Student";
+QPixmap* ShamelessStudent::PIC_0 = nullptr;
 
 ShamelessStudent::ShamelessStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost)
     : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)

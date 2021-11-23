@@ -1,21 +1,28 @@
 #include "row.h"
-#include "overworkedta.h"
 #include "game.h"
+#include "teacher.h"
+
 #include "cgagod.h"
 #include "gbusstudent.h"
 #include "shamelessstudent.h"
 #include "sleepdeprivedstudent.h"
-#include "teacher.h"
+#include "deadlinefighter.h"
 #include "teacherspet.h"
+
+#include "overworkedta.h"
 #include "kelvin.h"
 #include "pang.h"
 #include "desmond.h"
-#include "QDebug"
-#include "QObject"
+
+#include <QDebug>
+#include <QObject>
 
 Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QObject(parent), parent(parent)
 {
     grid = new Student*[size];
+    for(int i = 0; i < size; i++) {
+        grid[i] = nullptr;
+    }
     updateLeftMostTeacher();
 }
 
@@ -73,24 +80,28 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     QLabel* label = new QLabel(parent);
     switch (type) {
     case TimeVariant::Type::CGA_GOD:
-        label->setPixmap(QPixmap(":/images/students/stu_cga_0.png"));
+        label->setPixmap(*CgaGod::PIC_0);
         s = new CgaGod(label, this);
         break;
     case TimeVariant::Type::GBUS_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_gbus_0.png"));
+        label->setPixmap(*GbusStudent::PIC_0);
         s = new GbusStudent(label, this);
         break;
     case TimeVariant::Type::SHAMELESS_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_shameless_0.png"));
+        label->setPixmap(*ShamelessStudent::PIC_0);
         s = new ShamelessStudent(label, this);
         break;
     case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
-        label->setPixmap(QPixmap(":/images/students/stu_cga_0.png"));
+        label->setPixmap(*SleepDeprivedStudent::PIC_0);
         s = new SleepDeprivedStudent(label, this);
         break;
     case TimeVariant::Type::TEACHERS_PET:
-        label->setPixmap(QPixmap(":/images/students/stu_pet_0.png"));
+        label->setPixmap(*TeachersPet::PIC_0);
         s = new TeachersPet(label,this);
+        break;
+    case TimeVariant::Type::DEADLINE_FIGHTER:
+        label->setPixmap(*DeadlineFighter::PIC_0);
+        s = new DeadlineFighter(label,this);
         break;
     default:
         qDebug() << "Non student type passed in to addStudent() function";
@@ -98,10 +109,10 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
         return;
     }
 
-    addStudent(s, tile_pos); //register student to the grid
-    label->setGeometry(Game::GRID_LEFT + Game::GRID_INTERVAL_HORIZONTAL * tile_pos, yPos, Game::SPRITE_WIDTH, Game::SPRITE_HEIGHT);
+    label->setGeometry(Game::GRID_LEFT + Game::GRID_INTERVAL_HORIZONTAL * tile_pos, yPos, Student::SPRITE_WIDTH, Student::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
+    addStudent(s, tile_pos); //register student to the grid
     game->registerTimeVariant(s);
 }
 
@@ -110,19 +121,19 @@ void Row::addTeacher(TimeVariant::Type type) {
     QLabel* label = new QLabel(parent);
     switch(type) {
     case TimeVariant::Type::OVERWORKED_TA:
-        label->setPixmap(QPixmap(":/images/teachers/tea_overworked_ta_0.png"));
+        label->setPixmap(*OverworkedTA::PIC_0);
         t = new OverworkedTA(label, this);
         break;
     case TimeVariant::Type::KELVIN:
-        label->setPixmap(QPixmap(":/images/teachers/tea_kelvin_0.png"));
+        label->setPixmap(*Kelvin::PIC_0);
         t = new Kelvin(label, this);
         break;
     case TimeVariant::Type::PANG:
-        label->setPixmap(QPixmap(":/images/teachers/tea_pang_0.png"));
+        label->setPixmap(*Pang::PIC_0);
         t = new Pang(label, this);
         break;
     case TimeVariant::Type::DESMOND:
-        label->setPixmap(QPixmap(":/images/teachers/tea_desmond_0.png"));
+        label->setPixmap(*Desmond::PIC_0);
         t = new Desmond(label, this);
         break;
     default:
@@ -130,7 +141,7 @@ void Row::addTeacher(TimeVariant::Type type) {
         return;
     }
     addTeacher(t);
-    label->setGeometry(Game::TEA_GEN_POS, yPos, Game::SPRITE_WIDTH, Game::SPRITE_HEIGHT);
+    label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH, Teacher::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
     game->registerTimeVariant(t);
@@ -144,17 +155,16 @@ void Row::addAssignment(Student* shooter, int damage) {
 
     Game* game = Game::getInstance();
     QLabel* label = new QLabel(game->getParent());
-    label->setPixmap(QPixmap(":/images/items/item_assignment_0.png"));
-    label->setGeometry(shooter->getDistanceFromLeft() + Game::SPRITE_WIDTH*0.5,
-                       yPos + Game::SPRITE_HEIGHT * 0.3, Game::ASS_WIDTH,
-                       Game::ASS_HEIGHT);
+    label->setPixmap(*Assignment::PIC_0);
+    label->setGeometry(shooter->getDistanceFromLeft() + Student::SPRITE_WIDTH*0.5,
+                       yPos + Student::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
+                       Assignment::SPRITE_HEIGHT);
 
 
     Assignment* a = new Assignment(label, this, damage);
     addAssignment(a);
     game->registerTimeVariant(a);
     label->show();
-
 }
 
 
@@ -219,6 +229,16 @@ bool Row::hasReachedEnd() const {
     return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() == 0; // check the leftmost position
 }
 
+void Row::printTeacherList() {
+    qDebug() << "=== start printing all teacher's location ===";
+    for(int i = 0; i < teacherList.size(); i++)
+    {
+        if(!teacherList[i])
+            qDebug() << "A Teacher at: " << teacherList[i]->getDistanceFromLeft();
+    }
+    qDebug() << "=== pirnt end ===";
+}
+
 
 Row::~Row() {
     delete[] grid;
@@ -253,6 +273,7 @@ void Row::updateLeftMostTeacher() {
 void Row::addStudent(Student* const s, int pos) {
     if( !inBound(pos) || s==nullptr || grid[pos]!=nullptr)
         return;
+
     grid[pos] = s;
     studentQueue.push(s);
 }

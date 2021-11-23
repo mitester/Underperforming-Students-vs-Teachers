@@ -14,6 +14,10 @@ public:
     static const int DEFAULT_COST{10};
     static const int DEFAULT_DAMAGE{10};
 
+    static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+    static QPixmap* PIC_2;
+
     CgaGod(QLabel* widget, Row* row,
                          QString name = DEFAULT_NAME,
                          int maxHp = DEFAULT_MAX_HP,

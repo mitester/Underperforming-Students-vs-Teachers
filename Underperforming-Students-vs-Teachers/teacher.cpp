@@ -57,16 +57,11 @@ void Teacher::update() {
     if (rightAssignment && shape.intersects(rightAssignment->getWidget()->geometry())) { // hit an assignment
 
         this->hp -= rightAssignment->getDamage();
-        if(this->hp <= 0) {
-            this->widget->setEnabled(false);
-            this->widget->hide();
+        if(this->hp <= 0)
             row->removeTeacher(this);
-        }
-        Assignment* preRemove = row->popRightMostAssignment();
-        preRemove->getWidget()->setEnabled(false);
-        preRemove->getWidget()->hide();
-        preRemove->deleteLater();
 
+        Assignment* preRemove = row->popRightMostAssignment();
+        preRemove->deleteLater();
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
 
     }
@@ -76,15 +71,12 @@ void Teacher::update() {
         row->setRightMostStudentHp(rightStudent->getHp() - damage);
         if(rightStudent->getHp() <= 0) {
             Student* preRemove = row->popRightMostStudent();
-            preRemove->getWidget()->setEnabled(false);
-            preRemove->getWidget()->hide();
             preRemove->deleteLater();
         }
 
     } else { // hit nothing, move forward.
 
         widget->move(widget->x() - speed, widget->y());
-
     }
 
 

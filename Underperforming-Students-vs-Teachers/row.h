@@ -80,6 +80,9 @@ public:
 
     /** Utilities **/
     void updateLeftMostTeacher();
+    void printTeacherList();
+
+        Student** grid; //stores a pointer pointing to each student.
 
     ~Row();
 
@@ -102,7 +105,7 @@ private:
     std::priority_queue<Assignment*, QVector<Assignment*>, lessAssignment> assignmentQueue; //the priority queue maintaining assignments
     //Pointers are used to avoid the const access constriant
 
-    Student** grid; //stores a pointer pointing to each student.
+
     QVector<Teacher*> teacherList;  //the list of teachers
     int leftMostTeacherIndex;       //the index of the left most teacher.
     int grid_size;
