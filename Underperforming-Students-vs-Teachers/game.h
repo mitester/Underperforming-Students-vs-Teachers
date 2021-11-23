@@ -35,6 +35,8 @@ public:
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
     const static int TEA_GEN_POS {1000};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
+
+    static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
 //    const static int SPRITE_WIDTH {100};
 //    const static int ASS_HEIGHT {37};

@@ -1,6 +1,8 @@
 #include "redbull.h"
 #include <QDebug>
 #include <QRandomGenerator>
+#include "game.h"
+#include <QVector2D>
 
 QPixmap* Redbull::PIC_0 = nullptr;
 
@@ -29,7 +31,17 @@ void Redbull::update()
 {
     if(isPressed)
     {
-        //fly to the redbull storage place
+        if(widget->pos().x() >= Game::REDBULL_POS.x())
+        {
+            Game::getInstance()->addRedbull();
+            deleteLater();
+            return;
+        }
+
+        QVector2D v(Game::REDBULL_POS - widget->pos());
+        v.normalize();
+        v*=20;
+        widget->move(widget->pos() + v.toPoint());
     }
     else
     {
