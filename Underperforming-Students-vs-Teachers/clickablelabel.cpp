@@ -8,5 +8,16 @@ ClickableLabel::ClickableLabel(QWidget* parent, Qt::WindowFlags f)
 ClickableLabel::~ClickableLabel() {}
 
 void ClickableLabel::mousePressEvent(QMouseEvent* ) {
-    emit clicked();
+    if(clickable)
+        emit clicked();
+}
+
+void ClickableLabel::setClickable(bool x)
+{
+    clickable = x;
+}
+
+bool ClickableLabel::isClickable() const
+{
+    return clickable;
 }

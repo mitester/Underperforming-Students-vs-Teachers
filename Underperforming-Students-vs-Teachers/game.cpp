@@ -11,6 +11,7 @@
 #include "pang.h"
 #include "desmond.h"
 
+#include <QTime>
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QProgressBar>
@@ -32,6 +33,9 @@ void Game::move(QWidget *w, double xPercent, double yPercent) {
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     currentSize = parent->size(); //save the size of parent
+
+    //0 hours and GAME_DURATION mins
+    currentTimeLeft = QTime(0, GAME_DURATION);
 
     mainTimer = new QTimer(parent);
     mainTimer->setInterval(BASIC_TIME_UNIT);
@@ -102,6 +106,7 @@ bool Game::pause()
     if(!isStart) return false; //game is unable to pause if not started
 
     mainTimer->stop(); //timer will not reset after stop(). Therefore, it is a pause.
+    generatingTimer->stop();
     isStart = false;
     gameStatus = Game::GameStatus::PAUSED;
     return true;
@@ -109,6 +114,7 @@ bool Game::pause()
 
 void Game::update()
 {
+    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
     if(checkTerminated())
     {
         pause(); //pause the game immediately cuz nobody should move
@@ -119,6 +125,13 @@ void Game::update()
 
 bool Game::checkTerminated()
 {
+
+    if(currentTimeLeft == QTime(0,0)) //TODO: student cleared all teacher
+    {
+        gameStatus = GameStatus::STUDENT_WON;
+        return true;
+    }
+
     for(int i = 0; i < NUMBER_OF_ROW; i++)
     {
         if(rows[i]->hasReachedEnd()) //teacher cleared one row
@@ -128,11 +141,6 @@ bool Game::checkTerminated()
         }
     }
 
-    if(false) //TODO: student cleared all teacher
-    {
-        gameStatus = GameStatus::STUDENT_WON;
-        return true;
-    }
     return false;
 }
 
@@ -184,9 +192,15 @@ void Game::setParent(QObject *parent)
     QObject::setParent(parent);
 }
 
+QTimer* Game::getMainTimer() const
+{
+    return mainTimer;
+}
 
-
-
+QString Game::getCurrentTimeLeft() const
+{
+    return currentTimeLeft.toString("mm:ss");
+}
 
 
 

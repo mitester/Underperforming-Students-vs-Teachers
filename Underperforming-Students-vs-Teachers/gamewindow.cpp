@@ -26,6 +26,7 @@
 #include <QThread>
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QTime>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -91,7 +92,40 @@ GameWindow::GameWindow(QWidget *parent) :
 
     this->game = Game::getInstance(this); //get the Singleton Game object
 
-    connect(game, &Game::notifyAddRedbull, this, &GameWindow::changeRedbullNum);
+    connect(game, &Game::notifyAddRedbull, this,
+            [=](int n)
+            {
+                ui->lb_redbull_num->setText(QString::number((ui->lb_redbull_num->text().toInt() + n)));
+            });
+
+    connect(game->getMainTimer(), &QTimer::timeout,
+            this,
+            [=]()
+            {
+                ui->lb_time_count->setText(game->getCurrentTimeLeft());
+            });
+
+    connect(ui->lb_pause, &ClickableLabel::clicked, this,
+            [=]()
+            {
+               if(!ui->lb_pause->text().compare("Pause", Qt::CaseInsensitive))
+               {
+                   game->pause();
+                   ui->lb_pause->setText("Start");
+               }
+               else
+               {
+                   game->start();
+                   ui->lb_pause->setText("Pause");
+               }
+            });
+
+    connect(ui->lb_home, &ClickableLabel::clicked, this,
+            [=]()
+    {
+        parent->show();
+        this->close();
+    });
 
     game->start();
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
@@ -152,11 +186,6 @@ void GameWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.png"));
-}
-
-void GameWindow::changeRedbullNum(int n)
-{
-    ui->lb_redbull_num->setText(QString::number((ui->lb_redbull_num->text().toInt() + n)));
 }
 
 GameWindow::~GameWindow()

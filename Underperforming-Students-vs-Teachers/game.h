@@ -14,6 +14,7 @@
 #include <QProgressBar>
 #include <climits>
 #include <QSize>
+#include <QTime>
 
 class Game : public QObject
 {
@@ -35,6 +36,8 @@ public:
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
     const static int TEA_GEN_POS {1200};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
+
+    const static int GAME_DURATION{5}; //game duration in mins
 
     static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
@@ -77,6 +80,11 @@ public:
 
     QWidget* getParent() const;
 
+    QTimer* getMainTimer() const;
+
+    //return current time left in hh:mm form
+    QString getCurrentTimeLeft() const;
+
 private:
     explicit Game(QWidget* parent = nullptr);
     Game(Game& game) = delete;
@@ -118,6 +126,8 @@ private:
 
     QWidget* parent;
     void setParent(QObject *parent); // overload father's setParent to private
+
+    QTime currentTimeLeft;
 
 signals:
     void notifyAddRedbull(int n);

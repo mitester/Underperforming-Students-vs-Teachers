@@ -26,7 +26,7 @@ private:
     int windowWidth = 1280;
     int windowHeight = 720;
 
-    void changeRedbullNum(int n);
+    QMainWindow* mainWindow;
 };
 
 #endif // GAMEWINDOW_H

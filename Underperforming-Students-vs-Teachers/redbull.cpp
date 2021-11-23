@@ -7,7 +7,7 @@
 QPixmap* Redbull::PIC_0 = nullptr;
 
 Redbull::Redbull(ClickableLabel* widget, int energy, int vx, int vy, int ay) : Item(widget, nullptr),
-    energy(energy), vx_initial(vx), vx(vx), vy_initial(vy), vy(vy), ay(ay)
+    energy(energy), vx_initial(vx), vx(vx), vy_initial(vy), vy(vy), ay(ay), widget(widget)
 {
     connect(widget, &ClickableLabel::clicked, this, &Redbull::pressed);
 }
@@ -31,7 +31,7 @@ void Redbull::update()
 {
     if(isPressed)
     {
-        widget->setEnabled(false);
+        widget->setClickable(false);
         if(widget->pos().x() >= Game::REDBULL_POS.x())
         {
             Game::getInstance()->addRedbull();
