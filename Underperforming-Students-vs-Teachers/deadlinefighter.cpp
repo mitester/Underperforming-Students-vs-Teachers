@@ -33,7 +33,7 @@ void DeadlineFighter::update()
         * it is not guaranteed that timeConcept will be restored. However, it needs to be.
         * It is the reason for this code to exist
         */
-        //previous state is different from the
+        //previous state is different from the current state
         if(isTriggered ^ (leftMostTeacher->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
             isTriggered = !isTriggered;
