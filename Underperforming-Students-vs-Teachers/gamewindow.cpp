@@ -115,7 +115,6 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
     game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
 
 //    QLabel* label = new QLabel(this);
 //    label->setPixmap(*VendingMachine::PIC_0);
@@ -136,6 +135,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
 //    this->layout()->addWidget(spriteWidget);
 //    spriteWidget->show();
+
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
