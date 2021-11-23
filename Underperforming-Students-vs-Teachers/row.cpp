@@ -140,10 +140,10 @@ void Row::addTeacher(TimeVariant::Type type) {
         qDebug() << "Non teacher type passed in to addTeacher() function";
         return;
     }
-    addTeacher(t);
     label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH, Teacher::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
+    addTeacher(t);
     game->registerTimeVariant(t);
 }
 
@@ -260,13 +260,15 @@ void Row::deregisterFromGrid(Student *s) {
 
 void Row::updateLeftMostTeacher() {
     int leftmost = -1;
-    double leftmost_val = Game::MAX;
+    int leftmost_val = Game::MAX;
     for(int i = 0; i < teacherList.size(); i++) {
         if(teacherList[i] && teacherList[i]->getDistanceFromLeft() < leftmost_val) {
             leftmost_val = teacherList[i]->getDistanceFromLeft();
             leftmost = i;
         }
     }
+
+
     leftMostTeacherIndex = leftmost;
 }
 

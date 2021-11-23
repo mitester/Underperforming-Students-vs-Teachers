@@ -33,7 +33,7 @@ void DeadlineFighter::update()
         * It is the reason for this code to exist
         */
         //previous state is different from the current state
-        qDebug() << (row->getLeftMostTeacher()->getDistanceFromLeft());
+        //qDebug() << (row->getLeftMostTeacher()->getDistanceFromLeft());
         if(isTriggered ^ (row->getLeftMostTeacher()->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
             isTriggered = !isTriggered;
