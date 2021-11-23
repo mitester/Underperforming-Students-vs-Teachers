@@ -14,58 +14,87 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>1160</x>
+      <x>1100</x>
       <y>10</y>
-      <width>52</width>
-      <height>65</height>
+      <width>160</width>
+      <height>91</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="lb_redbull_pic">
-       <property name="minimumSize">
-        <size>
-         <width>50</width>
-         <height>42</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>50</width>
-         <height>42</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="images.qrc">:/images/items/item_redbull_0.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="lb_redbull_pic">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="images.qrc">:/images/items/item_redbull_0.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lb_redbull_num">
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>20</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#003367</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QLabel" name="lb_redbull_num">
-       <property name="maximumSize">
-        <size>
-         <width>50</width>
-         <height>42</height>
-        </size>
-       </property>
+      <widget class="QLabel" name="lb_time_count">
        <property name="font">
         <font>
-         <family>Heiti SC</family>
+         <family>Arial</family>
+         <pointsize>20</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:#003367</string>
+       </property>
        <property name="text">
-        <string>0</string>
+        <string>00:00</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

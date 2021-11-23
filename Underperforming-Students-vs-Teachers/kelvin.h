@@ -28,7 +28,7 @@ public:
            int speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 
     TimeVariant::Type getType() const;
-    virtual void update() override;
+    void update();
 
 };
 
