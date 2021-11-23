@@ -39,8 +39,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     mainTimer->callOnTimeout(this, &Game::update);
 
     generatingTimer = new QTimer(parent);
-    //generatingTimer->setInterval(getRandomInterval());
-    generatingTimer->setInterval(10000000);
+    generatingTimer->setInterval(getRandomInterval());
     generatingTimer->callOnTimeout(this, &Game::generateTeacher);
 
 

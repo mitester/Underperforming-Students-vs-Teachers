@@ -117,12 +117,12 @@ GameWindow::GameWindow(QWidget *parent) :
 
     game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
 
-    QLabel* label = new QLabel(this);
-    label->setPixmap(*VendingMachine::PIC_0);
-    label->move(label->width() + 80, height() - label->height() - 80);
-    label->setFixedSize(Assignment::SPRITE_WIDTH, Assignment::SPRITE_HEIGHT);
-    VendingMachine* v = new VendingMachine(label);
-    game->registerTimeVariant(v);
+//    QLabel* label = new QLabel(this);
+//    label->setPixmap(*VendingMachine::PIC_0);
+//    label->move(label->width() + 80, height() - label->height() - 80);
+//    label->setFixedSize(Assignment::SPRITE_WIDTH, Assignment::SPRITE_HEIGHT);
+//    VendingMachine* v = new VendingMachine(label);
+//    game->registerTimeVariant(v);
 
 //    QWidget* spriteWidget = new QWidget(this);
 //    spriteWidget->setGeometry(1120, 20, 150, 660);
