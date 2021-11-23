@@ -39,8 +39,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     mainTimer->callOnTimeout(this, &Game::update);
 
     generatingTimer = new QTimer(parent);
-    //generatingTimer->setInterval(getRandomInterval());
-    generatingTimer->setInterval(4000);
+    generatingTimer->setInterval(getRandomInterval());
     generatingTimer->callOnTimeout(this, &Game::generateTeacher);
 
 
@@ -152,26 +151,25 @@ void Game::setGameStatus(GameStatus status)
 
 void Game::generateTeacher()
 {
-    rows[2]->addTeacher(TimeVariant::Type::PANG);
-//    int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
-//    int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
-//    if(num >= 0 && num <= 4)
-//    {
-//        rows[rowNum]->addTeacher(TimeVariant::Type::OVERWORKED_TA);
-//    }
-//    if(num >= 5 && num <= 6)
-//    {
-//        rows[rowNum]->addTeacher(TimeVariant::Type::KELVIN);
-//    }
-//    if(num >= 7 && num <= 8)
-//    {
-//        rows[rowNum]->addTeacher(TimeVariant::Type::PANG);
-//    }
-//    if(num == 9)
-//    {
-//        rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
-//    }
-//    generatingTimer->setInterval(getRandomInterval());
+    int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
+    int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
+    if(num >= 0 && num <= 4)
+    {
+        rows[rowNum]->addTeacher(TimeVariant::Type::OVERWORKED_TA);
+    }
+    if(num >= 5 && num <= 6)
+    {
+        rows[rowNum]->addTeacher(TimeVariant::Type::PANG);
+    }
+    if(num >= 7 && num <= 8)
+    {
+        rows[rowNum]->addTeacher(TimeVariant::Type::KELVIN);
+    }
+    if(num == 9)
+    {
+        rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
+    }
+    generatingTimer->setInterval(getRandomInterval());
 }
 
 QWidget* Game::getParent() const

@@ -9,6 +9,10 @@
 #include "assignment.h"
 #include "item.h"
 #include "kelvin.h"
+#include "pang.h"
+#include "overworkedta.h"
+#include <QRandomGenerator>
+#include <QDebug>
 
 const QString Desmond::DEFAULT_NAME = "Desmond";
 
@@ -36,6 +40,43 @@ TimeVariant::Type Desmond::getType() const {return TimeVariant::Type::DESMOND;}
 void Desmond::skill() {
 
 }
+
+void doubleSpeed(Teacher *t) {
+    int speed = 0;
+    switch (t->getType()) {
+    case TimeVariant::Type::KELVIN:
+        speed = Kelvin::DEFAULT_SPEED; break;
+    case TimeVariant::Type::PANG:
+        speed = Pang::DEFAULT_SPEED; break;
+    case TimeVariant::Type::OVERWORKED_TA:
+        speed = OverworkedTA::DEFAULT_SPEED; break;
+    case TimeVariant::Type::DESMOND:
+        speed = Desmond::DEFAULT_SPEED; break;
+    default:
+        return;
+    }
+    t->setSpeed(speed * 2);
+    if(t->getType() == TimeVariant::Type::DESMOND)
+        t->setSpeed(speed / 2);
+}
+
+void halveSpeed(Teacher *t) {
+    int speed = 0;
+    switch (t->getType()) {
+    case TimeVariant::Type::KELVIN:
+        speed = Kelvin::DEFAULT_SPEED; break;
+    case TimeVariant::Type::PANG:
+        speed = Pang::DEFAULT_SPEED; break;
+    case TimeVariant::Type::OVERWORKED_TA:
+        speed = OverworkedTA::DEFAULT_SPEED; break;
+    case TimeVariant::Type::DESMOND:
+        speed = Desmond::DEFAULT_SPEED; break;
+    default:
+        return;
+    }
+    t->setSpeed(speed);
+}
+
 
 void Desmond::update() {
     // initialization (get all the references)
@@ -105,8 +146,37 @@ void Desmond::update() {
         }
     }
 
+    Game* game = Game::getInstance();
+    if(counterSkill >= skillSpeed) {
+
+        int k = QRandomGenerator::securelySeeded().bounded(0, 10);
+
+        if(k >= 5) { // "Do you want to learn more => increase speed"
+
+            qDebug() << "Do you want to learn more?";
+
+            for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
+                game->getRowAt(i)->modifyTeachers(doubleSpeed);
+
+            speedIncreased = true;
+
+        } else {    // "additional class"
+
+            qDebug() << "Let's have some additional class";
+
+            game->addRedbull(-5);
+
+        }
+
+        counterSkill = 0;
+    }
+
+    if(speedIncreased && countdown++ >= SPEED_INCREASE_COUNTDOWN) {
+        countdown = 0;
+        for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
+            game->getRowAt(i)->modifyTeachers(halveSpeed);
+    }
 
     counter ++;
-    counterSkill1++;
-    counterSkill2++;
+    counterSkill++;
 }

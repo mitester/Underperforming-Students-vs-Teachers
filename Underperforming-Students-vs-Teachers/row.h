@@ -81,8 +81,9 @@ public:
     /** Utilities **/
     void updateLeftMostTeacher();
     void printTeacherList();
+    void modifyTeachers(void (*f)(Teacher* t));
 
-        Student** grid; //stores a pointer pointing to each student.
+    Student** grid; //stores a pointer pointing to each student.
 
     ~Row();
 

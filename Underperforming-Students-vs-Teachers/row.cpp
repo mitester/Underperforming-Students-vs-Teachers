@@ -268,7 +268,6 @@ void Row::updateLeftMostTeacher() {
         }
     }
 
-
     leftMostTeacherIndex = leftmost;
 }
 
@@ -289,6 +288,14 @@ void Row::addTeacher(Teacher *const t) {
     if(t == nullptr)    return;
     teacherList.append(t);
     updateLeftMostTeacher();
+}
+
+void Row::modifyTeachers(void (*f)(Teacher *)) {
+    for(int i = 0; i < teacherList.size(); i++){
+        if(teacherList[i]) {
+            f(teacherList[i]);
+        }
+    }
 }
 
 
