@@ -1,14 +1,14 @@
 #include "cgagod.h"
 
-const QString CgaGod::defaultName = "CGA God";
+const QString CgaGod::DEFAULT_NAME = "CGA God";
 
 
-CgaGod::CgaGod(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)
-    : AttackStudent(widget, name, maxHp, skillSpeed, cost, damage)
+CgaGod::CgaGod(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost, int damage)
+    : AttackStudent(widget, row, name, maxHp, skillSpeed, cost, damage)
 {
 
 }
 
-void CgaGod::skill() {}
+TimeVariant::Type CgaGod::getType() const {return TimeVariant::Type::CGA_GOD;}
 
 void CgaGod::update() {}

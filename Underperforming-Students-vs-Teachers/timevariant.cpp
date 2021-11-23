@@ -1,16 +1,19 @@
 #include "timevariant.h"
+#include "game.h"
 
-TimeVariant::TimeVariant(QWidget* widget) : widget(widget)
+TimeVariant::TimeVariant(QLabel* widget, Row* row) : QObject(widget), widget(widget), row(row)
 {
-
+    widget->setScaledContents(true);
 }
 
-QWidget* TimeVariant::getWidget()
-{
-    return widget;
+QLabel* TimeVariant::getWidget() const {return widget;}
+
+void TimeVariant::setWidget(QLabel* widget) {this->widget = widget;}
+
+int TimeVariant::getDistanceFromLeft() const {
+    return this->widget->x();
 }
 
-void TimeVariant::setWidget(QWidget* widget)
-{
-    this->widget = widget;
+Row* TimeVariant::getRow() const {
+    return row;
 }

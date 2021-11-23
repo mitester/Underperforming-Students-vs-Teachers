@@ -1,4 +1,4 @@
-/*
+/***
 * This is a class of Attack Student
 * It can be instantiated
 */
@@ -9,22 +9,23 @@
 
 class SleepDeprivedStudent : public AttackStudent
 {
+    Q_OBJECT
+
 public:
-    static const QString defaultName;
-    static const int defaultMaxHp{10};
-    static constexpr double defaultSkillSpeed{10.0}; //compiler said it should be constexpr for static double
-    static const int defaultCost{10};
-    static const int defaultDamage{10};
+    static const QString DEFAULT_NAME;
+    static const int DEFAULT_MAX_HP{10};
+    static const int DEFAULT_SKILL_SPEED{2000};
+    static const int DEFAULT_COST{10};
+    static const int DEFAULT_DAMAGE{10};
 
-    SleepDeprivedStudent(QWidget* widget,
-                         QString name = defaultName,
-                         int maxHp = defaultMaxHp,
-                         double skillSpeed = defaultSkillSpeed,
-                         int cost = defaultCost,
-                         int damage = defaultDamage);
+    SleepDeprivedStudent(QLabel* widget, Row* row,
+                         QString name = DEFAULT_NAME,
+                         int maxHp = DEFAULT_MAX_HP,
+                         int skillSpeed = DEFAULT_SKILL_SPEED,
+                         int cost = DEFAULT_COST,
+                         int damage = DEFAULT_DAMAGE);
 
-    //the implementation of the pure virtual skill()
-    void skill();
+    TimeVariant::Type getType() const;
 
     //the implementation of the pure virtual update()
     void update();

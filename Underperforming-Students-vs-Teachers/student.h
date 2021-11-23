@@ -1,4 +1,4 @@
-/*
+/***
 * This is the student class
 */
 #ifndef STUDENT_H
@@ -6,28 +6,33 @@
 
 #include "human.h"
 
+class Row;
+
 class Student : public Human
 {
+    Q_OBJECT
+
+public:
+    //getter and setter for skillSpeed
+    int getSkillSpeed() const;
+    void setSkillSpeed(int skillSpeed);
+
+    //getter and setter for skillSpeed
+    int getCost() const;
+    void setCost(int cost);
+
 protected:
     //protected constructor
-    Student(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost);
+    Student(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost);
 
     //stores this student skillSpeed
-    double skillSpeed;
+    int skillSpeed;
 
     //stores this student deployment cost
     int cost;
 
-    //getter and setter for skillSpeed
-    double getSkillSpeed();
-    void setSkillSpeed(double skillSpeed);
-
-    //getter and setter for skillSpeed
-    int getCost();
-    void setCost(int cost);
-
-    //restrict all subclasses to provide a skill implementation
-    virtual void skill() = 0;
+    //stores the position of the student in the row
+    int tilePos;
 };
 
 #endif // STUDENT_H

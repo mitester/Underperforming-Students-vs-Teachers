@@ -1,15 +1,14 @@
 #include "teacherspet.h"
 
-const QString TeachersPet::defaultName = "Teachers' Pet";
+const QString TeachersPet::DEFAULT_NAME = "Teachers' Pet";
 
-TeachersPet::TeachersPet(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost)
-    : SupportStudent(widget, name, maxHp, skillSpeed, cost)
+TeachersPet::TeachersPet(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost)
+    : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 
 }
 
-//the implementation of the pure virtual skill()
-void TeachersPet::skill() {}
+TimeVariant::Type TeachersPet::getType() const {return TimeVariant::Type::TEACHERS_PET;}
 
 //the implementation of the pure virtual update()
 void TeachersPet::update() {}
