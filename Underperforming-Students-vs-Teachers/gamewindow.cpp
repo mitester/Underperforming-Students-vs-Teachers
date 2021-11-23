@@ -123,8 +123,8 @@ GameWindow::GameWindow(QWidget *parent) :
     connect(ui->lb_home, &ClickableLabel::clicked, this,
             [=]()
     {
-        parent->show();
-        this->close();
+        parentWidget()->show();
+        deleteLater();
     });
 
     game->start();
