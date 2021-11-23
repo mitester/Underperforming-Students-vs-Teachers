@@ -45,6 +45,8 @@ private:
 
     //stores the isPressed state
     bool isPressed = false;
+
+
 };
 
 #endif // REDBULL_H

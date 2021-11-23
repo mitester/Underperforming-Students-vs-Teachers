@@ -30,5 +30,6 @@
         <file>images/teachers/tea_kelvin_2.png</file>
         <file>images/teachers/tea_kelvin_3.png</file>
         <file>images/scene/game_scene.png</file>
+        <file>images/items/item_vending_0.png</file>
     </qresource>
 </RCC>

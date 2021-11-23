@@ -9,6 +9,10 @@ class VendingMachine : public Item
 public:
     static const int DEFAULT_SKILL_SPEED{1500};
 
+    static const int SPRITE_WIDTH{200};
+    static const int SPRITE_HEIGHT{260};
+
+
     static QPixmap* PIC_0;
 
     VendingMachine(QLabel* widget, int skillSpeed = DEFAULT_SKILL_SPEED);

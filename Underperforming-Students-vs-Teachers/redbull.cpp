@@ -31,6 +31,7 @@ void Redbull::update()
 {
     if(isPressed)
     {
+        widget->setEnabled(false);
         if(widget->pos().x() >= Game::REDBULL_POS.x())
         {
             Game::getInstance()->addRedbull();
