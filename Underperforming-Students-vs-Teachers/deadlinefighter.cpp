@@ -37,13 +37,23 @@ void DeadlineFighter::update()
         if(isTriggered ^ (leftMostTeacher->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
             isTriggered = !isTriggered;
+
+            if(isTriggered)
+            {
+                widget->setPixmap(*PIC_3);
+            }
+            else
+            {
+                widget->setPixmap(*PIC_0);
+
+            }
+
             timeConcept = 0;
         }
 
         if(isTriggered)
         {
             skillSpeed = triggeredSkillSpeed;
-            //widget->setPixmap(QPixmap(":/images/students/stu_deadline_3.png"));
 
             if(timeConcept == skillSpeed / 2)
             {
