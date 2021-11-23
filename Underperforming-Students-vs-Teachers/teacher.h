@@ -34,11 +34,12 @@ public:
 
 protected:
     explicit Teacher(QLabel *widget, Row* row, QString name, int maxHp, int speed, int damage);
-private:
     int speed;
     int damage;
     int counter = 0;
     bool firstLeg = true;
+private:
+
 };
 
 #endif // TEACHER_H

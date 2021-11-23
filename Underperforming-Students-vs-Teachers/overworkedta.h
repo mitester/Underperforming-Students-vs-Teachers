@@ -2,6 +2,16 @@
 #define OVERWORKEDTA_H
 
 #include "teacher.h"
+#include "human.h"
+#include <algorithm>
+#include <queue>
+#include "row.h"
+#include "timevariant.h"
+#include "human.h"
+#include "assignment.h"
+#include "item.h"
+#include "kelvin.h"
+#include <QLabel>
 
 /***
     Author: Tse Wai Chung
@@ -28,6 +38,7 @@ public:
                           int speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 
     TimeVariant::Type getType() const;
+    virtual void update() override;
 };
 
 #endif // OVERWORKEDTA_H
