@@ -1,15 +1,14 @@
 #include "shamelessstudent.h"
 
-const QString ShamelessStudent::defaultName = "Shameless Student";
+const QString ShamelessStudent::DEFAULT_NAME = "Shameless Student";
 
-ShamelessStudent::ShamelessStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost)
-    : SupportStudent(widget, name, maxHp, skillSpeed, cost)
+ShamelessStudent::ShamelessStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost)
+    : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 
 }
 
-//the implementation of the pure virtual skill()
-void ShamelessStudent::skill() {}
+TimeVariant::Type ShamelessStudent::getType() const {return TimeVariant::Type::SHAMELESS_STUDENT;}
 
 //the implementation of the pure virtual update()
 void ShamelessStudent::update() {}

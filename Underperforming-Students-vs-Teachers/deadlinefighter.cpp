@@ -1,14 +1,14 @@
 #include "deadlinefighter.h"
 
-const QString DeadlineFighter::defaultName = "Deadline Fighter";
+const QString DeadlineFighter::DEFAULT_NAME = "Deadline Fighter";
 
 
-DeadlineFighter::DeadlineFighter(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost, int damage)
-    : AttackStudent(widget, name, maxHp, skillSpeed, cost, damage)
+DeadlineFighter::DeadlineFighter(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost, int damage)
+    : AttackStudent(widget, row, name, maxHp, skillSpeed, cost, damage)
 {
 
 }
 
-void DeadlineFighter::skill() {}
+TimeVariant::Type DeadlineFighter::getType() const {return TimeVariant::Type::DEADLINE_STUDENT;}
 
 void DeadlineFighter::update() {}

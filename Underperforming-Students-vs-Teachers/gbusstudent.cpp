@@ -1,15 +1,14 @@
 #include "gbusstudent.h"
 
-const QString GbusStudent::defaultName = "GBUS Student";
+const QString GbusStudent::DEFAULT_NAME = "GBUS Student";
 
-GbusStudent::GbusStudent(QWidget* widget, QString name, int maxHp, double skillSpeed, int cost)
-    : SupportStudent(widget, name, maxHp, skillSpeed, cost)
+GbusStudent::GbusStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost)
+    : SupportStudent(widget, row, name, maxHp, skillSpeed, cost)
 {
 
 }
 
-//the implementation of the pure virtual skill()
-void GbusStudent::skill() {}
+TimeVariant::Type GbusStudent::getType() const {return TimeVariant::Type::GBUS_STUDENT;}
 
 //the implementation of the pure virtual update()
 void GbusStudent::update() {}

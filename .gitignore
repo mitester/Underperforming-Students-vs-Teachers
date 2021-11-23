@@ -2,8 +2,7 @@
 *.pro.user
 
 # Qt compiled folder
-*-Debug/
-*-Release/
+build-*/
 
 # MacOS stupid file
 .DS_Store

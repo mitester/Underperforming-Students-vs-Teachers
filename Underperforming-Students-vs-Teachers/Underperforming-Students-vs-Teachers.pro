@@ -9,35 +9,56 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    assignment.cpp \
     attackstudent.cpp \
     cgagod.cpp \
     deadlinefighter.cpp \
+    desmond.cpp \
+    game.cpp \
+    gamewindow.cpp \
     gbusstudent.cpp \
     human.cpp \
+    item.cpp \
+    kelvin.cpp \
     main.cpp \
     mainwindow.cpp \
+    overworkedta.cpp \
+    pang.cpp \
+    row.cpp \
     shamelessstudent.cpp \
     sleepdeprivedstudent.cpp \
     student.cpp \
     supportstudent.cpp \
+    teacher.cpp \
     teacherspet.cpp \
     timevariant.cpp
 
 HEADERS += \
+    assignment.h \
     attackstudent.h \
     cgagod.h \
     deadlinefighter.h \
+    desmond.h \
+    game.h \
+    gamewindow.h \
     gbusstudent.h \
     human.h \
+    item.h \
+    kelvin.h \
     mainwindow.h \
+    overworkedta.h \
+    pang.h \
+    row.h \
     shamelessstudent.h \
     sleepdeprivedstudent.h \
     student.h \
     supportstudent.h \
+    teacher.h \
     teacherspet.h \
     timevariant.h
 
 FORMS += \
+    gamewindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -47,4 +68,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES +=
 
-RESOURCES +=
+RESOURCES += \
+    images.qrc
