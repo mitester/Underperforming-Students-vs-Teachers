@@ -9,7 +9,7 @@ class Redbull : public Item
     Q_OBJECT
 public:
     static const int DEFAULT_ENERGY = 10;
-    static const int DEFAULT_INITIAL_VELOCITY_X{7};
+    static const int DEFAULT_INITIAL_VELOCITY_X{3};
     static const int DEFAULT_INITIAL_VELOCITY_Y{-14};
     static const int DEFAULT_INITIAL_ACCELERATION_Y{1};
     static const int SPRITE_WIDTH{50};

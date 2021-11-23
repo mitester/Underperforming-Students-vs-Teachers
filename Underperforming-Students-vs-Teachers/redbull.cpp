@@ -1,5 +1,6 @@
 #include "redbull.h"
 #include <QDebug>
+#include <QRandomGenerator>
 
 QPixmap* Redbull::PIC_0 = nullptr;
 
