@@ -73,15 +73,25 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     OverworkedTA::PIC_0 = new QPixmap(":/images/teachers/tea_overworked_ta_0.png");
     OverworkedTA::PIC_1 = new QPixmap(":/images/teachers/tea_overworked_ta_1.png");
+    OverworkedTA::PIC_2 = new QPixmap(":/images/teachers/tea_overworked_ta_2.png");
+    OverworkedTA::PIC_3 = new QPixmap(":/images/teachers/tea_overworked_ta_3.png");
 
     Pang::PIC_0 = new QPixmap(":/images/teachers/tea_pang_0.png");
     Pang::PIC_1 = new QPixmap(":/images/teachers/tea_pang_1.png");
+    Pang::PIC_2 = new QPixmap(":/images/teachers/tea_pang_2.png");
+    Pang::PIC_3 = new QPixmap(":/images/teachers/tea_pang_3.png");
 
     Kelvin::PIC_0 = new QPixmap(":/images/teachers/tea_kelvin_0.png");
     Kelvin::PIC_1 = new QPixmap(":/images/teachers/tea_kelvin_1.png");
+    Kelvin::PIC_2 = new QPixmap(":/images/teachers/tea_kelvin_2.png");
+    Kelvin::PIC_3 = new QPixmap(":/images/teachers/tea_kelvin_3.png");
+
 
     Desmond::PIC_0 = new QPixmap(":/images/teachers/tea_desmond_0.png");
     Desmond::PIC_1 = new QPixmap(":/images/teachers/tea_desmond_1.png");
+    Desmond::PIC_2 = new QPixmap(":/images/teachers/tea_desmond_2.png");
+    Desmond::PIC_3 = new QPixmap(":/images/teachers/tea_desmond_3.png");
+
 
     Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
 
@@ -119,15 +129,24 @@ Game::~Game()
 
     delete OverworkedTA::PIC_0;
     delete OverworkedTA::PIC_1;
+    delete OverworkedTA::PIC_2;
+    delete OverworkedTA::PIC_3;
 
     delete Pang::PIC_0;
     delete Pang::PIC_1;
+    delete Pang::PIC_2;
+    delete Pang::PIC_3;
 
     delete Kelvin::PIC_0;
     delete Kelvin::PIC_1;
+    delete Kelvin::PIC_2;
+    delete Kelvin::PIC_3;
 
     delete Desmond::PIC_0;
     delete Desmond::PIC_1;
+    delete Desmond::PIC_2;
+    delete Desmond::PIC_3;
+
 
     delete Assignment::PIC_0;
 
@@ -161,15 +180,24 @@ Game::~Game()
 
     OverworkedTA::PIC_0 = nullptr;
     OverworkedTA::PIC_1 = nullptr;
+    OverworkedTA::PIC_2 = nullptr;
+    OverworkedTA::PIC_3 = nullptr;
 
     Pang::PIC_0 = nullptr;
     Pang::PIC_1 = nullptr;
+    Pang::PIC_2 = nullptr;
+    Pang::PIC_3 = nullptr;
 
     Kelvin::PIC_0 = nullptr;
     Kelvin::PIC_1 = nullptr;
+    Kelvin::PIC_2 = nullptr;
+    Kelvin::PIC_3 = nullptr;
 
     Desmond::PIC_0 = nullptr;
     Desmond::PIC_1 = nullptr;
+    Desmond::PIC_2 = nullptr;
+    Desmond::PIC_3 = nullptr;
+
 
     Assignment::PIC_0 = nullptr;
 

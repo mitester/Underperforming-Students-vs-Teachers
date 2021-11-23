@@ -21,6 +21,8 @@ public:
 
     static QPixmap* PIC_0;
     static QPixmap* PIC_1;
+    static QPixmap* PIC_2;
+    static QPixmap* PIC_3;
 
     int getSkillSpeed() const;
     void setSkillSpeed(int skillSpeed);
