@@ -4,10 +4,11 @@
 #include "game.h"
 #include "human.h"
 #include "sleepdeprivedstudent.h"
+#include "student.h"
 
 SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags f):ClickableLabel(parent, f), type(type)
 {
-    this->setGeometry(0,0,Human::SPRITE_HEIGHT,Human::SPRITE_WIDTH);
+    this->setGeometry(0,0,Student::SPRITE_HEIGHT,Student::SPRITE_WIDTH);
     switch (type) {
         case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
             setPixmap(*SleepDeprivedStudent::PIC_0);

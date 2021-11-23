@@ -37,6 +37,8 @@ protected:
 private:
     int speed;
     int damage;
+    int counter = 0;
+    bool firstLeg = true;
 };
 
 #endif // TEACHER_H

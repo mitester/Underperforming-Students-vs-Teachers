@@ -7,6 +7,7 @@
 #include "human.h"
 #include "assignment.h"
 #include "item.h"
+#include "kelvin.h"
 #include <QDebug>
 
 Teacher::Teacher(QLabel *widget, Row* row, QString name, int maxHp, int speed, int damage) :
@@ -45,6 +46,7 @@ void Teacher::update() {
 
     if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {
         row->removeTeacher(this);
+        return ;
     }
 
     QRect shape = widget->geometry();
@@ -87,8 +89,24 @@ void Teacher::update() {
     } else { // hit nothing, move forward.
 
         widget->move(widget->x() - speed, widget->y());
+
+        if(counter >= 10) {
+            if(speed > 0) {
+                if(firstLeg)
+                    widget->setPixmap(*Kelvin::PIC_1);
+                else
+                    widget->setPixmap(*Kelvin::PIC_0);
+            } else {
+                //if(firstLeg)
+                    //widget->setPixmap(*Kelvin::PIC_3); Recover after PIC3, PIC2 are added.
+                //else
+                    //widget->setPixmap(*Kelvin::PIC_2);
+            }
+            firstLeg = !firstLeg;
+            counter = 0;
+        }
     }
 
-
+    counter ++;
 }
 

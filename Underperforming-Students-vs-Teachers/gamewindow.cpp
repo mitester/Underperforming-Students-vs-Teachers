@@ -15,6 +15,7 @@
 #include "kelvin.h"
 #include "pang.h"
 #include "desmond.h"
+#include "vendingmachine.h"
 
 #include "spritecard.h"
 #include <QString>
@@ -34,8 +35,6 @@ GameWindow::GameWindow(QWidget *parent) :
     setWindowTitle(Game::GAME_NAME);
 
     setFixedSize(windowWidth, windowHeight);
-
-    this->game = Game::getInstance(this); //get the Singleton Game object
 
     SleepDeprivedStudent::PIC_0 = new QPixmap(":/images/students/stu_sleep_0.png");
     SleepDeprivedStudent::PIC_1 = new QPixmap(":/images/students/stu_sleep_1.png");
@@ -62,15 +61,33 @@ GameWindow::GameWindow(QWidget *parent) :
 
     OverworkedTA::PIC_0 = new QPixmap(":/images/teachers/tea_overworked_ta_0.png");
     OverworkedTA::PIC_1 = new QPixmap(":/images/teachers/tea_overworked_ta_1.png");
+    OverworkedTA::PIC_2 = new QPixmap(":/images/teachers/tea_overworked_ta_2.png");
+    OverworkedTA::PIC_3 = new QPixmap(":/images/teachers/tea_overworked_ta_3.png");
 
     Pang::PIC_0 = new QPixmap(":/images/teachers/tea_pang_0.png");
     Pang::PIC_1 = new QPixmap(":/images/teachers/tea_pang_1.png");
+    Pang::PIC_2 = new QPixmap(":/images/teachers/tea_pang_2.png");
+    Pang::PIC_3 = new QPixmap(":/images/teachers/tea_pang_3.png");
 
     Kelvin::PIC_0 = new QPixmap(":/images/teachers/tea_kelvin_0.png");
     Kelvin::PIC_1 = new QPixmap(":/images/teachers/tea_kelvin_1.png");
+    Kelvin::PIC_2 = new QPixmap(":/images/teachers/tea_kelvin_2.png");
+    Kelvin::PIC_3 = new QPixmap(":/images/teachers/tea_kelvin_3.png");
+
 
     Desmond::PIC_0 = new QPixmap(":/images/teachers/tea_desmond_0.png");
     Desmond::PIC_1 = new QPixmap(":/images/teachers/tea_desmond_1.png");
+    Desmond::PIC_2 = new QPixmap(":/images/teachers/tea_desmond_2.png");
+    Desmond::PIC_3 = new QPixmap(":/images/teachers/tea_desmond_3.png");
+
+
+    Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
+
+    Redbull::PIC_0 = new QPixmap(":/images/items/item_redbull_0.png");
+
+    VendingMachine::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
+
+    this->game = Game::getInstance(this); //get the Singleton Game object
 
     game->start();
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
@@ -98,16 +115,27 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
     game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    QWidget* spriteWidget = new QWidget(this);
-    spriteWidget->setGeometry(1120, 20, 150, 660);
-    spriteWidget->setStyleSheet("color: rgb(161, 112, 56);");
-    spriteWidget->setLayout(new QVBoxLayout(this));
+    game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
 
-    SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
-    SpriteCard* card2 = new SpriteCard(TimeVariant::Type::CGA_GOD, this);
-    spriteWidget->layout()->addWidget(card1);
-    spriteWidget->layout()->addWidget(card2);
+    QLabel* label = new QLabel(this);
+    label->setPixmap(*VendingMachine::PIC_0);
+    label->move(label->width() + 80, height() - label->height() - 80);
+    label->setFixedSize(Assignment::SPRITE_WIDTH, Assignment::SPRITE_HEIGHT);
+    VendingMachine* v = new VendingMachine(label);
+    game->registerTimeVariant(v);
 
+//    QWidget* spriteWidget = new QWidget(this);
+//    spriteWidget->setGeometry(1120, 20, 150, 660);
+//    spriteWidget->setStyleSheet("color: rgb(161, 112, 56);");
+//    spriteWidget->setLayout(new QVBoxLayout(this));
+
+//    SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
+//    SpriteCard* card2 = new SpriteCard(TimeVariant::Type::CGA_GOD, this);
+//    spriteWidget->layout()->addWidget(card1);
+//    spriteWidget->layout()->addWidget(card2);
+
+//    this->layout()->addWidget(spriteWidget);
+//    spriteWidget->show();
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
@@ -149,15 +177,30 @@ GameWindow::~GameWindow()
 
     delete OverworkedTA::PIC_0;
     delete OverworkedTA::PIC_1;
+    delete OverworkedTA::PIC_2;
+    delete OverworkedTA::PIC_3;
 
     delete Pang::PIC_0;
     delete Pang::PIC_1;
+    delete Pang::PIC_2;
+    delete Pang::PIC_3;
 
     delete Kelvin::PIC_0;
     delete Kelvin::PIC_1;
+    delete Kelvin::PIC_2;
+    delete Kelvin::PIC_3;
 
     delete Desmond::PIC_0;
     delete Desmond::PIC_1;
+    delete Desmond::PIC_2;
+    delete Desmond::PIC_3;
+
+
+    delete Assignment::PIC_0;
+
+    delete Redbull::PIC_0;
+
+    delete VendingMachine::PIC_0;
 
     //nullptr
     SleepDeprivedStudent::PIC_0 = nullptr;
@@ -185,15 +228,30 @@ GameWindow::~GameWindow()
 
     OverworkedTA::PIC_0 = nullptr;
     OverworkedTA::PIC_1 = nullptr;
+    OverworkedTA::PIC_2 = nullptr;
+    OverworkedTA::PIC_3 = nullptr;
 
     Pang::PIC_0 = nullptr;
     Pang::PIC_1 = nullptr;
+    Pang::PIC_2 = nullptr;
+    Pang::PIC_3 = nullptr;
 
     Kelvin::PIC_0 = nullptr;
     Kelvin::PIC_1 = nullptr;
+    Kelvin::PIC_2 = nullptr;
+    Kelvin::PIC_3 = nullptr;
 
     Desmond::PIC_0 = nullptr;
     Desmond::PIC_1 = nullptr;
+    Desmond::PIC_2 = nullptr;
+    Desmond::PIC_3 = nullptr;
+
+
+    Assignment::PIC_0 = nullptr;
+
+    Redbull::PIC_0 = nullptr;
+
+    VendingMachine::PIC_0 = nullptr;
 
     delete ui;
 }
