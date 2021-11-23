@@ -13,6 +13,9 @@ class Student : public Human
     Q_OBJECT
 
 public:
+    static const int SPRITE_WIDTH{100};
+    static const int SPRITE_HEIGHT{130};
+
     //getter and setter for skillSpeed
     int getSkillSpeed() const;
     void setSkillSpeed(int skillSpeed);

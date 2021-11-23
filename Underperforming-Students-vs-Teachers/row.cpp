@@ -109,7 +109,7 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
         return;
     }
 
-    label->setGeometry(Game::GRID_LEFT + Game::GRID_INTERVAL_HORIZONTAL * tile_pos, yPos, Human::SPRITE_WIDTH, Human::SPRITE_HEIGHT);
+    label->setGeometry(Game::GRID_LEFT + Game::GRID_INTERVAL_HORIZONTAL * tile_pos, yPos, Student::SPRITE_WIDTH, Student::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
     addStudent(s, tile_pos); //register student to the grid
@@ -141,7 +141,7 @@ void Row::addTeacher(TimeVariant::Type type) {
         return;
     }
     addTeacher(t);
-    label->setGeometry(Game::TEA_GEN_POS, yPos, Human::SPRITE_WIDTH, Human::SPRITE_HEIGHT);
+    label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH, Teacher::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
     game->registerTimeVariant(t);
@@ -155,9 +155,9 @@ void Row::addAssignment(Student* shooter, int damage) {
 
     Game* game = Game::getInstance();
     QLabel* label = new QLabel(game->getParent());
-    label->setPixmap(QPixmap(":/images/items/item_assignment_0.png"));
-    label->setGeometry(shooter->getDistanceFromLeft() + Human::SPRITE_WIDTH*0.5,
-                       yPos + Human::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
+    label->setPixmap(*Assignment::PIC_0);
+    label->setGeometry(shooter->getDistanceFromLeft() + Student::SPRITE_WIDTH*0.5,
+                       yPos + Student::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
                        Assignment::SPRITE_HEIGHT);
 
 

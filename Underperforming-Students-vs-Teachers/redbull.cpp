@@ -1,4 +1,7 @@
 #include "redbull.h"
+#include <QDebug>
+
+QPixmap* Redbull::PIC_0 = nullptr;
 
 Redbull::Redbull(ClickableLabel* widget, int energy, int vx, int vy, int ay) : Item(widget, nullptr),
     energy(energy), vx_initial(vx), vx(vx), vy_initial(vy), vy(vy), ay(ay)
@@ -30,6 +33,7 @@ void Redbull::update()
     else
     {
         if(vy == -vy_initial) return; //parabola completed
+        widget->show();
         widget->move(widget->x() + vx, widget->y() + vy);
         vy += ay;
     }

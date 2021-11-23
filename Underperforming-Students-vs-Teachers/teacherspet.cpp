@@ -12,4 +12,7 @@ TeachersPet::TeachersPet(QLabel* widget, Row* row, QString name, int maxHp, int 
 TimeVariant::Type TeachersPet::getType() const {return TimeVariant::Type::TEACHERS_PET;}
 
 //the implementation of the pure virtual update()
-void TeachersPet::update() {}
+void TeachersPet::update()
+{
+
+}

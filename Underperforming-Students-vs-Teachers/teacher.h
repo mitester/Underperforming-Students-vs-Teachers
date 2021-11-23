@@ -17,6 +17,9 @@ class Teacher : public Human
     Q_OBJECT
 
 public:
+    static const int SPRITE_WIDTH{62};
+    static const int SPRITE_HEIGHT{125};
+
     /* Mutators */
     int getSpeed() const;
     void setSpeed(int speed);

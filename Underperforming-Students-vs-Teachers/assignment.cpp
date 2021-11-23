@@ -3,6 +3,8 @@
 #include "game.h"
 #include "row.h"
 
+QPixmap* Assignment::PIC_0 = nullptr;
+
 Assignment::Assignment(QLabel* widget, Row* row, int damage, int speed) : Item(widget, row), damage(damage), speed(speed)
 {
 }

@@ -10,7 +10,7 @@ class GbusStudent : public SupportStudent
 public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{10};
-    static const int DEFAULT_SKILL_SPEED{1000};
+    static const int DEFAULT_SKILL_SPEED{5000};
     static const int DEFAULT_COST{10};
 
     static QPixmap* PIC_0;
