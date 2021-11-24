@@ -14,10 +14,14 @@ class Desmond : public Teacher
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{1000};
+    static const int DEFAULT_MAX_HP{10000};
     static const int DEFAULT_SPEED{1};
     static const int DEFAULT_DAMAGE{10};
-    static const int DEFAULT_SKILL_SPEED{1000};
+    static const int DEFAULT_SKILL_SPEED{600};
+    static const int SPEED_INCREASE_COUNTDOWN{500};
+
+    static const int SPRITE_WIDTH{121};
+    static const int SPRITE_HEIGHT{180};
 
     static QPixmap* PIC_0;
     static QPixmap* PIC_1;
@@ -38,8 +42,9 @@ public:
     void update(); // implementation of the virtual function update()
 private:
     int skillSpeed;
-    int counterSkill1; // counter for skill 'learn more'
-    int counterSkill2; // counter for skill 'additional class'
+    int counterSkill = 0; // counter for skill
+    int countdown = 0;
+    bool speedIncreased = false;
 };
 
 #endif // DESMOND_H

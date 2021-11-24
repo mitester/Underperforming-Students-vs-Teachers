@@ -117,6 +117,7 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
 }
 
 void Row::addTeacher(TimeVariant::Type type) {
+    Game* game = Game::getInstance();
     Teacher* t = nullptr;
     QLabel* label = new QLabel(parent);
     switch(type) {
@@ -134,15 +135,18 @@ void Row::addTeacher(TimeVariant::Type type) {
         break;
     case TimeVariant::Type::DESMOND:
         label->setPixmap(*Desmond::PIC_0);
-        t = new Desmond(label, this);
+        game->desmond = new Desmond(label, this);
+        label->raise();
+        t = game->desmond;
         break;
     default:
         qDebug() << "Non teacher type passed in to addTeacher() function";
         return;
     }
     label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH, Teacher::SPRITE_HEIGHT);
+    if(type == TimeVariant::Type::DESMOND)
+        label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH * 1.2, Teacher::SPRITE_HEIGHT * 1.2);
     label->show();
-    Game* game = Game::getInstance();
     addTeacher(t);
     game->registerTimeVariant(t);
 }
@@ -268,7 +272,6 @@ void Row::updateLeftMostTeacher() {
         }
     }
 
-
     leftMostTeacherIndex = leftmost;
 }
 
@@ -289,6 +292,23 @@ void Row::addTeacher(Teacher *const t) {
     if(t == nullptr)    return;
     teacherList.append(t);
     updateLeftMostTeacher();
+}
+
+void Row::modifyTeachers(void (*f)(Teacher *)) {
+    for(int i = 0; i < teacherList.size(); i++){
+        if(teacherList[i]) {
+            f(teacherList[i]);
+        }
+    }
+}
+
+//this function is invalidated
+Desmond* Row::getDesmond() const {
+    for(int i = 0; i < teacherList.size(); i++) {
+        if(teacherList[i] && teacherList[i]->getType() == TimeVariant::Type::DESMOND)
+            return nullptr;
+    }
+    return nullptr;
 }
 
 
