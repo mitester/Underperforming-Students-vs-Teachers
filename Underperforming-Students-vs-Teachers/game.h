@@ -133,7 +133,7 @@ private:
     QTime currentTimeLeft;
 
 signals:
-    void notifyAddRedbull(int n);
+    void notifyAddRedbull();
 };
 
 #endif // GAME_H
