@@ -69,7 +69,7 @@ int Game::getRedbullNum() const {return redbullNum;}
 
 bool Game::addRedbull(int n)
 {
-    emit notifyAddRedbull(n);
+    emit notifyAddRedbull();
     int temp = redbullNum + n;
 
     if(temp < 0) return false;
