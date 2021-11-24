@@ -92,10 +92,12 @@ GameWindow::GameWindow(QWidget *parent) :
 
     this->game = Game::getInstance(this); //get the Singleton Game object
 
+    ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
+
     connect(game, &Game::notifyAddRedbull, this,
-            [=](int n)
+            [=]()
             {
-                ui->lb_redbull_num->setText(QString::number((ui->lb_redbull_num->text().toInt() + n)));
+                ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
             });
 
     connect(game->getMainTimer(), &QTimer::timeout,
