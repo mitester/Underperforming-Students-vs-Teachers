@@ -24,8 +24,8 @@ class OverworkedTA : public Teacher
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{30};
-    static const int DEFAULT_SPEED{1};
+    static const int DEFAULT_MAX_HP{50};
+    static const int DEFAULT_SPEED{2};
     static const int DEFAULT_DAMAGE{10};
 
     static QPixmap* PIC_0;
