@@ -102,20 +102,21 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
     game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(2)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
-    game->getRowAt(2)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 0);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 1);
     game->getRowAt(2)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
     game->getRowAt(2)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(3)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
     game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
     game->getRowAt(3)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
     game->getRowAt(3)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(4)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::GBUS_STUDENT, 0);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 1);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 2);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 3);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 4);
 
 
     QLabel* label = new QLabel(this);
@@ -149,7 +150,7 @@ void GameWindow::resizeEvent(QResizeEvent *ev) {
 void GameWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.jpg"));
+    p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.png"));
 }
 
 GameWindow::~GameWindow()

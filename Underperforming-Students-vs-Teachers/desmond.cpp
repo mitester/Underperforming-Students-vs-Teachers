@@ -58,6 +58,7 @@ void doubleSpeed(Teacher *t) {
     t->setSpeed(speed * 2);
     if(t->getType() == TimeVariant::Type::DESMOND)
         t->setSpeed(speed / 2);
+    t->getWidget()->setStyleSheet("background-color: rgba(14, 249, 25, 0.21)");
 }
 
 void halveSpeed(Teacher *t) {
@@ -75,6 +76,7 @@ void halveSpeed(Teacher *t) {
         return;
     }
     t->setSpeed(speed);
+    t->getWidget()->setStyleSheet(" ;");
 }
 
 
@@ -127,23 +129,26 @@ void Desmond::update() {
 
     } else { // hit nothing, move forward.
 
-        widget->move(widget->x() - speed, widget->y());
+        if(counter % 2 == 0) {
+            widget->move(widget->x() - speed, widget->y());
 
-        if(counter >= speed * 5) {
-            if(speed > 0) {
-                if(firstLeg)
-                    widget->setPixmap(*Desmond::PIC_1);
-                else
-                    widget->setPixmap(*Desmond::PIC_0);
-            } else {
-                //if(firstLeg)
-                    //widget->setPixmap(*Desmond::PIC_3); Recover after PIC3, PIC2 are added.
-                //else
-                    //widget->setPixmap(*Desmond::PIC_2);
+            if(counter >= speed * 5) {
+                if(speed > 0) {
+                    if(firstLeg)
+                        widget->setPixmap(*Desmond::PIC_1);
+                    else
+                        widget->setPixmap(*Desmond::PIC_0);
+                } else {
+                    //if(firstLeg)
+                        //widget->setPixmap(*Desmond::PIC_3); Recover after PIC3, PIC2 are added.
+                    //else
+                        //widget->setPixmap(*Desmond::PIC_2);
+                }
+                firstLeg = !firstLeg;
+                counter = 0;
             }
-            firstLeg = !firstLeg;
-            counter = 0;
         }
+
     }
 
     Game* game = Game::getInstance();
@@ -151,7 +156,7 @@ void Desmond::update() {
 
         int k = QRandomGenerator::securelySeeded().bounded(0, 10);
 
-        if(k >= 5) { // "Do you want to learn more => increase speed"
+        if(k >= 0) { // "Do you want to learn more => increase speed"
 
             qDebug() << "Do you want to learn more?";
 
@@ -164,7 +169,7 @@ void Desmond::update() {
 
             qDebug() << "Let's have some additional class";
 
-            game->addRedbull(-5);
+            game->addRedbull(-1);
 
         }
 

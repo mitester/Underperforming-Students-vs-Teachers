@@ -15,10 +15,12 @@
 #include <QRandomGenerator>
 #include <QProgressBar>
 #include <QDebug>
+#include <QPoint>
 
 
 //default value for Game::instance
 Game* Game::instance = nullptr;
+QPoint Game::REDBULL_POS = {};
 
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;

@@ -10,6 +10,7 @@
 #include "item.h"
 #include "kelvin.h"
 #include <QLabel>
+#include <qmath.h>
 
 const QString Kelvin::DEFAULT_NAME = "Kelvin";
 
@@ -74,23 +75,26 @@ void Kelvin::update() {
 
     } else { // hit nothing, move forward.
 
-        widget->move(widget->x() - speed, widget->y());
+        if(counter % 2 == 0)  {
+            widget->move(widget->x() - speed, widget->y());
 
-        if(counter >= speed * 5) {
-            if(speed > 0) {
-                if(firstLeg)
-                    widget->setPixmap(*Kelvin::PIC_1);
-                else
-                    widget->setPixmap(*Kelvin::PIC_0);
-            } else {
-                //if(firstLeg)
-                    //widget->setPixmap(*Kelvin::PIC_3); Recover after PIC3, PIC2 are added.
-                //else
-                    //widget->setPixmap(*Kelvin::PIC_2);
+            if(counter >= abs(speed) * 5) {
+                if(speed > 0) {
+                    if(firstLeg)
+                        widget->setPixmap(*Kelvin::PIC_1);
+                    else
+                        widget->setPixmap(*Kelvin::PIC_0);
+                } else {
+                    if(firstLeg)
+                        widget->setPixmap(*Kelvin::PIC_3);
+                    else
+                        widget->setPixmap(*Kelvin::PIC_2);
+                }
+                firstLeg = !firstLeg;
+                counter = 0;
             }
-            firstLeg = !firstLeg;
-            counter = 0;
         }
+
     }
 
     counter ++;
