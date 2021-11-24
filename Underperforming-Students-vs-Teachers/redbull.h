@@ -45,6 +45,9 @@ private:
 
     //stores the isPressed state
     bool isPressed = false;
+
+    ClickableLabel* widget;
+
 };
 
 #endif // REDBULL_H

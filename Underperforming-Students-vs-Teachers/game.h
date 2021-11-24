@@ -14,6 +14,7 @@
 #include <QProgressBar>
 #include <climits>
 #include <QSize>
+#include <QTime>
 
 class Game : public QObject
 {
@@ -33,8 +34,10 @@ public:
     const static int GRID_INTERVAL_HORIZONTAL {100};
     const static int GRID_LEFT {300};        // the position of the leftmost tile
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
-    const static int TEA_GEN_POS {1150};     // the generation position of teachers
+    const static int TEA_GEN_POS {1200};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
+
+    const static int GAME_DURATION{5}; //game duration in mins
 
     static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
@@ -77,6 +80,11 @@ public:
 
     QWidget* getParent() const;
 
+    QTimer* getMainTimer() const;
+
+    //return current time left in hh:mm form
+    QString getCurrentTimeLeft() const;
+
 private:
     explicit Game(QWidget* parent = nullptr);
     Game(Game& game) = delete;
@@ -103,7 +111,7 @@ private:
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 10;
+    int generatingTeacherUpperBound = 8;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;
@@ -119,6 +127,10 @@ private:
     QWidget* parent;
     void setParent(QObject *parent); // overload father's setParent to private
 
+    QTime currentTimeLeft;
+
+signals:
+    void notifyAddRedbull(int n);
 };
 
 #endif // GAME_H
