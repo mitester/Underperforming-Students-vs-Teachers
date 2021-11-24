@@ -29,10 +29,10 @@ public:
     static const int NUMBER_OF_COLUMN{9};
     static const int MAX{INT_MAX}; //the maximum integer
 
-    const static int GRID_UP = 60;
+    const static int GRID_UP = 30;
     const static int GRID_INTERVAL_VERTICAL {115};     // the interval between two tiles
     const static int GRID_INTERVAL_HORIZONTAL {100};
-    const static int GRID_LEFT {300};        // the position of the leftmost tile
+    const static int GRID_LEFT {280};        // the position of the leftmost tile
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
     const static int TEA_GEN_POS {1200};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
@@ -111,7 +111,7 @@ private:
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 8;
+    int generatingTeacherUpperBound = 10;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;

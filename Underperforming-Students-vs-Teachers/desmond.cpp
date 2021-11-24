@@ -156,7 +156,7 @@ void Desmond::update() {
 
         int k = QRandomGenerator::securelySeeded().bounded(0, 10);
 
-        if(k >= 0) { // "Do you want to learn more => increase speed"
+        if(k >= 4) { // "Do you want to learn more => increase speed"
 
             qDebug() << "Do you want to learn more?";
 
