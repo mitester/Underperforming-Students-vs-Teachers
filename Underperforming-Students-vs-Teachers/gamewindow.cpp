@@ -26,6 +26,7 @@
 #include <QThread>
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QTime>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,6 +34,8 @@ GameWindow::GameWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(Game::GAME_NAME);
+
+    Game::REDBULL_POS = ui->lb_redbull_pic->mapToGlobal(QPoint(0,0));
 
     setFixedSize(windowWidth, windowHeight);
 
@@ -85,9 +88,44 @@ GameWindow::GameWindow(QWidget *parent) :
 
     Redbull::PIC_0 = new QPixmap(":/images/items/item_redbull_0.png");
 
-    VendingMachine::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
+    VendingMachine::PIC_0 = new QPixmap(":/images/items/item_vending_0.png");
 
     this->game = Game::getInstance(this); //get the Singleton Game object
+
+    connect(game, &Game::notifyAddRedbull, this,
+            [=](int n)
+            {
+                ui->lb_redbull_num->setText(QString::number((ui->lb_redbull_num->text().toInt() + n)));
+            });
+
+    connect(game->getMainTimer(), &QTimer::timeout,
+            this,
+            [=]()
+            {
+                ui->lb_time_count->setText(game->getCurrentTimeLeft());
+            });
+
+    connect(ui->lb_pause, &ClickableLabel::clicked, this,
+            [=]()
+            {
+               if(!ui->lb_pause->text().compare("Pause", Qt::CaseInsensitive))
+               {
+                   game->pause();
+                   ui->lb_pause->setText("Start");
+               }
+               else
+               {
+                   game->start();
+                   ui->lb_pause->setText("Pause");
+               }
+            });
+
+    connect(ui->lb_home, &ClickableLabel::clicked, this,
+            [=]()
+    {
+        parentWidget()->show();
+        deleteLater();
+    });
 
     game->start();
     game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
@@ -115,12 +153,11 @@ GameWindow::GameWindow(QWidget *parent) :
     game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
     game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(2)->addTeacher(TimeVariant::Type::KELVIN);
 
     QLabel* label = new QLabel(this);
     label->setPixmap(*VendingMachine::PIC_0);
-    label->move(label->width() + 80, height() - label->height() - 80);
-    label->setFixedSize(Assignment::SPRITE_WIDTH, Assignment::SPRITE_HEIGHT);
+    label->setFixedSize(VendingMachine::SPRITE_WIDTH, VendingMachine::SPRITE_HEIGHT);
+    label->move(0, height() - label->height() - 80);
     VendingMachine* v = new VendingMachine(label);
     game->registerTimeVariant(v);
 
@@ -136,6 +173,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
 //    this->layout()->addWidget(spriteWidget);
 //    spriteWidget->show();
+
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
@@ -147,7 +185,7 @@ void GameWindow::resizeEvent(QResizeEvent *ev) {
 void GameWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.jpg"));
+    p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.png"));
 }
 
 GameWindow::~GameWindow()

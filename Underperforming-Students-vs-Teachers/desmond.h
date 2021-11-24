@@ -14,8 +14,8 @@ class Desmond : public Teacher
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{10};
-    static const int DEFAULT_SPEED{1000};
+    static const int DEFAULT_MAX_HP{1000};
+    static const int DEFAULT_SPEED{1};
     static const int DEFAULT_DAMAGE{10};
     static const int DEFAULT_SKILL_SPEED{1000};
 
@@ -38,6 +38,8 @@ public:
     void update(); // implementation of the virtual function update()
 private:
     int skillSpeed;
+    int counterSkill1; // counter for skill 'learn more'
+    int counterSkill2; // counter for skill 'additional class'
 };
 
 #endif // DESMOND_H

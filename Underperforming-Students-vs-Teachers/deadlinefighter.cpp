@@ -24,9 +24,8 @@ TimeVariant::Type DeadlineFighter::getType() const {return TimeVariant::Type::DE
 
 void DeadlineFighter::update()
 {
-    Teacher* leftMostTeacher = row->getLeftMostTeacher();
 
-    if(leftMostTeacher)
+    if(row->getLeftMostTeacher())
     {
         /***
         * since it would be triggered at any time
@@ -34,7 +33,8 @@ void DeadlineFighter::update()
         * It is the reason for this code to exist
         */
         //previous state is different from the current state
-        if(isTriggered ^ (leftMostTeacher->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
+        //qDebug() << (row->getLeftMostTeacher()->getDistanceFromLeft());
+        if(isTriggered ^ (row->getLeftMostTeacher()->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
             isTriggered = !isTriggered;
 
@@ -50,7 +50,6 @@ void DeadlineFighter::update()
 
             timeConcept = 0;
         }
-
         if(isTriggered)
         {
             skillSpeed = triggeredSkillSpeed;

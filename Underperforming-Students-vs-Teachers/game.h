@@ -14,6 +14,7 @@
 #include <QProgressBar>
 #include <climits>
 #include <QSize>
+#include <QTime>
 
 class Game : public QObject
 {
@@ -28,13 +29,17 @@ public:
     static const int NUMBER_OF_COLUMN{9};
     static const int MAX{INT_MAX}; //the maximum integer
 
-    const static int GRID_UP = 50;
-    const static int GRID_INTERVAL_VERTICAL {125};     // the interval between two tiles
-    const static int GRID_INTERVAL_HORIZONTAL {75};
-    const static int GRID_LEFT {220};        // the position of the leftmost tile
+    const static int GRID_UP = 60;
+    const static int GRID_INTERVAL_VERTICAL {115};     // the interval between two tiles
+    const static int GRID_INTERVAL_HORIZONTAL {100};
+    const static int GRID_LEFT {300};        // the position of the leftmost tile
     const static int GRID_RIGHT {1500};         // the position of the rightmost tile
-    const static int TEA_GEN_POS {1000};     // the generation position of teachers
+    const static int TEA_GEN_POS {1200};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
+
+    const static int GAME_DURATION{5}; //game duration in mins
+
+    static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
 //    const static int SPRITE_WIDTH {100};
 //    const static int ASS_HEIGHT {37};
@@ -74,6 +79,11 @@ public:
     //bool stop(); no need for this. Just close the window bounded with this game
 
     QWidget* getParent() const;
+
+    QTimer* getMainTimer() const;
+
+    //return current time left in hh:mm form
+    QString getCurrentTimeLeft() const;
 
 private:
     explicit Game(QWidget* parent = nullptr);
@@ -117,6 +127,10 @@ private:
     QWidget* parent;
     void setParent(QObject *parent); // overload father's setParent to private
 
+    QTime currentTimeLeft;
+
+signals:
+    void notifyAddRedbull(int n);
 };
 
 #endif // GAME_H

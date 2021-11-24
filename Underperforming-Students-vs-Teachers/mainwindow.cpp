@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle(Game::GAME_NAME);
+
 }
 
 MainWindow::~MainWindow()
