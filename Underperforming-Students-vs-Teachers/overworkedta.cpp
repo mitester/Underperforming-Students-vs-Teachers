@@ -74,20 +74,20 @@ void OverworkedTA::update() {
 
     } else { // hit nothing, move forward.
 
-        if(counter % 2 == 0) {
+        if(counter % 3 == 0) {
             widget->move(widget->x() - speed, widget->y());
 
-            if(counter >= speed * 5) {
+            if(counter >= abs(speed) * 5) {
                 if(speed > 0) {
                     if(firstLeg)
                         widget->setPixmap(*OverworkedTA::PIC_1);
                     else
                         widget->setPixmap(*OverworkedTA::PIC_0);
                 } else {
-                    //if(firstLeg)
-                        //widget->setPixmap(*OverworkedTA::PIC_3); Recover after PIC3, PIC2 are added.
-                    //else
-                        //widget->setPixmap(*OverworkedTA::PIC_2);
+                    if(firstLeg)
+                        widget->setPixmap(*OverworkedTA::PIC_3);
+                    else
+                        widget->setPixmap(*OverworkedTA::PIC_2);
                 }
                 firstLeg = !firstLeg;
                 counter = 0;

@@ -75,7 +75,7 @@ void Kelvin::update() {
 
     } else { // hit nothing, move forward.
 
-        if(counter % 2 == 0)  {
+        if(counter % 3 == 0)  {
             widget->move(widget->x() - speed, widget->y());
 
             if(counter >= abs(speed) * 5) {

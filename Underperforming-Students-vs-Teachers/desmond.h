@@ -20,6 +20,9 @@ public:
     static const int DEFAULT_SKILL_SPEED{600};
     static const int SPEED_INCREASE_COUNTDOWN{500};
 
+    static const int SPRITE_WIDTH{121};
+    static const int SPRITE_HEIGHT{180};
+
     static QPixmap* PIC_0;
     static QPixmap* PIC_1;
     static QPixmap* PIC_2;

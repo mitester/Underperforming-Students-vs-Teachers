@@ -115,10 +115,10 @@ void Desmond::update() {
 
     if (rightStudent && shape.intersects(rightStudent->getWidget()->geometry())) {   // hit a student
 
-        if(rightStudent->getType() == TimeVariant::Type::TEACHERS_PET) {
-            speed = -speed;
-            row->setRightMostStudentHp(0);
-        } else
+//        if(rightStudent->getType() == TimeVariant::Type::TEACHERS_PET) {
+//            speed = -speed;
+//            row->setRightMostStudentHp(0);
+//        } else
             row->setRightMostStudentHp(rightStudent->getHp() - damage);
 
         if(rightStudent->getHp() <= 0) {
@@ -129,7 +129,7 @@ void Desmond::update() {
 
     } else { // hit nothing, move forward.
 
-        if(counter % 2 == 0) {
+        if(counter % 4 == 0) {
             widget->move(widget->x() - speed, widget->y());
 
             if(counter >= speed * 5) {
@@ -160,6 +160,8 @@ void Desmond::update() {
 
             qDebug() << "Do you want to learn more?";
 
+            widget->setPixmap(*Desmond::PIC_2);
+
             for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
                 game->getRowAt(i)->modifyTeachers(doubleSpeed);
 
@@ -169,7 +171,11 @@ void Desmond::update() {
 
             qDebug() << "Let's have some additional class";
 
-            game->addRedbull(-1);
+            game->addRedbull(-3);
+
+            widget->setPixmap(*Desmond::PIC_3);
+
+            speedIncreased = true;
 
         }
 

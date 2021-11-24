@@ -31,6 +31,7 @@
 class Teacher;
 class Student;
 class Assignment;
+class Desmond;
 
 class Row : public QObject
 {
@@ -82,6 +83,7 @@ public:
     void updateLeftMostTeacher();
     void printTeacherList();
     void modifyTeachers(void (*f)(Teacher* t));
+    Desmond* getDesmond() const; //returns nullptr if not found
 
     Student** grid; //stores a pointer pointing to each student.
 

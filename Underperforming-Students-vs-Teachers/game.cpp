@@ -26,6 +26,7 @@ QPoint Game::REDBULL_POS = {};
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
 TimeVariant::Type Game::selectedSprite = TimeVariant::Type::REDBULL;
+Desmond* Game::desmond = nullptr;
 
 void Game::move(QWidget *w, double xPercent, double yPercent) {
     w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
@@ -178,9 +179,11 @@ void Game::generateTeacher()
     }
     if(num == 9)
     {
-        rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
+        if(!desmond)
+            rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
     }
     generatingTimer->setInterval(getRandomInterval());
+    if(desmond) desmond->getWidget()->raise();
 }
 
 QWidget* Game::getParent() const

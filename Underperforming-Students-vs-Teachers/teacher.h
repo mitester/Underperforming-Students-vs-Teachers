@@ -17,7 +17,7 @@ class Teacher : public Human
     Q_OBJECT
 
 public:
-    static const int SPRITE_WIDTH{81};
+    static const int SPRITE_WIDTH{110};
     static const int SPRITE_HEIGHT{163};
 
     /* Mutators */

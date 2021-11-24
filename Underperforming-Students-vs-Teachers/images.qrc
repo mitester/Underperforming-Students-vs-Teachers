@@ -31,5 +31,11 @@
         <file>images/teachers/tea_kelvin_3.png</file>
         <file>images/scene/game_scene.png</file>
         <file>images/items/item_vending_0.png</file>
+        <file>images/teachers/tea_desmond_2.png</file>
+        <file>images/teachers/tea_desmond_3.png</file>
+        <file>images/teachers/tea_overworked_ta_2.png</file>
+        <file>images/teachers/tea_overworked_ta_3.png</file>
+        <file>images/teachers/tea_pang_2.png</file>
+        <file>images/teachers/tea_pang_3.png</file>
     </qresource>
 </RCC>

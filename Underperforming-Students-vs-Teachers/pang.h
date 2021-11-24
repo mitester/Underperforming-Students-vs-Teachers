@@ -14,8 +14,8 @@ class Pang : public Teacher
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{100};
-    static const int DEFAULT_SPEED{3};
+    static const int DEFAULT_MAX_HP{200};
+    static const int DEFAULT_SPEED{4};
     static const int DEFAULT_DAMAGE{1};
 
     static QPixmap* PIC_0;

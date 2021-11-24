@@ -16,6 +16,8 @@
 #include <QSize>
 #include <QTime>
 
+class Desmond;
+
 class Game : public QObject
 {
     Q_OBJECT
@@ -38,6 +40,7 @@ public:
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
 
     const static int GAME_DURATION{5}; //game duration in mins
+    static Desmond* desmond;
 
     static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
