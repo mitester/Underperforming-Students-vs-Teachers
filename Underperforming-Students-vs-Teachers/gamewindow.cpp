@@ -93,6 +93,7 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
+    ui->widget_right->raise();
 
     connect(game, &Game::notifyAddRedbull, this,
             [=]()
@@ -105,6 +106,7 @@ GameWindow::GameWindow(QWidget *parent) :
             [=]()
             {
                 ui->lb_time_count->setText(game->getCurrentTimeLeft());
+                ui->widget_right->raise();
             });
 
     connect(ui->lb_pause, &ClickableLabel::clicked, this,
