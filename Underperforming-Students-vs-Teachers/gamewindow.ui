@@ -75,8 +75,8 @@
    <widget class="QWidget" name="widget_right" native="true">
     <property name="geometry">
      <rect>
-      <x>1090</x>
-      <y>20</y>
+      <x>1100</x>
+      <y>0</y>
       <width>161</width>
       <height>101</height>
      </rect>
@@ -105,7 +105,7 @@
       </property>
       <item>
        <widget class="QWidget" name="widget_redbull" native="true">
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>20</x>

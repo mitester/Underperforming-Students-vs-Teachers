@@ -120,7 +120,6 @@ void Row::addTeacher(TimeVariant::Type type) {
     Game* game = Game::getInstance();
     Teacher* t = nullptr;
     QLabel* label = new QLabel(parent);
-    label->lower(); //not blocking Ui display
     switch(type) {
     case TimeVariant::Type::OVERWORKED_TA:
         label->setPixmap(*OverworkedTA::PIC_0);
@@ -147,6 +146,7 @@ void Row::addTeacher(TimeVariant::Type type) {
     label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH, Teacher::SPRITE_HEIGHT);
     if(type == TimeVariant::Type::DESMOND)
         label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH * 1.2, Teacher::SPRITE_HEIGHT * 1.2);
+    label->lower();
     label->show();
     addTeacher(t);
     game->registerTimeVariant(t);
