@@ -315,8 +315,6 @@ GameWindow::~GameWindow()
 void GameWindow::mousePressEvent(QMouseEvent *ev) {
     QPoint p = ev->pos();
     Game* game = Game::getInstance();
-    //qDebug() << "p(x,y): " << p.x() << " " << p.y();
-    //qDebug() << "type: " << static_cast<int>(game->selectedSprite);
     if(p.x() > Game::GRID_LEFT && p.x() < Game::GRID_RIGHT &&
        p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN &&
        game->selectedSprite != TimeVariant::Type::EMPTY) { //if in bound
@@ -339,9 +337,6 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) {
         }
 
         int cost = game->getCost(game->selectedSprite);
-
-        qDebug() << "the (x,y): " << minXIdx << " " << minYIdx;
-
 
         if(game->getRedbullNum() >= cost && !row->hasStudentAt(minXIdx)) {
 

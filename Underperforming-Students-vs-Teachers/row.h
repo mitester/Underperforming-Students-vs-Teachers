@@ -78,6 +78,7 @@ public:
     int getGridSize() const;            // the size of the grid
     bool hasReachedEnd() const;         // if any teacher has reached the end of this row
     int getYPos() const;
+    bool hasStudentAt(int pos) const; //returns true if has student
 
     /** Utilities **/
     void updateLeftMostTeacher();
