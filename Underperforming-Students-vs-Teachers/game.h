@@ -26,16 +26,17 @@ public:
     static const QString GAME_NAME;
     static const int BASIC_TIME_UNIT{20};           //it is the basic time unit of QTimer
                                                     //emit timeout() signal in 50Hz
-    static const int DEFAULT_REDBULL_NUMBER{10};    // it is the default redbull number
+    static const int DEFAULT_REDBULL_NUMBER{100};    // it is the default redbull number
     static const int NUMBER_OF_ROW{5};              //it is the number of row of the map
     static const int NUMBER_OF_COLUMN{9};
     static const int MAX{INT_MAX}; //the maximum integer
 
-    const static int GRID_UP = 30;
+    const static int GRID_UP {30};
+    const static int GRID_DOWN {625};
     const static int GRID_INTERVAL_VERTICAL {115};     // the interval between two tiles
-    const static int GRID_INTERVAL_HORIZONTAL {100};
+    const static int GRID_INTERVAL_HORIZONTAL {97};
     const static int GRID_LEFT {280};        // the position of the leftmost tile
-    const static int GRID_RIGHT {1500};         // the position of the rightmost tile
+    const static int GRID_RIGHT {1200};         // the position of the rightmost tile
     const static int TEA_GEN_POS {1200};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
 
@@ -88,6 +89,8 @@ public:
     //return current time left in hh:mm form
     QString getCurrentTimeLeft() const;
 
+    int getCost(TimeVariant::Type student) const; //return the cost of the given type
+
 private:
     explicit Game(QWidget* parent = nullptr);
     Game(Game& game) = delete;
@@ -109,12 +112,12 @@ private:
     //it generates teacher randomly
     void generateTeacher();
     QTimer* generatingTimer; //it handles the teacher generating frequency
-    int generatingTimerUpperBound = 3000; //exclusive upper bound
-    int generatingTimerLowerBound = 1000; //inclusive upper bound
+    int generatingTimerUpperBound = 10000; //exclusive upper bound
+    int generatingTimerLowerBound = 5000; //inclusive upper bound
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 10;
+    int generatingTeacherUpperBound = 7;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;

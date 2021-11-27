@@ -27,6 +27,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QTime>
+#include <qmath.h>
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -130,37 +131,37 @@ GameWindow::GameWindow(QWidget *parent) :
     });
 
     game->start();
-    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
-    game->getRowAt(0)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-    game->getRowAt(0)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-    game->getRowAt(0)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+//    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+//    game->getRowAt(0)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+//    game->getRowAt(0)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+//    game->getRowAt(0)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(1)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
-    game->getRowAt(1)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-    game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+//    game->getRowAt(1)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+//    game->getRowAt(1)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+//    game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+//    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 0);
-    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 1);
-    game->getRowAt(2)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-    game->getRowAt(2)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+//    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 0);
+//    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 1);
+//    game->getRowAt(2)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+//    game->getRowAt(2)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
-    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-    game->getRowAt(3)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-    game->getRowAt(3)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+//    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
+//    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+//    game->getRowAt(3)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+//    game->getRowAt(3)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-    game->getRowAt(4)->addStudent(TimeVariant::Type::GBUS_STUDENT, 0);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 1);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 2);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 3);
-    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 4);
+//    game->getRowAt(4)->addStudent(TimeVariant::Type::GBUS_STUDENT, 0);
+//    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 1);
+//    game->getRowAt(4)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 2);
+//    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 3);
+//    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 4);
 
 
     QLabel* label = new QLabel(this);
     label->setPixmap(*VendingMachine::PIC_0);
-    label->setFixedSize(VendingMachine::SPRITE_WIDTH, VendingMachine::SPRITE_HEIGHT);
-    label->move(0, height() - label->height() - 80);
+    label->setFixedSize(VendingMachine::SPRITE_WIDTH * 0.7, VendingMachine::SPRITE_HEIGHT * 0.7);
+    label->move(140, height() - label->height() - 40);
     VendingMachine* v = new VendingMachine(label);
     game->registerTimeVariant(v);
 
@@ -177,6 +178,20 @@ GameWindow::GameWindow(QWidget *parent) :
 //    this->layout()->addWidget(spriteWidget);
 //    spriteWidget->show();
 
+    SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
+    SpriteCard* card2 = new SpriteCard(TimeVariant::Type::GBUS_STUDENT, this);
+    SpriteCard* card3 = new SpriteCard(TimeVariant::Type::DEADLINE_FIGHTER, this);
+    SpriteCard* card4 = new SpriteCard(TimeVariant::Type::SHAMELESS_STUDENT, this);
+    SpriteCard* card5 = new SpriteCard(TimeVariant::Type::TEACHERS_PET, this);
+    SpriteCard* card6 = new SpriteCard(TimeVariant::Type::CGA_GOD, this);
+    SpriteCard* card7 = new SpriteCard(TimeVariant::Type::EMPTY, this);
+    ui->gridLayout->addWidget(card1,0,0);
+    ui->gridLayout->addWidget(card2,1,0);
+    ui->gridLayout->addWidget(card3,2,0);
+    ui->gridLayout->addWidget(card4,3,0);
+    ui->gridLayout->addWidget(card5,0,1);
+    ui->gridLayout->addWidget(card6,1,1);
+    ui->gridLayout->addWidget(card7,2,1);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
@@ -295,4 +310,49 @@ GameWindow::~GameWindow()
     VendingMachine::PIC_0 = nullptr;
 
     delete ui;
+}
+
+void GameWindow::mousePressEvent(QMouseEvent *ev) {
+    QPoint p = ev->pos();
+    Game* game = Game::getInstance();
+    //qDebug() << "p(x,y): " << p.x() << " " << p.y();
+    //qDebug() << "type: " << static_cast<int>(game->selectedSprite);
+    if(p.x() > Game::GRID_LEFT && p.x() < Game::GRID_RIGHT &&
+       p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN &&
+       game->selectedSprite != TimeVariant::Type::EMPTY) { //if in bound
+
+        int minYIdx = 0;
+        for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
+            if(abs(game->getRowAt(i)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y())
+             < abs(game->getRowAt(minYIdx)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y()))
+                minYIdx = i;
+        Row* row = game->getRowAt(minYIdx);
+
+        int minXPos = Game::GRID_LEFT;
+        int minXIdx = 0;
+        for(int i = 0; i < Game::NUMBER_OF_COLUMN; i++) {
+            int xPos = Game::GRID_LEFT + (Game::GRID_INTERVAL_HORIZONTAL/2) + i * Game::GRID_INTERVAL_HORIZONTAL;
+            if(abs(xPos - p.x()) < abs(minXPos - p.x())) {
+                minXPos = xPos;
+                minXIdx = i;
+            }
+        }
+
+        int cost = game->getCost(game->selectedSprite);
+
+        qDebug() << "the (x,y): " << minXIdx << " " << minYIdx;
+
+
+        if(game->getRedbullNum() >= cost && !row->hasStudentAt(minXIdx)) {
+
+            if(row->getLeftMostTeacher())
+                if(row->getLeftMostTeacher()->getDistanceFromLeft() < minXPos)
+                    return;
+
+            game->addRedbull(-cost);
+            row->addStudent(game->selectedSprite, minXIdx);
+        }
+
+        emit game->notifyAddRedbull();
+    }
 }

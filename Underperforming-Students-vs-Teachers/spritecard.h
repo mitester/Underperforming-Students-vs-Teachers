@@ -8,6 +8,8 @@
 class SpriteCard : public ClickableLabel
 {
 public:
+    const static int WIDTH = 100;
+    const static int HEIGHT = 125;
     SpriteCard(TimeVariant::Type type, QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
 
 protected:

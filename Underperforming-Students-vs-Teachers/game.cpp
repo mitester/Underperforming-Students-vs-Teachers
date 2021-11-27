@@ -25,7 +25,7 @@ QPoint Game::REDBULL_POS = {};
 
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
-TimeVariant::Type Game::selectedSprite = TimeVariant::Type::REDBULL;
+TimeVariant::Type Game::selectedSprite = TimeVariant::Type::EMPTY;
 Desmond* Game::desmond = nullptr;
 
 void Game::move(QWidget *w, double xPercent, double yPercent) {
@@ -204,6 +204,25 @@ QTimer* Game::getMainTimer() const
 QString Game::getCurrentTimeLeft() const
 {
     return currentTimeLeft.toString("mm:ss");
+}
+
+int Game::getCost(TimeVariant::Type student) const {
+    switch (student) {
+    case TimeVariant::Type::CGA_GOD:
+        return CgaGod::DEFAULT_COST;
+    case TimeVariant::Type::DEADLINE_FIGHTER:
+        return DeadlineFighter::DEFAULT_COST;
+    case TimeVariant::Type::GBUS_STUDENT:
+        return GbusStudent::DEFAULT_COST;
+    case TimeVariant::Type::SHAMELESS_STUDENT:
+        return ShamelessStudent::DEFAULT_COST;
+    case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
+        return SleepDeprivedStudent::DEFAULT_COST;
+    case TimeVariant::Type::TEACHERS_PET:
+        return TeachersPet::DEFAULT_COST;
+    default:
+        qDebug() << "Invalid type passed in to getCost() function.";
+    }
 }
 
 

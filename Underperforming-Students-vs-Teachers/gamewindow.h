@@ -19,6 +19,7 @@ public:
 protected:
     void resizeEvent(QResizeEvent* ev);
     void paintEvent(QPaintEvent* ev);
+    void mousePressEvent(QMouseEvent* ev);
 
 private:
     Ui::GameWindow *ui;
