@@ -136,7 +136,6 @@ void Row::addTeacher(TimeVariant::Type type) {
     case TimeVariant::Type::DESMOND:
         label->setPixmap(*Desmond::PIC_0);
         game->desmond = new Desmond(label, this);
-        label->raise();
         t = game->desmond;
         break;
     default:

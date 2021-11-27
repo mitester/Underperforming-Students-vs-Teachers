@@ -106,6 +106,7 @@ GameWindow::GameWindow(QWidget *parent) :
             [=]()
             {
                 ui->lb_time_count->setText(game->getCurrentTimeLeft());
+                ui->widget_right->raise();
             });
 
     connect(ui->lb_pause, &ClickableLabel::clicked, this,
