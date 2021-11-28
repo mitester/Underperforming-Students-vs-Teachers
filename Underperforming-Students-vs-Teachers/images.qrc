@@ -44,5 +44,18 @@
         <file>images/cards/card_remove_0.png</file>
         <file>images/cards/card_shameless_0.png</file>
         <file>images/cards/card_sleep_0.png</file>
+        <file>images/items/item_assignment_1.png</file>
+        <file>images/items/item_assignment_2.png</file>
+        <file>images/items/item_explosion_0.png</file>
+        <file>images/items/item_explosion_1.png</file>
+        <file>images/items/item_explosion_2.png</file>
+        <file>images/scene/game_scene_fail.png</file>
+        <file>images/scene/game_scene_pass.png</file>
+        <file>images/students/stu_cga_trans.png</file>
+        <file>images/students/stu_deadline_trans.png</file>
+        <file>images/students/stu_gbus_trans.png</file>
+        <file>images/students/stu_pet_trans.png</file>
+        <file>images/students/stu_shameless_trans.png</file>
+        <file>images/students/stu_sleep_trans.png</file>
     </qresource>
 </RCC>
