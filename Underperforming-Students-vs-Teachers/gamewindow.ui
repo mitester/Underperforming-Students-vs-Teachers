@@ -171,6 +171,9 @@
             <property name="text">
              <string>0</string>
             </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
@@ -197,6 +200,9 @@
         </property>
         <property name="text">
          <string>00:00</string>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
