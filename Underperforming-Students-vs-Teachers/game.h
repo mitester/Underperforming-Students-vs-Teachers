@@ -101,7 +101,7 @@ public:
     //return current time left in hh:mm form
     QString getCurrentTimeLeft() const;
 
-    int getCost(TimeVariant::Type student) const; //return the cost of the given type
+    static int getCost(TimeVariant::Type student); //return the cost of the given type
 
 private:
     explicit Game(QWidget* parent = nullptr);

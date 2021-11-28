@@ -12,7 +12,7 @@ public:
     static const int DEFAULT_MAX_HP{200};
     static const int DEFAULT_SKILL_SPEED{2200};
     static const int DEFAULT_TRIGGERED_SKILL_SPEED{600};
-    static const int DEFAULT_COST{10};
+    static const int DEFAULT_COST{20};
     static const int DEFAULT_DAMAGE{10};
     static const int DEFAULT_TRIGGER_SKILL_DISTANCE{380};
 
