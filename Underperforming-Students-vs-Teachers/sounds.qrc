@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>sounds/bgm.mp3</file>
+        <file>sounds/victory.mp3</file>
+        <file>sounds/lose.mp3</file>
     </qresource>
 </RCC>

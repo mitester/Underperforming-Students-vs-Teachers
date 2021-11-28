@@ -50,7 +50,6 @@ public:
     static QPixmap* GAME_SCENE_FAIL;
     static QPixmap* GAME_SCENE_PASS;
 
-
     const static int GAME_DURATION{180000}; //game duration in msecs
     static Desmond* desmond;
 
@@ -145,7 +144,6 @@ private:
     QTime currentTimeLeft;
 
     QMediaPlayer player{this};
-    QMediaPlaylist playlist{this};
 signals:
     void notifyAddRedbull();
 };

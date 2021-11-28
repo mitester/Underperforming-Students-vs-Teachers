@@ -56,9 +56,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
-    playlist.addMedia(QUrl("qrc:/sounds/bgm.mp3"));
-    playlist.setPlaybackMode(QMediaPlaylist::PlaybackMode::Loop);
-    player.setPlaylist(&playlist);
+    player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
 }
 
 Game::~Game()
@@ -140,10 +138,15 @@ void Game::update()
         if(gameStatus == GameStatus::STUDENT_WON)
         {
             lb_game_ended->setPixmap(*GAME_SCENE_PASS);
+            player.setMedia(QUrl("qrc:/sounds/victory.mp3"));
+            player.play();
         }
         else if(gameStatus == GameStatus::TEACHER_WON)
         {
             lb_game_ended->setPixmap(*GAME_SCENE_FAIL);
+            player.setMedia(QUrl("qrc:/sounds/lose.mp3"));
+            player.play();
+
         }
         lb_game_ended->raise();
         lb_game_ended->show();
