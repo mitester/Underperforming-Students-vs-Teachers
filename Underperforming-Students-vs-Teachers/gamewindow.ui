@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>185</width>
+      <width>222</width>
       <height>80</height>
      </rect>
     </property>
@@ -205,6 +205,17 @@
       </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>221</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
    </widget>
   </widget>
  </widget>

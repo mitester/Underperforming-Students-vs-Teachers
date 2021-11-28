@@ -29,7 +29,8 @@ public:
         DESMOND,
         REDBULL,
         ASSIGNMENT,
-        VENDING_MACHINE
+        VENDING_MACHINE,
+        EMPTY
     };
 
     //an enum class which stores all TimeVariant Categories

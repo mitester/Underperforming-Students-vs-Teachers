@@ -36,6 +36,10 @@
 ## Class Structure
 ```
 +-- QObject
+|   +-- QWidget
+|       +-- QLabel
+|           +-- ClickableLabel
+|               +-- SpriteCard
 |   +-- TimeVariant
 |       +-- Human
 |           +-- Student
