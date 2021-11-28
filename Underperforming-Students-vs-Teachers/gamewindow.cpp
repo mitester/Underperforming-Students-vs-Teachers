@@ -167,19 +167,6 @@ GameWindow::GameWindow(QWidget *parent) :
     VendingMachine* v = new VendingMachine(label);
     game->registerTimeVariant(v);
 
-//    QWidget* spriteWidget = new QWidget(this);
-//    spriteWidget->setGeometry(1120, 20, 150, 660);
-//    spriteWidget->setStyleSheet("color: rgb(161, 112, 56);");
-//    spriteWidget->setLayout(new QVBoxLayout(this));
-
-//    SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
-//    SpriteCard* card2 = new SpriteCard(TimeVariant::Type::CGA_GOD, this);
-//    spriteWidget->layout()->addWidget(card1);
-//    spriteWidget->layout()->addWidget(card2);
-
-//    this->layout()->addWidget(spriteWidget);
-//    spriteWidget->show();
-
     SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
     SpriteCard* card2 = new SpriteCard(TimeVariant::Type::GBUS_STUDENT, this);
     SpriteCard* card3 = new SpriteCard(TimeVariant::Type::DEADLINE_FIGHTER, this);

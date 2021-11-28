@@ -22,18 +22,16 @@
 //default value for Game::instance
 Game* Game::instance = nullptr;
 QPoint Game::REDBULL_POS = {};
-SpriteCard* Game::selectedCard = nullptr;
 
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
-TimeVariant::Type Game::selectedSprite = TimeVariant::Type::EMPTY;
 Desmond* Game::desmond = nullptr;
 
 void Game::move(QWidget *w, double xPercent, double yPercent) {
     w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
 }
 
-Game::Game(QWidget* parent) : QObject(parent), parent(parent)
+Game::Game(QWidget* parent) : QObject(parent), parent(parent), selectedCard(nullptr), selectedSprite(TimeVariant::Type::EMPTY)
 {
     currentSize = parent->size(); //save the size of parent
 
