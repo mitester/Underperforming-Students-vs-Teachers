@@ -63,7 +63,8 @@ public:
     /** Add operations**/
     void addStudent(TimeVariant::Type type, int tile_pos); // create a new student at tile_pos
     void addTeacher(TimeVariant::Type type);            // create a teacher at the right side of the row
-    void addAssignment(Student* shooter, int damage);                   // create a new assignment at tile_pos
+    void addAssignment(Student* shooter, int damage,  // create a new assignment at tile_pos with the given pixmap
+                       QPixmap pixmap = *Assignment::PIC_0);
 
 
     /** Remove operations (! Note: remove according to index is expensive)**/

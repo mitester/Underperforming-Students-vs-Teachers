@@ -37,12 +37,14 @@ public:
     //the implementation of the pure virtual update()
     void update();
 
+    bool isTriggered() const;
+
 private:
     const int normalSkillSpeed;
     const int triggeredSkillSpeed;
     const int triggerSkillDistance;
 
-    bool isTriggered = false;
+    bool triggered = false;
 
 };
 

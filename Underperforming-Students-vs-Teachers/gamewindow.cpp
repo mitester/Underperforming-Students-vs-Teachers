@@ -90,6 +90,9 @@ GameWindow::GameWindow(QWidget *parent) :
 
 
     Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
+    Assignment::PIC_1 = new QPixmap(":/images/items/item_assignment_1.png");
+    Assignment::PIC_2 = new QPixmap(":/images/items/item_assignment_2.png");
+
 
     Redbull::PIC_0 = new QPixmap(":/images/items/item_redbull_0.png");
 

@@ -27,7 +27,7 @@ void CgaGod::update()
         else if(timeConcept == skillSpeed)
         {
             widget->setPixmap(*PIC_2);
-            row->addAssignment(this, damage);
+            row->addAssignment(this, damage, *Assignment::PIC_2);
             timeConcept = 0;
         }
         timeConcept += Game::BASIC_TIME_UNIT;

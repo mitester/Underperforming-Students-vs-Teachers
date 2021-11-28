@@ -13,6 +13,8 @@ public:
     static const int DEFAULT_SPEED{3};
 
     static QPixmap* PIC_0;
+    static QPixmap* PIC_1;
+    static QPixmap* PIC_2;
 
     Assignment(QLabel* widget, Row* row, int damage = DEFAULT_DAMAGE, int speed = DEFAULT_SPEED);
 
