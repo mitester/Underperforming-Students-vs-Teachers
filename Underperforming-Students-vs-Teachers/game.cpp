@@ -225,7 +225,7 @@ QString Game::getCurrentTimeLeft() const
     return currentTimeLeft.toString("mm:ss");
 }
 
-int Game::getCost(TimeVariant::Type student) const {
+int Game::getCost(TimeVariant::Type student) {
     switch (student) {
     case TimeVariant::Type::CGA_GOD:
         return CgaGod::DEFAULT_COST;

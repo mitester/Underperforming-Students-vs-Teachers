@@ -335,7 +335,7 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) {
     Game* game = Game::getInstance();
     if(p.x() > Game::GRID_LEFT && p.x() < Game::GRID_RIGHT &&
        p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN &&
-       game->selectedSprite != TimeVariant::Type::EMPTY) { //if in bound
+       game->selectedCard != nullptr) { //if in bound
 
         int minYIdx = 0;
         for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
@@ -352,6 +352,12 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) {
                 minXPos = xPos;
                 minXIdx = i;
             }
+        }
+
+        if(game->selectedSprite == TimeVariant::Type::EMPTY) {
+            if(row->hasStudentAt(minXIdx))
+                row->removeStudent(minXIdx);
+            return;
         }
 
         int cost = game->getCost(game->selectedSprite);

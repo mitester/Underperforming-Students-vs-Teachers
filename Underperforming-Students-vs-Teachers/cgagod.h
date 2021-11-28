@@ -11,7 +11,7 @@ public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{3000};
     static const int DEFAULT_SKILL_SPEED{2000};
-    static const int DEFAULT_COST{10};
+    static const int DEFAULT_COST{30};
     static const int DEFAULT_DAMAGE{50};
 
     static QPixmap* PIC_0;
