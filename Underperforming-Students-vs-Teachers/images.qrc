@@ -37,5 +37,12 @@
         <file>images/teachers/tea_overworked_ta_3.png</file>
         <file>images/teachers/tea_pang_2.png</file>
         <file>images/teachers/tea_pang_3.png</file>
+        <file>images/cards/card_cga_0.png</file>
+        <file>images/cards/card_deadline_0.png</file>
+        <file>images/cards/card_gbus_0.png</file>
+        <file>images/cards/card_pet_0.png</file>
+        <file>images/cards/card_remove_0.png</file>
+        <file>images/cards/card_shameless_0.png</file>
+        <file>images/cards/card_sleep_0.png</file>
     </qresource>
 </RCC>

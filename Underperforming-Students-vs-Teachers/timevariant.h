@@ -28,7 +28,8 @@ public:
         DESMOND,
         REDBULL,
         ASSIGNMENT,
-        VENDING_MACHINE
+        VENDING_MACHINE,
+        EMPTY
     };
 
     enum class Category

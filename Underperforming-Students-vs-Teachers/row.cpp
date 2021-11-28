@@ -311,6 +311,17 @@ Desmond* Row::getDesmond() const {
     return nullptr;
 }
 
+int Row::getYPos() const {
+    return yPos;
+}
+
+bool Row::hasStudentAt(int pos) const {
+    if(inBound(pos))
+        return grid[pos] != nullptr;
+    qDebug() << "invalid pos passed to hasStudentAt()";
+    return false;
+}
+
 
 
 
