@@ -180,7 +180,7 @@ void Game::update()
 
             //generating time
             generatingTimerLowerBound = 1000;
-            generatingTeacherUpperBound = 3001;
+            generatingTimerUpperBound = 3001;
         }
     }
 }
