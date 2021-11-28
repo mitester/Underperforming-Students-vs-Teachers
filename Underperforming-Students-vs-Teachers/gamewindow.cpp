@@ -368,4 +368,8 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) {
 
         emit game->notifyAddRedbull();
     }
+    else
+    {
+        QMainWindow::mousePressEvent(ev);
+    }
 }
