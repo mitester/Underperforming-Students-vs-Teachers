@@ -84,6 +84,10 @@ GameWindow::GameWindow(QWidget *parent) :
     Desmond::PIC_2 = new QPixmap(":/images/teachers/tea_desmond_2.png");
     Desmond::PIC_3 = new QPixmap(":/images/teachers/tea_desmond_3.png");
 
+    Item::EXPLOSION_0 = new QPixmap(":/images/items/item_explosion_0.png");
+    Item::EXPLOSION_1 = new QPixmap(":/images/items/item_explosion_1.png");
+    Item::EXPLOSION_2 = new QPixmap(":/images/items/item_explosion_2.png");
+
 
     Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
 
@@ -166,19 +170,6 @@ GameWindow::GameWindow(QWidget *parent) :
     label->move(140, height() - label->height() - 40);
     VendingMachine* v = new VendingMachine(label);
     game->registerTimeVariant(v);
-
-//    QWidget* spriteWidget = new QWidget(this);
-//    spriteWidget->setGeometry(1120, 20, 150, 660);
-//    spriteWidget->setStyleSheet("color: rgb(161, 112, 56);");
-//    spriteWidget->setLayout(new QVBoxLayout(this));
-
-//    SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
-//    SpriteCard* card2 = new SpriteCard(TimeVariant::Type::CGA_GOD, this);
-//    spriteWidget->layout()->addWidget(card1);
-//    spriteWidget->layout()->addWidget(card2);
-
-//    this->layout()->addWidget(spriteWidget);
-//    spriteWidget->show();
 
     SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
     SpriteCard* card2 = new SpriteCard(TimeVariant::Type::GBUS_STUDENT, this);

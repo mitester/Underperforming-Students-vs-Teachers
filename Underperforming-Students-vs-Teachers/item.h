@@ -2,6 +2,7 @@
 #define ITEM_H
 
 #include "timevariant.h"
+#include <QPixmap>
 
 class Item : public TimeVariant
 {
@@ -9,6 +10,9 @@ class Item : public TimeVariant
 
 public:
     TimeVariant::Category getCategory() const;
+    static QPixmap* EXPLOSION_0;
+    static QPixmap* EXPLOSION_1;
+    static QPixmap* EXPLOSION_2;
 
 protected:
     Item(QLabel* widget, Row* row = nullptr);
