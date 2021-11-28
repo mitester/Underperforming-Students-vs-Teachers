@@ -57,4 +57,7 @@ void Redbull::update()
 void Redbull::pressed()
 {
     isPressed = true;
+    QMediaPlayer* player = new QMediaPlayer(widget);
+    player->setMedia(QUrl("qrc:/sounds/redbull.mp3"));
+    player->play();
 }

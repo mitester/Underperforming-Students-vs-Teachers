@@ -40,8 +40,11 @@ void OverworkedTA::update() {
         //this->widget->setDisabled(true);
         if(counter % 10 == 0) {
             widget->setFixedSize(Teacher::SPRITE_HEIGHT, Teacher::SPRITE_HEIGHT);
-            if(deadCounter == 1)
+            if(deadCounter == 1) {
+                player->setMedia(QUrl("qrc:/sounds/explosion.wav"));
+                player->play();
                 widget->setPixmap(*Item::EXPLOSION_0);
+            }
             if(deadCounter == 2)
                 widget->setPixmap(*Item::EXPLOSION_1);
             if(deadCounter == 3)
@@ -74,6 +77,9 @@ void OverworkedTA::update() {
         Assignment* preRemove = row->popRightMostAssignment();
         preRemove->deleteLater();
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
+
+        //player->setMedia(QUrl("qrc:/sounds/hit.wav"));
+        //player->play();
 
     }
 
