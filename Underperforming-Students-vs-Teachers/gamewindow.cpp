@@ -142,7 +142,6 @@ GameWindow::GameWindow(QWidget *parent) :
         deleteLater();
     });
 
-    game->start();
 //    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
 //    game->getRowAt(0)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
 //    game->getRowAt(0)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
@@ -191,6 +190,12 @@ GameWindow::GameWindow(QWidget *parent) :
     ui->gridLayout->addWidget(card5,0,1);
     ui->gridLayout->addWidget(card6,1,1);
     ui->gridLayout->addWidget(card7,2,1);
+
+
+    //ATTENTION
+    //starts the game after everything is ready
+    //so it must be the last line
+    game->start();
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {

@@ -38,8 +38,9 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     currentSize = parent->size(); //save the size of parent
 
-    //0 hours and GAME_DURATION mins
-    currentTimeLeft = QTime(0, GAME_DURATION);
+
+    currentTimeLeft = QTime(0, 0);
+    currentTimeLeft = currentTimeLeft.addMSecs(GAME_DURATION);
 
     mainTimer = new QTimer(parent);
     mainTimer->setInterval(BASIC_TIME_UNIT);
@@ -142,7 +143,38 @@ void Game::update()
         lb_game_ended->raise();
         lb_game_ended->show();
     }
-    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+
+    int msecs = currentTimeLeft.msecsSinceStartOfDay();
+    if(msecs > 0)
+    {
+        currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+        if(msecs <= GAME_DURATION * 1/4)
+        {
+            //teacher kind
+            generatingTeacherUpperBound = 7;
+
+            //generating time
+            generatingTimerLowerBound = 4000;
+        }
+        else if(msecs <= GAME_DURATION * 1/2)
+        {
+            //teacher kind
+            generatingTeacherLowerBound = 4;
+            generatingTeacherUpperBound = 9;
+
+            //generating time
+            generatingTimerUpperBound = 80001;
+        }
+        else if(msecs <= GAME_DURATION * 3/4)
+        {
+            //teacher kind
+            generatingTeacherUpperBound = 11;
+
+            //generating time
+            generatingTimerLowerBound = 1000;
+            generatingTeacherUpperBound = 3001;
+        }
+    }
 }
 
 bool Game::checkTerminated()
