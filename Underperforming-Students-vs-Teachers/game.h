@@ -15,6 +15,8 @@
 #include <climits>
 #include <QSize>
 #include <QTime>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 class SpriteCard;
 class Desmond;
@@ -142,6 +144,8 @@ private:
 
     QTime currentTimeLeft;
 
+    QMediaPlayer player{this};
+    QMediaPlaylist playlist{this};
 signals:
     void notifyAddRedbull();
 };

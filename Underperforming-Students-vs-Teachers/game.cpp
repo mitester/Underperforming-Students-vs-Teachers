@@ -55,6 +55,10 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
+
+    playlist.addMedia(QUrl("qrc:/sounds/bgm.mp3"));
+    playlist.setPlaybackMode(QMediaPlaylist::PlaybackMode::Loop);
+    player.setPlaylist(&playlist);
 }
 
 Game::~Game()
@@ -101,7 +105,7 @@ bool Game::start()
     mainTimer->start();
     generatingTimer->start();
     gameStatus = GameStatus::BATTLING;
-
+    player.play();
     return true;
 }
 
@@ -115,6 +119,7 @@ bool Game::pause()
     {
         gameStatus = GameStatus::PAUSED;
     }
+    player.pause();
     return true;
 }
 
