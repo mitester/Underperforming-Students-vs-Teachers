@@ -4,6 +4,8 @@
 #include "row.h"
 
 QPixmap* Assignment::PIC_0 = nullptr;
+QPixmap* Assignment::PIC_1 = nullptr;
+QPixmap* Assignment::PIC_2 = nullptr;
 
 Assignment::Assignment(QLabel* widget, Row* row, int damage, int speed) : Item(widget, row), damage(damage), speed(speed)
 {

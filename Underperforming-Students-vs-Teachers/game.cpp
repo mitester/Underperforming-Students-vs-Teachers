@@ -22,6 +22,9 @@
 //default value for Game::instance
 Game* Game::instance = nullptr;
 QPoint Game::REDBULL_POS = {};
+QPixmap* Game::GAME_SCENE_FAIL = nullptr;
+QPixmap* Game::GAME_SCENE_PASS = nullptr;
+
 
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
@@ -31,7 +34,7 @@ void Game::move(QWidget *w, double xPercent, double yPercent) {
     w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
 }
 
-Game::Game(QWidget* parent) : QObject(parent), parent(parent), selectedCard(nullptr), selectedSprite(TimeVariant::Type::EMPTY)
+Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     currentSize = parent->size(); //save the size of parent
 
@@ -91,37 +94,55 @@ Row* Game::getRowAt(int i) const
 
 bool Game::start()
 {
-    if(isStart) return false; //game is unable to re-start
+    if(gameStatus != GameStatus::PAUSED) return false; //game is unable to re-start
 
     //game start init
     mainTimer->start();
     generatingTimer->start();
-    isStart = true;
-    gameStatus = Game::GameStatus::BATTLING;
+    gameStatus = GameStatus::BATTLING;
 
     return true;
 }
 
 bool Game::pause()
 {
-    if(!isStart) return false; //game is unable to pause if not started
+    if(gameStatus == GameStatus::PAUSED) return false; //game is unable to pause if not started
 
     mainTimer->stop(); //timer will not reset after stop(). Therefore, it is a pause.
     generatingTimer->stop();
-    isStart = false;
-    gameStatus = Game::GameStatus::PAUSED;
+    if(gameStatus == GameStatus::BATTLING)
+    {
+        gameStatus = GameStatus::PAUSED;
+    }
     return true;
 }
 
 void Game::update()
 {
-    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
     if(checkTerminated())
     {
         pause(); //pause the game immediately cuz nobody should move
         //some dialog should pop up afterwards
+
+        QLabel* lb_game_ended = new QLabel(parent);
+        lb_game_ended->setScaledContents(true);
+        lb_game_ended->setGeometry(GAME_ENDED_LABEL_X, GAME_ENDED_LABEL_Y,
+                                   GAME_ENDED_LABEL_WIDTH, GAME_ENDED_LABEL_HEIGHT);
+        lb_game_ended->setPixmap(QPixmap());
+        lb_game_ended->hide();
+
+        if(gameStatus == GameStatus::STUDENT_WON)
+        {
+            lb_game_ended->setPixmap(*GAME_SCENE_PASS);
+        }
+        else if(gameStatus == GameStatus::TEACHER_WON)
+        {
+            lb_game_ended->setPixmap(*GAME_SCENE_FAIL);
+        }
+        lb_game_ended->raise();
+        lb_game_ended->show();
     }
-    //TODO: change the progress bar value
+    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
 }
 
 bool Game::checkTerminated()
@@ -141,7 +162,6 @@ bool Game::checkTerminated()
             return true;
         }
     }
-
     return false;
 }
 
@@ -221,6 +241,7 @@ int Game::getCost(TimeVariant::Type student) const {
         return TeachersPet::DEFAULT_COST;
     default:
         qDebug() << "Invalid type passed in to getCost() function.";
+        return 0;
     }
 }
 

@@ -22,6 +22,11 @@ DeadlineFighter::DeadlineFighter(QLabel* widget, Row* row, QString name, int max
 
 TimeVariant::Type DeadlineFighter::getType() const {return TimeVariant::Type::DEADLINE_FIGHTER;}
 
+bool DeadlineFighter::isTriggered() const
+{
+    return triggered;
+}
+
 void DeadlineFighter::update()
 {
 
@@ -34,11 +39,11 @@ void DeadlineFighter::update()
         */
         //previous state is different from the current state
         //qDebug() << (row->getLeftMostTeacher()->getDistanceFromLeft());
-        if(isTriggered ^ (row->getLeftMostTeacher()->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
+        if(triggered ^ (row->getLeftMostTeacher()->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
-            isTriggered = !isTriggered;
+            triggered = !triggered;
 
-            if(isTriggered)
+            if(triggered)
             {
                 widget->setPixmap(*PIC_3);
             }
@@ -50,7 +55,7 @@ void DeadlineFighter::update()
 
             timeConcept = 0;
         }
-        if(isTriggered)
+        if(triggered)
         {
             skillSpeed = triggeredSkillSpeed;
 
@@ -61,7 +66,7 @@ void DeadlineFighter::update()
             else if(timeConcept == skillSpeed)
             {
                 widget->setPixmap(*PIC_5);
-                row->addAssignment(this, damage);
+                row->addAssignment(this, damage, *Assignment::PIC_1);
                 timeConcept = 0;
             }
         }
@@ -86,7 +91,7 @@ void DeadlineFighter::update()
     {
         timeConcept = 0;
         widget->setPixmap(*PIC_0);
-        isTriggered = false;
+        triggered = false;
         skillSpeed = normalSkillSpeed;
     }
 }

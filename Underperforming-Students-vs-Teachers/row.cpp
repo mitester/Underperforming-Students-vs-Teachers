@@ -151,7 +151,7 @@ void Row::addTeacher(TimeVariant::Type type) {
     game->registerTimeVariant(t);
 }
 
-void Row::addAssignment(Student* shooter, int damage) {
+void Row::addAssignment(Student* shooter, int damage, QPixmap pixmap) {
     if(shooter == nullptr) {
         qDebug() << "attempt to add assignment at null tile";
         return ;
@@ -159,7 +159,7 @@ void Row::addAssignment(Student* shooter, int damage) {
 
     Game* game = Game::getInstance();
     QLabel* label = new QLabel(game->getParent());
-    label->setPixmap(*Assignment::PIC_0);
+    label->setPixmap(pixmap);
     label->setGeometry(shooter->getDistanceFromLeft() + Student::SPRITE_WIDTH*0.5,
                        yPos + Student::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
                        Assignment::SPRITE_HEIGHT);

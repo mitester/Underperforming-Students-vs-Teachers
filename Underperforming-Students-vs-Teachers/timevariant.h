@@ -14,6 +14,7 @@ class TimeVariant : public QObject
 {
     Q_OBJECT
 public:
+    //an enum class which stores all TimeVariant Types
     enum class Type
     {
         SLEEP_DEPRIVED_STUDENT,
@@ -32,6 +33,7 @@ public:
         EMPTY
     };
 
+    //an enum class which stores all TimeVariant Categories
     enum class Category
     {
         ATTACK_STUDENT,
@@ -50,11 +52,17 @@ public:
     //restricting all subclasses to provide an interface to return back their type & category
     virtual TimeVariant::Type getType() const = 0;
     virtual TimeVariant::Category getCategory() const = 0;
+
+    //get their widget x coordinate
     int getDistanceFromLeft() const;
+
+    //get the row object belongs to this TimeVariant object
     Row* getRow() const;
 
 
 protected:
+    //constructor
+    //it takes a
     TimeVariant(QLabel *widget, Row* row);
     ~TimeVariant();
 

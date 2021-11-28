@@ -41,7 +41,16 @@ public:
     const static int TEA_GEN_POS {1200};     // the generation position of teachers
     const static int TEA_END_POS {95};       // the end position of teachers (reached this point implies teacher victory)
 
-    const static int GAME_DURATION{5}; //game duration in mins
+    const static int GAME_ENDED_LABEL_X{300};
+    const static int GAME_ENDED_LABEL_Y{100};
+    const static int GAME_ENDED_LABEL_WIDTH{896};
+    const static int GAME_ENDED_LABEL_HEIGHT{504};
+    static QPixmap* GAME_SCENE_FAIL;
+    static QPixmap* GAME_SCENE_PASS;
+
+
+
+    const static int GAME_DURATION{3}; //game duration in mins
     static Desmond* desmond;
 
     static QPoint REDBULL_POS;
@@ -59,8 +68,8 @@ public:
     //get instance with its parent
     static Game* getInstance(QWidget* parent = nullptr);
 
-    TimeVariant::Type selectedSprite;
-    SpriteCard* selectedCard;
+    TimeVariant::Type selectedSprite = TimeVariant::Type::EMPTY;
+    SpriteCard* selectedCard = nullptr;
 
     //getter and setter of redbullNum
     int getRedbullNum() const;
@@ -108,18 +117,15 @@ private:
     //an array of Row* storing the row information for the i-th row
     Row* rows[NUMBER_OF_ROW]; //statically allocated thus no memory concern
 
-    //a variable stores if the game starts, it can be changed by calling Game::start(), Game::pause(), Game::stop()
-    bool isStart = false;
-
     //it generates teacher randomly
     void generateTeacher();
     QTimer* generatingTimer; //it handles the teacher generating frequency
-    int generatingTimerUpperBound = 3000; //exclusive upper bound
-    int generatingTimerLowerBound = 1000; //inclusive upper bound
+    int generatingTimerUpperBound = 10001; //exclusive upper bound
+    int generatingTimerLowerBound = 5000; //inclusive upper bound
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 10;
+    int generatingTeacherUpperBound = 6;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;

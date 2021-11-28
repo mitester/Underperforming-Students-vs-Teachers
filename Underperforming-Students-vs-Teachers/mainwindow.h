@@ -16,9 +16,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-private slots:
-    void on_btn_start_clicked();
+    void paintEvent(QPaintEvent* ev);
+    void mousePressEvent(QMouseEvent* ev);
 
 private:
     Ui::MainWindow *ui;
