@@ -4,6 +4,7 @@
 #include "game.h"
 #include "spritecard.h"
 #include "timevariant.h"
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +22,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+}
 
 void MainWindow::on_btn_start_clicked()
 {

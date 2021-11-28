@@ -98,6 +98,9 @@ GameWindow::GameWindow(QWidget *parent) :
 
     VendingMachine::PIC_0 = new QPixmap(":/images/items/item_vending_0.png");
 
+    Game::GAME_SCENE_FAIL = new QPixmap(":/images/scene/game_scene_fail.png");
+    Game::GAME_SCENE_PASS = new QPixmap(":/images/scene/game_scene_pass.png");
+
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
@@ -247,12 +250,22 @@ GameWindow::~GameWindow()
     delete Desmond::PIC_2;
     delete Desmond::PIC_3;
 
+    delete Item::EXPLOSION_0;
+    delete Item::EXPLOSION_1;
+    delete Item::EXPLOSION_2;
+
 
     delete Assignment::PIC_0;
+    delete Assignment::PIC_1;
+    delete Assignment::PIC_2;
+
 
     delete Redbull::PIC_0;
 
     delete VendingMachine::PIC_0;
+
+    delete Game::GAME_SCENE_FAIL;
+    delete Game::GAME_SCENE_PASS;
 
     //nullptr
     SleepDeprivedStudent::PIC_0 = nullptr;
@@ -298,12 +311,21 @@ GameWindow::~GameWindow()
     Desmond::PIC_2 = nullptr;
     Desmond::PIC_3 = nullptr;
 
+    Item::EXPLOSION_0 = nullptr;
+    Item::EXPLOSION_1 = nullptr;
+    Item::EXPLOSION_2 = nullptr;
+
 
     Assignment::PIC_0 = nullptr;
+    Assignment::PIC_1 = nullptr;
+    Assignment::PIC_2 = nullptr;
 
     Redbull::PIC_0 = nullptr;
 
     VendingMachine::PIC_0 = nullptr;
+
+    Game::GAME_SCENE_FAIL = nullptr;
+    Game::GAME_SCENE_PASS = nullptr;
 
     delete ui;
 }
