@@ -15,6 +15,8 @@
 #include <climits>
 #include <QSize>
 #include <QTime>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 class SpriteCard;
 class Desmond;
@@ -48,9 +50,7 @@ public:
     static QPixmap* GAME_SCENE_FAIL;
     static QPixmap* GAME_SCENE_PASS;
 
-
-
-    const static int GAME_DURATION{3}; //game duration in mins
+    const static int GAME_DURATION{180000}; //game duration in msecs
     static Desmond* desmond;
 
     static QPoint REDBULL_POS;
@@ -125,7 +125,7 @@ private:
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 6;
+    int generatingTeacherUpperBound = 5;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;
@@ -143,6 +143,7 @@ private:
 
     QTime currentTimeLeft;
 
+    QMediaPlayer player{this};
 signals:
     void notifyAddRedbull();
 };

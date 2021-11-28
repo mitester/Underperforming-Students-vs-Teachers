@@ -38,8 +38,9 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     currentSize = parent->size(); //save the size of parent
 
-    //0 hours and GAME_DURATION mins
-    currentTimeLeft = QTime(0, GAME_DURATION);
+
+    currentTimeLeft = QTime(0, 0);
+    currentTimeLeft = currentTimeLeft.addMSecs(GAME_DURATION);
 
     mainTimer = new QTimer(parent);
     mainTimer->setInterval(BASIC_TIME_UNIT);
@@ -54,6 +55,8 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
+
+    player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
 }
 
 Game::~Game()
@@ -100,7 +103,7 @@ bool Game::start()
     mainTimer->start();
     generatingTimer->start();
     gameStatus = GameStatus::BATTLING;
-
+    player.play();
     return true;
 }
 
@@ -114,6 +117,7 @@ bool Game::pause()
     {
         gameStatus = GameStatus::PAUSED;
     }
+    player.pause();
     return true;
 }
 
@@ -134,15 +138,51 @@ void Game::update()
         if(gameStatus == GameStatus::STUDENT_WON)
         {
             lb_game_ended->setPixmap(*GAME_SCENE_PASS);
+            player.setMedia(QUrl("qrc:/sounds/victory.mp3"));
+            player.play();
         }
         else if(gameStatus == GameStatus::TEACHER_WON)
         {
             lb_game_ended->setPixmap(*GAME_SCENE_FAIL);
+            player.setMedia(QUrl("qrc:/sounds/lose.mp3"));
+            player.play();
+
         }
         lb_game_ended->raise();
         lb_game_ended->show();
     }
-    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+
+    int msecs = currentTimeLeft.msecsSinceStartOfDay();
+    if(msecs > 0)
+    {
+        currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+        if(msecs <= GAME_DURATION * 1/4)
+        {
+            //teacher kind
+            generatingTeacherUpperBound = 7;
+
+            //generating time
+            generatingTimerLowerBound = 4000;
+        }
+        else if(msecs <= GAME_DURATION * 1/2)
+        {
+            //teacher kind
+            generatingTeacherLowerBound = 4;
+            generatingTeacherUpperBound = 9;
+
+            //generating time
+            generatingTimerUpperBound = 80001;
+        }
+        else if(msecs <= GAME_DURATION * 3/4)
+        {
+            //teacher kind
+            generatingTeacherUpperBound = 11;
+
+            //generating time
+            generatingTimerLowerBound = 1000;
+            generatingTeacherUpperBound = 3001;
+        }
+    }
 }
 
 bool Game::checkTerminated()
