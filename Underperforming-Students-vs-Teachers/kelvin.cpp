@@ -37,6 +37,24 @@ void Kelvin::update() {
         return ;
     }
 
+    if(deadCounter >= 1) { //enters the "explosion mode"
+        //this->widget->setDisabled(true);
+        if(counter % 10 == 0) {
+            widget->setFixedSize(Teacher::SPRITE_HEIGHT, Teacher::SPRITE_HEIGHT);
+            if(deadCounter == 1)
+                widget->setPixmap(*Item::EXPLOSION_0);
+            if(deadCounter == 2)
+                widget->setPixmap(*Item::EXPLOSION_1);
+            if(deadCounter == 3)
+                widget->setPixmap(*Item::EXPLOSION_2);
+            if(deadCounter == 4)
+                row->removeTeacher(this);
+            deadCounter ++;
+        }
+        counter ++;
+        return;
+    }
+
     QRect shape = widget->geometry();
     const Teacher* leftTeacher = this->row->getLeftMostTeacher();
     const Assignment* rightAssignment = this->row->getRightMostAssignment();
@@ -52,7 +70,7 @@ void Kelvin::update() {
 
         this->hp -= rightAssignment->getDamage();
         if(this->hp <= 0)
-            row->removeTeacher(this);
+            deadCounter++;
 
         Assignment* preRemove = row->popRightMostAssignment();
         preRemove->deleteLater();

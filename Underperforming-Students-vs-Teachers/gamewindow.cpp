@@ -84,6 +84,10 @@ GameWindow::GameWindow(QWidget *parent) :
     Desmond::PIC_2 = new QPixmap(":/images/teachers/tea_desmond_2.png");
     Desmond::PIC_3 = new QPixmap(":/images/teachers/tea_desmond_3.png");
 
+    Item::EXPLOSION_0 = new QPixmap(":/images/items/item_explosion_0.png");
+    Item::EXPLOSION_1 = new QPixmap(":/images/items/item_explosion_1.png");
+    Item::EXPLOSION_2 = new QPixmap(":/images/items/item_explosion_2.png");
+
 
     Assignment::PIC_0 = new QPixmap(":/images/items/item_assignment_0.png");
 
@@ -133,31 +137,31 @@ GameWindow::GameWindow(QWidget *parent) :
     });
 
     game->start();
-//    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
-//    game->getRowAt(0)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-//    game->getRowAt(0)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-//    game->getRowAt(0)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+    game->getRowAt(0)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-//    game->getRowAt(1)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
-//    game->getRowAt(1)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-//    game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-//    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+    game->getRowAt(1)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-//    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 0);
-//    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 1);
-//    game->getRowAt(2)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-//    game->getRowAt(2)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 0);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::CGA_GOD, 1);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+    game->getRowAt(2)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-//    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
-//    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
-//    game->getRowAt(3)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
-//    game->getRowAt(3)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 0);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 2);
+    game->getRowAt(3)->addStudent(TimeVariant::Type::TEACHERS_PET, 3);
 
-//    game->getRowAt(4)->addStudent(TimeVariant::Type::GBUS_STUDENT, 0);
-//    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 1);
-//    game->getRowAt(4)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 2);
-//    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 3);
-//    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 4);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::GBUS_STUDENT, 0);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::CGA_GOD, 1);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 2);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::SHAMELESS_STUDENT, 3);
+    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 4);
 
 
     QLabel* label = new QLabel(this);

@@ -114,12 +114,12 @@ private:
     //it generates teacher randomly
     void generateTeacher();
     QTimer* generatingTimer; //it handles the teacher generating frequency
-    int generatingTimerUpperBound = 10000; //exclusive upper bound
-    int generatingTimerLowerBound = 5000; //inclusive upper bound
+    int generatingTimerUpperBound = 3000; //exclusive upper bound
+    int generatingTimerLowerBound = 1000; //inclusive upper bound
     int getRandomInterval() const; //get a random interval between [generatingLowerBound, generatingUpperBound)
 
     //it holds and teacher kind boundaries
-    int generatingTeacherUpperBound = 7;
+    int generatingTeacherUpperBound = 10;
     int generatingTeacherLowerBound = 0;
 
     GameStatus gameStatus = GameStatus::PAUSED;

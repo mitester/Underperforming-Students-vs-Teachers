@@ -37,6 +37,7 @@ protected:
     int speed;
     int damage;
     int counter = 0;
+    int deadCounter = 0;
     bool firstLeg = true;
 private:
 
