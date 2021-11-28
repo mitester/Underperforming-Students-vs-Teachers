@@ -162,7 +162,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
     QLabel* label = new QLabel(this);
     label->setPixmap(*VendingMachine::PIC_0);
-    label->setFixedSize(VendingMachine::SPRITE_WIDTH * 0.7, VendingMachine::SPRITE_HEIGHT * 0.7);
+    label->setFixedSize(VendingMachine::SPRITE_WIDTH, VendingMachine::SPRITE_HEIGHT);
     label->move(140, height() - label->height() - 40);
     VendingMachine* v = new VendingMachine(label);
     game->registerTimeVariant(v);

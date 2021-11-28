@@ -16,6 +16,7 @@
 #include <QSize>
 #include <QTime>
 
+class SpriteCard;
 class Desmond;
 
 class Game : public QObject
@@ -50,6 +51,7 @@ public:
 //    const static int ASS_WIDTH {45};
 
     static TimeVariant::Type selectedSprite;
+    static SpriteCard* selectedCard;
 
     static QSize currentSize;
     static void move(QWidget* w, double xPercent, double yPercent);   //move a QWidget to the correspond absolute position given relative position

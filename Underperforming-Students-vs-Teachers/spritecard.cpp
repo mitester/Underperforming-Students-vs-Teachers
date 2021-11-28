@@ -38,18 +38,26 @@ SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags 
     }
     this->setStyleSheet("color: white;");
     this->show();
+
+    connect(this, &ClickableLabel::clicked, this, &SpriteCard::on_clicked);
 }
 
-void SpriteCard::mousePressEvent(QMouseEvent *event) {
+void SpriteCard::on_clicked() {
     Game* game = Game::getInstance();
-        if(selected) {
-            selected = false;
+    if(Game::selectedCard == nullptr) {   //if no card is currently selected
+        Game::selectedSprite = type;
+        Game::selectedCard = this;
+        this->setStyleSheet("color: white; border: 3px solid yellow;");
+    } else {
+        if(Game::selectedCard == this) {   //if yourself is the card selected
+            Game::selectedCard = nullptr;
             Game::selectedSprite = TimeVariant::Type::EMPTY;
             this->setStyleSheet("color: white;");
-        } else if(game->selectedSprite == TimeVariant::Type::EMPTY) {
-            selected = true;
+        } else {                     // if another card was previously selected
+            emit Game::selectedCard->clicked();
+            Game::selectedCard = this;
             Game::selectedSprite = type;
             this->setStyleSheet("color: white; border: 3px solid yellow;");
         }
-
+    }
 }

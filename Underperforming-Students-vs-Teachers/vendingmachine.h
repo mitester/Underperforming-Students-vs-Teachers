@@ -9,8 +9,8 @@ class VendingMachine : public Item
 public:
     static const int DEFAULT_SKILL_SPEED{5000};
 
-    static const int SPRITE_WIDTH{200};
-    static const int SPRITE_HEIGHT{260};
+    static const int SPRITE_WIDTH{140};
+    static const int SPRITE_HEIGHT{182};
 
 
     static QPixmap* PIC_0;
