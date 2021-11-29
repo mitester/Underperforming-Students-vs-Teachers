@@ -1,3 +1,7 @@
+/***
+ * class of Redbull
+ * inherits from Item
+ */
 #ifndef REDBULL_H
 #define REDBULL_H
 
@@ -9,6 +13,7 @@ class Redbull : public Item
 {
     Q_OBJECT
 public:
+    //some constants defined the behavior of Redbull
     static const int DEFAULT_ENERGY = 2;
     static const int DEFAULT_INITIAL_VELOCITY_X{3};
     static const int DEFAULT_INITIAL_VELOCITY_Y{-14};
@@ -18,6 +23,7 @@ public:
 
     static QPixmap* PIC_0;
 
+    //constructor
     Redbull(ClickableLabel* widget, int energy = DEFAULT_ENERGY,
             int vx = DEFAULT_INITIAL_VELOCITY_X, int vy = DEFAULT_INITIAL_VELOCITY_Y,
             int ay = DEFAULT_INITIAL_ACCELERATION_Y);

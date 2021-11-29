@@ -1,5 +1,6 @@
 /***
 * This is a superclass of Student and Teacher
+* inherits from TimeVariant
 */
 #ifndef HUMAN_H
 #define HUMAN_H
@@ -38,6 +39,7 @@ protected:
 
     int maxHp;
 
+    //every Human plays its own sfx
     QMediaPlayer* player;
 };
 

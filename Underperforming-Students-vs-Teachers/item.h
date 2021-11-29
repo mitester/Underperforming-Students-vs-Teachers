@@ -1,3 +1,7 @@
+/***
+* base class of all items
+* inherits from TimeVariant
+*/
 #ifndef ITEM_H
 #define ITEM_H
 

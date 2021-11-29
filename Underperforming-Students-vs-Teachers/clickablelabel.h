@@ -1,3 +1,7 @@
+/***
+ * Since QLabel doesn't emit clicked() signal when it is clicked
+ * ClickableLabel overrided QLabel's mousePressEvent() and emit clicked() signal when it's clicked and clickable
+ */
 #ifndef CLICKABLELABEL_H
 #define CLICKABLELABEL_H
 
@@ -9,6 +13,7 @@ class ClickableLabel : public QLabel {
     Q_OBJECT
 
 public:
+    //constructor
     explicit ClickableLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
     ~ClickableLabel();
 
@@ -22,10 +27,11 @@ signals:
     void clicked();
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event); //inherits from QLabel
 
 private:
-    bool clickable = true;
+    bool clickable = true; // the property indicates if it is clickable
+                           // if not, no clicked() will be emitted
 
 };
 
