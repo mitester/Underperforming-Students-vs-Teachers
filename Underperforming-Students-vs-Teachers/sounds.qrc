@@ -3,5 +3,11 @@
         <file>sounds/bgm.mp3</file>
         <file>sounds/victory.mp3</file>
         <file>sounds/lose.mp3</file>
+        <file>sounds/bgm_0.mp3</file>
+        <file>sounds/cheer.wav</file>
+        <file>sounds/explosion.wav</file>
+        <file>sounds/shoot.wav</file>
+        <file>sounds/hit.wav</file>
+        <file>sounds/redbull.mp3</file>
     </qresource>
 </RCC>

@@ -6,8 +6,17 @@
 
 
 /***
-    Author: Tse Wai Chung
-    Date: 11/13/2021
+ *   Date: 11/13/2021
+ *
+ *   The class of Teacher.
+ *
+ *   All teachers has speed (they can move) and damage (attack).
+ *   They are of the same height and width.
+ *
+ *   So, this class provides accessors and mutators for speed and damage for any teachers.
+ *   Some protected counters are also added for animations and sound effects
+ *
+
 */
 
 class Row;

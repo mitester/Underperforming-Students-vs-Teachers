@@ -2,7 +2,7 @@
 
 Human::Human(QLabel *widget, Row* row, QString name, int maxHp) : TimeVariant(widget, row), name(name), hp(maxHp), maxHp(maxHp)
 {
-
+    player = new QMediaPlayer(this->widget);
 }
 
 //getter and setter for name

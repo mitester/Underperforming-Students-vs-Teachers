@@ -20,7 +20,6 @@ void SleepDeprivedStudent::update()
     //there is at least one teacher approaching
     if(row->getLeftMostTeacher())
     {
-
         if(timeConcept == skillSpeed / 2)
         {
             widget->setPixmap(*PIC_1);
@@ -29,6 +28,8 @@ void SleepDeprivedStudent::update()
         {
             widget->setPixmap(*PIC_2);
             row->addAssignment(this, damage);
+            player->setMedia(QUrl("qrc:/sounds/shoot.wav"));
+            player->play();
             timeConcept = 0;
         }
         timeConcept += Game::BASIC_TIME_UNIT;

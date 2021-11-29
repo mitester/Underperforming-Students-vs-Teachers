@@ -4,8 +4,10 @@
 #include "teacher.h"
 
 /***
-    Author: Tse Wai Chung
     Date: 11/13/2021
+    The class of Teacher Pang.
+    It is a subclass of Teacher, which represents the Pang.
+    All its parameters & pictures are stored as static memeber of the class.
 */
 
 class Pang : public Teacher

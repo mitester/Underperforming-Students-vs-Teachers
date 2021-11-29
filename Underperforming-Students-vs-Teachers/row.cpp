@@ -30,30 +30,30 @@ Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QOb
 
 const Student* Row::getRightMostStudent() const {
     // const ref is returned because external modification may disturb the internal order of queue, not safe
-    if(studentQueue.empty())
+    if(studentQueue.empty()) // check if the queque is null
         return nullptr;
     return studentQueue.top();
 }
 
 const Assignment* Row::getRightMostAssignment() const {
     // const ref is returned because external modification may disturb the internal order of queue, not safe
-    if(assignmentQueue.empty())
+    if(assignmentQueue.empty()) // check if the queue is null
         return nullptr;
     return assignmentQueue.top();
 }
 
 Student* Row::popRightMostStudent() {
     // pop a student will remove it from all records in Row, but will not make it deleted
-    if(studentQueue.empty())
+    if(studentQueue.empty())    //check null
         return nullptr;
     Student* s = studentQueue.top();
     studentQueue.pop();
-    deregisterFromGrid(s);
+    deregisterFromGrid(s);  //student is also placed in an array 'Grid'
     return s;
 }
 
 Assignment* Row::popRightMostAssignment() {
-    if(assignmentQueue.empty())
+    if(assignmentQueue.empty())     //check null
         return nullptr;
     Assignment* a = assignmentQueue.top();
     assignmentQueue.pop();
@@ -67,7 +67,7 @@ void Row::setRightMostStudentHp(int hp) {
 
 
 Teacher* Row::getLeftMostTeacher() const {
-    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size() || teacherList.empty())
+    if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size() || teacherList.empty()) //check conditions
         return nullptr;
     else
         return teacherList.at(leftMostTeacherIndex);
@@ -78,10 +78,10 @@ Teacher* Row::getLeftMostTeacher() const {
 void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     Student* s = nullptr;
     QLabel* label = new QLabel(parent);
-    switch (type) {
+    switch (type) { // set different Pixmap and type with the user parameter type
     case TimeVariant::Type::CGA_GOD:
-        label->setPixmap(*CgaGod::PIC_0);
-        s = new CgaGod(label, this);
+        label->setPixmap(*CgaGod::PIC_0);   //set the pixmap
+        s = new CgaGod(label, this);    //generate the object
         break;
     case TimeVariant::Type::GBUS_STUDENT:
         label->setPixmap(*GbusStudent::PIC_0);
@@ -109,14 +109,15 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
         return;
     }
 
+    //set the position and height, width of the object.
     label->setGeometry(Game::GRID_LEFT + Game::GRID_INTERVAL_HORIZONTAL * tile_pos, yPos, Student::SPRITE_WIDTH, Student::SPRITE_HEIGHT);
     label->show();
     Game* game = Game::getInstance();
     addStudent(s, tile_pos); //register student to the grid
-    game->registerTimeVariant(s);
+    game->registerTimeVariant(s);   //register it as a timevariant object (its update will be called)
 }
 
-void Row::addTeacher(TimeVariant::Type type) {
+void Row::addTeacher(TimeVariant::Type type) {  //the logic is identical to the addStudent
     Game* game = Game::getInstance();
     Teacher* t = nullptr;
     QLabel* label = new QLabel(parent);
@@ -137,13 +138,15 @@ void Row::addTeacher(TimeVariant::Type type) {
         label->setPixmap(*Desmond::PIC_0);
         game->desmond = new Desmond(label, this);
         t = game->desmond;
+        game->player.setMedia(QUrl("qrc:/sounds/bgm_0.mp3"));   //plays a strong bgm when Desmond shows up
+        game->player.play();
         break;
     default:
         qDebug() << "Non teacher type passed in to addTeacher() function";
         return;
     }
     label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH, Teacher::SPRITE_HEIGHT);
-    if(type == TimeVariant::Type::DESMOND)
+    if(type == TimeVariant::Type::DESMOND)  //Desmond has bigger size
         label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH * 1.2, Teacher::SPRITE_HEIGHT * 1.2);
     label->lower();
     label->show();
@@ -151,7 +154,7 @@ void Row::addTeacher(TimeVariant::Type type) {
     game->registerTimeVariant(t);
 }
 
-void Row::addAssignment(Student* shooter, int damage, QPixmap pixmap) {
+void Row::addAssignment(Student* shooter, int damage, QPixmap pixmap) { // add an assignment
     if(shooter == nullptr) {
         qDebug() << "attempt to add assignment at null tile";
         return ;
@@ -163,10 +166,11 @@ void Row::addAssignment(Student* shooter, int damage, QPixmap pixmap) {
     label->setGeometry(shooter->getDistanceFromLeft() + Student::SPRITE_WIDTH*0.5,
                        yPos + Student::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
                        Assignment::SPRITE_HEIGHT);
+    // The shooting position is 0.3 * student width to the right
 
 
     Assignment* a = new Assignment(label, this, damage);
-    addAssignment(a);
+    addAssignment(a); //the assignment also needs to be registered.
     game->registerTimeVariant(a);
     label->show();
 }
@@ -198,12 +202,12 @@ void Row::removeStudent(int pos) {
             }
         }
     }
-    //the behaviour of "removing student at pos" rarely happens
+    //the behaviour of "removing student at pos" rarely happens (not as frequent as collision (accessor))
 }
 
-void Row::removeTeacher(Teacher* t) {
+void Row::removeTeacher(Teacher* t) {   //Remove teacher from the container
     teacherList.removeOne(t);
-    t->deleteLater();
+    t->deleteLater();   // delete it later
     updateLeftMostTeacher();
 }
 
@@ -255,41 +259,41 @@ bool Row::inBound(int pos) const {
 
 //delete a student and remove it from the grid.
 void Row::deregisterFromGrid(Student *s) {
-    for(int i = 0; i < grid_size; i++) {
-        if(grid[i] != nullptr && grid[i] == s) {
+    for(int i = 0; i < grid_size; i++) {    // loop over the grid and check who to delete
+        if(grid[i] != nullptr && grid[i] == s) {    // inspect nullity first
             grid[i] = nullptr;
         }
     }
 }
 
 void Row::updateLeftMostTeacher() {
-    int leftmost = -1;
-    int leftmost_val = Game::MAX;
+    int leftmost = -1;      //invalid initial value
+    int leftmost_val = Game::MAX;   //maximum number in the world
     for(int i = 0; i < teacherList.size(); i++) {
-        if(teacherList[i] && teacherList[i]->getDistanceFromLeft() < leftmost_val) {
+        if(teacherList[i] && teacherList[i]->getDistanceFromLeft() < leftmost_val) {    //compare if the given teacher is more "left"
             leftmost_val = teacherList[i]->getDistanceFromLeft();
             leftmost = i;
         }
     }
 
-    leftMostTeacherIndex = leftmost;
+    leftMostTeacherIndex = leftmost; //update the index
 }
 
 void Row::addStudent(Student* const s, int pos) {
-    if( !inBound(pos) || s==nullptr || grid[pos]!=nullptr)
+    if( !inBound(pos) || s==nullptr || grid[pos]!=nullptr) //check condition
         return;
 
-    grid[pos] = s;
-    studentQueue.push(s);
+    grid[pos] = s;      //register student in the grid
+    studentQueue.push(s);   //register student in the queue.
 }
 
 void Row::addAssignment(Assignment *const a) {
-    if(a != nullptr)
+    if(a != nullptr)        //check nullity
         assignmentQueue.push(a);
 }
 
 void Row::addTeacher(Teacher *const t) {
-    if(t == nullptr)    return;
+    if(t == nullptr)    return; //check nullity
     teacherList.append(t);
     updateLeftMostTeacher();
 }
@@ -297,27 +301,20 @@ void Row::addTeacher(Teacher *const t) {
 void Row::modifyTeachers(void (*f)(Teacher *)) {
     for(int i = 0; i < teacherList.size(); i++){
         if(teacherList[i]) {
-            f(teacherList[i]);
+            f(teacherList[i]); // execute the modifier function to every teachers
         }
     }
-}
-
-//this function is invalidated
-Desmond* Row::getDesmond() const {
-    for(int i = 0; i < teacherList.size(); i++) {
-        if(teacherList[i] && teacherList[i]->getType() == TimeVariant::Type::DESMOND)
-            return nullptr;
-    }
-    return nullptr;
+    updateLeftMostTeacher();
 }
 
 int Row::getYPos() const {
     return yPos;
 }
 
-bool Row::hasStudentAt(int pos) const {
-    if(inBound(pos))
+bool Row::hasStudentAt(int pos) const { //check if there is student at pos
+    if(inBound(pos))    // if inbound
         return grid[pos] != nullptr;
+    // if not in bound
     qDebug() << "invalid pos passed to hasStudentAt()";
     return false;
 }

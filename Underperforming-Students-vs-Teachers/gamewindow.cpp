@@ -40,6 +40,8 @@ GameWindow::GameWindow(QWidget *parent) :
 
     setFixedSize(windowWidth, windowHeight);
 
+    // ======== All pictures are preloaded for efficiency improvement ========
+
     SleepDeprivedStudent::PIC_0 = new QPixmap(":/images/students/stu_sleep_0.png");
     SleepDeprivedStudent::PIC_1 = new QPixmap(":/images/students/stu_sleep_1.png");
     SleepDeprivedStudent::PIC_2 = new QPixmap(":/images/students/stu_sleep_2.png");
@@ -176,6 +178,7 @@ GameWindow::GameWindow(QWidget *parent) :
     VendingMachine* v = new VendingMachine(label);
     game->registerTimeVariant(v);
 
+    //Creating the sprite selection board
     SpriteCard* card1 = new SpriteCard(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, this);
     SpriteCard* card2 = new SpriteCard(TimeVariant::Type::GBUS_STUDENT, this);
     SpriteCard* card3 = new SpriteCard(TimeVariant::Type::DEADLINE_FIGHTER, this);
@@ -335,20 +338,23 @@ GameWindow::~GameWindow()
     delete ui;
 }
 
-void GameWindow::mousePressEvent(QMouseEvent *ev) {
+void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEvent. Mostly for sprite card placement
     QPoint p = ev->pos();
     Game* game = Game::getInstance();
+
     if(p.x() > Game::GRID_LEFT && p.x() < Game::GRID_RIGHT &&
        p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN &&
-       game->selectedCard != nullptr) { //if in bound
+       game->selectedCard != nullptr) { //only when the click is within the grid area, we do further judgement
 
+        // Finding the closest row that matches the YPosition of the clicking
         int minYIdx = 0;
-        for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
+        for(int i = 0; i < Game::NUMBER_OF_ROW; i++)    //compare the y position to every row's yPos
             if(abs(game->getRowAt(i)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y())
              < abs(game->getRowAt(minYIdx)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y()))
                 minYIdx = i;
         Row* row = game->getRowAt(minYIdx);
 
+        // Finding the closest tile in the row that matches the XPosition of the clicking
         int minXPos = Game::GRID_LEFT;
         int minXIdx = 0;
         for(int i = 0; i < Game::NUMBER_OF_COLUMN; i++) {
@@ -359,6 +365,7 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) {
             }
         }
 
+        // If the selected type is Empty, but there is card selected (implies expel)
         if(game->selectedSprite == TimeVariant::Type::EMPTY) {
             if(row->hasStudentAt(minXIdx))
                 row->removeStudent(minXIdx);
@@ -367,17 +374,17 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) {
 
         int cost = game->getCost(game->selectedSprite);
 
-        if(game->getRedbullNum() >= cost && !row->hasStudentAt(minXIdx)) {
+        if(game->getRedbullNum() >= cost && !row->hasStudentAt(minXIdx)) {  // check if cost is enough & hasStudent
 
-            if(row->getLeftMostTeacher())
+            if(row->getLeftMostTeacher()) // not allowed to put student to the right of teachers
                 if(row->getLeftMostTeacher()->getDistanceFromLeft() < minXPos)
                     return;
 
-            game->addRedbull(-cost);
-            row->addStudent(game->selectedSprite, minXIdx);
+            game->addRedbull(-cost); // reduce redbull
+            row->addStudent(game->selectedSprite, minXIdx); // add the student to corresponding row
         }
 
-        emit game->notifyAddRedbull();
+        emit game->notifyAddRedbull();  //notify the game to add redbull.
     }
     else
     {

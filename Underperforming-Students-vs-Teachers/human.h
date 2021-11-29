@@ -6,6 +6,7 @@
 
 #include <QString>
 #include "timevariant.h"
+#include <QMediaPlayer>
 
 class Row;
 
@@ -38,6 +39,8 @@ protected:
     int hp;
 
     int maxHp;
+
+    QMediaPlayer* player;
 };
 
 #endif // HUMAN_H

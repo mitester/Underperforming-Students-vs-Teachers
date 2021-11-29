@@ -14,8 +14,10 @@
 #include <QLabel>
 
 /***
-    Author: Tse Wai Chung
     Date: 11/13/2021
+    The class of Teacher OverworkedTa.
+    It is a subclass of Teacher, which represents the OverworkedTa.
+    All its parameters & pictures are stored as static memeber of the class.
 */
 
 class OverworkedTA : public Teacher

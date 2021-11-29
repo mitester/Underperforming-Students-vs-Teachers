@@ -39,10 +39,12 @@ SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags 
     this->setStyleSheet("color: white;");
     this->show();
 
-    QLabel *costLabel = new QLabel(this);
+    costLabel = new QLabel(this);
     costLabel->setText(QString::number(Game::getCost(type)));
     costLabel->setStyleSheet("color: black; font-size: 19px; font: bold;");
     costLabel->move(COST_X, COST_Y);
+
+    setObjectName("SpriteCard");
 
     connect(this, &ClickableLabel::clicked, this, &SpriteCard::on_clicked);
 }
@@ -52,7 +54,7 @@ void SpriteCard::on_clicked() {
     if(game->selectedCard == nullptr) {   //if no card is currently selected
         game->selectedSprite = type;
         game->selectedCard = this;
-        this->setStyleSheet("* {color: white; border: 3px solid yellow;} .QLabel {color: black;}");
+        this->setStyleSheet("#" + objectName() +"{ color: white; border: 3px solid yellow;}");
     } else {
         if(game->selectedCard == this) {   //if yourself is the card selected
             game->selectedCard = nullptr;
@@ -63,7 +65,7 @@ void SpriteCard::on_clicked() {
             emit game->selectedCard->clicked();
             game->selectedCard = this;
             game->selectedSprite = type;
-            this->setStyleSheet("color: white; border: 3px solid yellow;");
+            this->setStyleSheet("#" + objectName() +"{ color: white; border: 3px solid yellow;}");
         }
     }
 }

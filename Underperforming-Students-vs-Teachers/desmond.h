@@ -4,8 +4,12 @@
 #include "teacher.h"
 
 /***
-    Author: Tse Wai Chung
-    Date: 11/13/2021
+    The class of boss Desmond.
+
+    It is responsible for handling the attack, movement and skill of Desmond.
+    It also provides necessary accessors and mutators for manager classes.
+    All parameters of `Desmond` such as speed, skillspeed are defined in this class.
+
 */
 
 class Desmond : public Teacher
