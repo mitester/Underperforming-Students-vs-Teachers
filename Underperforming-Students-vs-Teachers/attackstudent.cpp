@@ -3,6 +3,7 @@
 AttackStudent::AttackStudent(QLabel* widget, Row* row, QString name, int maxHp, int skillSpeed, int cost, int damage)
     : Student (widget, row, name, maxHp, skillSpeed, cost), damage(damage)
 {
+    player->setMedia(QUrl("qrc:/sounds/shoot.mp3"));
 }
 
 int AttackStudent::getDamage() const {return damage;}
