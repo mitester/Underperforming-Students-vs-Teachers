@@ -29,7 +29,7 @@ public:
     static const QString GAME_NAME;
     static const int BASIC_TIME_UNIT{20};           //it is the basic time unit of QTimer
                                                     //emit timeout() signal in 50Hz
-    static const int DEFAULT_REDBULL_NUMBER{1000};    // it is the default redbull number
+    static const int DEFAULT_REDBULL_NUMBER{100};    // it is the default redbull number
     static const int NUMBER_OF_ROW{5};              //it is the number of row of the map
     static const int NUMBER_OF_COLUMN{9};
     static const int MAX{INT_MAX}; //the maximum integer

@@ -10,6 +10,8 @@ Redbull::Redbull(ClickableLabel* widget, int energy, int vx, int vy, int ay) : I
     energy(energy), vx_initial(vx), vx(vx), vy_initial(vy), vy(vy), ay(ay), widget(widget)
 {
     connect(widget, &ClickableLabel::clicked, this, &Redbull::pressed);
+    player.setParent(widget);
+    player.setMedia(QUrl("qrc:/sounds/redbull.mp3"));
 }
 
 int Redbull::getEnergy() const
@@ -46,6 +48,7 @@ void Redbull::update()
     }
     else
     {
+        widget->raise();
         if(vy == -vy_initial) return; //parabola completed
         widget->show();
         widget->move(widget->x() + vx, widget->y() + vy);
@@ -57,7 +60,5 @@ void Redbull::update()
 void Redbull::pressed()
 {
     isPressed = true;
-    QMediaPlayer* player = new QMediaPlayer(widget);
-    player->setMedia(QUrl("qrc:/sounds/redbull.mp3"));
-    player->play();
+    player.play();
 }

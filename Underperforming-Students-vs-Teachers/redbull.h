@@ -3,6 +3,7 @@
 
 #include "item.h"
 #include "clickablelabel.h"
+#include <QMediaPlayer>
 
 class Redbull : public Item
 {
@@ -47,6 +48,8 @@ private:
     bool isPressed = false;
 
     ClickableLabel* widget;
+
+    QMediaPlayer player;
 
 };
 
