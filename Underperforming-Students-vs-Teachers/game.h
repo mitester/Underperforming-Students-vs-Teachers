@@ -106,6 +106,8 @@ public:
 
     QLabel* transLabel = nullptr;
 
+    void adjustHumanLayer(Human* h, int rowId);
+
 private:
     explicit Game(QWidget* parent = nullptr);
     Game(Game& game) = delete;
@@ -146,6 +148,8 @@ private:
     void setParent(QObject *parent); // overload father's setParent to private
 
     QTime currentTimeLeft;
+
+    QWidget* sentinels[NUMBER_OF_ROW - 1]; //human stack management layer splits
 
 signals:
     void notifyAddRedbull();

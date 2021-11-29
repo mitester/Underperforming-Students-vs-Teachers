@@ -30,6 +30,7 @@ private:
     Game* game;
     int windowWidth = 1280;
     int windowHeight = 720;
+
 };
 
 #endif // GAMEWINDOW_H

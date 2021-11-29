@@ -46,8 +46,6 @@ public:
      *  The right most position is NUMBER_OF_COLUMNS - 1
      * **/
 
-    friend class Game;
-
     Row(int id, int yPos, int size, QWidget *parent = nullptr);
 
     /** Static Constant Fields **/
