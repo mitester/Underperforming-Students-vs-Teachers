@@ -31,7 +31,6 @@ private:
     int windowWidth = 1280;
     int windowHeight = 720;
 
-    QMainWindow* mainWindow;
 };
 
 #endif // GAMEWINDOW_H

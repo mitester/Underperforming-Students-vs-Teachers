@@ -28,8 +28,6 @@ public:
     int getHp() const;
     void setHp(int hp);
 
-    Row* getRow();
-
 protected:
     //protected constructor, nobody could create a human instance except children
     Human(QLabel *widget, Row* row, QString name, int maxHp);

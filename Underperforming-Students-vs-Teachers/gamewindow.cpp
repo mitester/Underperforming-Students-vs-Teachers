@@ -406,8 +406,6 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
             row->addStudent(game->selectedSprite, minXIdx); // add the student to corresponding row
         }
 
-        emit game->notifyAddRedbull();  //notify the game to add redbull.
-
         if(game->getRedbullNum() < game->getCost(game->selectedSprite)) {
             emit game->selectedCard->clicked();
         }

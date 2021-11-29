@@ -53,9 +53,18 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
-        rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
+        rows[i] = new Row(i, GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
     player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
+
+    for(int i = 0; i < NUMBER_OF_ROW - 1; i++)
+    {
+        sentinels[i] = new QWidget(parent);
+        sentinels[i]->setGeometry(0,0,0,0);
+
+        if(i == 0) sentinels[i]->lower();
+        else if(i == NUMBER_OF_ROW - 2) sentinels[i]->raise();
+    }
 }
 
 Game::~Game()
@@ -297,5 +306,24 @@ int Game::getCost(TimeVariant::Type student) {
     }
 }
 
+void Game::adjustHumanLayer(Human* h, int rowId)
+{
+    if(rowId < 0 || rowId > NUMBER_OF_ROW - 1)
+    {
+        qDebug() << "Game::adjustHumanLayer(Human* h, int rowId): invalid rowId";
+        return;
+    }
 
-
+    if(rowId == 0)
+    {
+        h->getWidget()->lower();
+    }
+    else if(rowId == Game::NUMBER_OF_ROW - 1)
+    {
+        h->getWidget()->raise();
+    }
+    else
+    {
+        h->getWidget()->stackUnder(sentinels[rowId - 1]);
+    }
+}

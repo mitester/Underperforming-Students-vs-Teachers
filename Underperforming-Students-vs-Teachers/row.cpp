@@ -17,7 +17,7 @@
 #include <QDebug>
 #include <QObject>
 
-Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QObject(parent), parent(parent)
+Row::Row(int id, int yPos, int size, QWidget *parent) : id(id), yPos(yPos), grid_size(size), QObject(parent), parent(parent)
 {
     grid = new Student*[size];
     for(int i = 0; i < size; i++) {
@@ -114,6 +114,7 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     label->show();
     Game* game = Game::getInstance();
     addStudent(s, tile_pos); //register student to the grid
+    game->adjustHumanLayer(s, s->getRow()->getId());
     game->registerTimeVariant(s);   //register it as a timevariant object (its update will be called)
 }
 
@@ -152,6 +153,7 @@ void Row::addTeacher(TimeVariant::Type type) {  //the logic is identical to the 
     label->lower();
     label->show();
     addTeacher(t);
+    game->adjustHumanLayer(t, t->getRow()->getId());
     game->registerTimeVariant(t);
 }
 
@@ -320,7 +322,10 @@ bool Row::hasStudentAt(int pos) const { //check if there is student at pos
     return false;
 }
 
-
+int Row::getId() const
+{
+    return id;
+}
 
 
 
