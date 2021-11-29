@@ -61,9 +61,6 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     {
         sentinels[i] = new QWidget(parent);
         sentinels[i]->setGeometry(0,0,0,0);
-
-        if(i == 0) sentinels[i]->lower();
-        else if(i == NUMBER_OF_ROW - 2) sentinels[i]->raise();
     }
 }
 
@@ -256,10 +253,13 @@ void Game::generateTeacher()
     if(num >= 18 && num <= 20)
     {
         if(!desmond)
+        {
             rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
+            desmondRowId = rowNum;
+        }
+
     }
     generatingTimer->setInterval(getRandomInterval());
-    if(desmond) desmond->getWidget()->raise();
 }
 
 QWidget* Game::getParent() const
@@ -310,16 +310,14 @@ void Game::adjustHumanLayer(Human* h, int rowId)
         return;
     }
 
-    if(rowId == 0)
-    {
-        h->getWidget()->lower();
-    }
-    else if(rowId == Game::NUMBER_OF_ROW - 1)
+    if(rowId == NUMBER_OF_ROW - 1)
     {
         h->getWidget()->raise();
+        if(desmond && desmondRowId == rowId) desmond->getWidget()->raise();
     }
     else
     {
-        h->getWidget()->stackUnder(sentinels[rowId - 1]);
+        h->getWidget()->stackUnder(sentinels[rowId]);
+        if(desmond && desmondRowId == rowId) desmond->getWidget()->stackUnder(sentinels[rowId]);
     }
 }

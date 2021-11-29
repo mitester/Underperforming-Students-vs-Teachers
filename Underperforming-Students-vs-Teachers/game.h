@@ -57,6 +57,7 @@ public:
     static QPixmap* GAME_SCENE_PASS;                //picture pointer of the pass label
     const static int GAME_DURATION{180000};         //game duration in msecs
     Desmond* desmond = nullptr;                     //stores the ref of Desmond
+    int desmondRowId = -1;                            //stores the row Desmond in
 
     static QPoint REDBULL_POS;                      //coordinates of the redbull UI label (every Redbull needs to fly after clicked)
 //    const static int SPRITE_HEIGHT {128};
