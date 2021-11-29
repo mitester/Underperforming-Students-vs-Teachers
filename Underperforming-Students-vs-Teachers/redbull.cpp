@@ -33,10 +33,11 @@ void Redbull::update()
 {
     if(isPressed)
     {
+        Game::getInstance()->addRedbull();
+        player.play();
         widget->setClickable(false);
         if(widget->pos().x() >= Game::REDBULL_POS.x())
         {
-            Game::getInstance()->addRedbull();
             deleteLater();
             return;
         }
@@ -60,5 +61,4 @@ void Redbull::update()
 void Redbull::pressed()
 {
     isPressed = true;
-    player.play();
 }
