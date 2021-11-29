@@ -41,7 +41,8 @@ SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags 
     this->show();
 
     costLabel = new QLabel(this);
-    costLabel->setText(QString::number(Game::getCost(type)));
+    int cost = Game::getCost(type);
+    costLabel->setText(cost != 0 ? QString::number(cost) : "");
     costLabel->setStyleSheet("color: black; font-size: 19px; font: bold;");
     costLabel->move(COST_X, COST_Y);
 
@@ -75,7 +76,7 @@ QPixmap getTransPicPath(TimeVariant::Type type) {
 void SpriteCard::on_clicked() {
     Game* game = Game::getInstance();
 
-    if(game->selectedCard == nullptr) {   //if no card is currently selected
+    if(game->selectedCard == nullptr && game->getRedbullNum() >= game->getCost(this->type)) {   //if no card is currently selected
         game->selectedSprite = type;
         game->selectedCard = this;
 
@@ -86,7 +87,7 @@ void SpriteCard::on_clicked() {
             game->selectedSprite = TimeVariant::Type::EMPTY;
             this->setStyleSheet("color: white;");
 
-        } else {                     // if another card was previously selected
+        } else if(game->getRedbullNum() >= game->getCost(this->type)){        // if another card was previously selected
             emit game->selectedCard->clicked();
             game->selectedCard = this;
             game->selectedSprite = type;
