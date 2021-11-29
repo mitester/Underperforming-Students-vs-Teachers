@@ -151,35 +151,48 @@ void Game::update()
         lb_game_ended->show();
     }
 
-    int msecs = currentTimeLeft.msecsSinceStartOfDay();
+    int msecs = GAME_DURATION - currentTimeLeft.msecsSinceStartOfDay();
     if(msecs > 0)
     {
         currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+        qDebug() << msecs;
         if(msecs <= GAME_DURATION * 1/4)
         {
             //teacher kind
-            generatingTeacherUpperBound = 7;
+            generatingTeacherUpperBound = 9;
 
             //generating time
             generatingTimerLowerBound = 4000;
+            generatingTimerUpperBound = 10001;
         }
         else if(msecs <= GAME_DURATION * 1/2)
         {
             //teacher kind
-            generatingTeacherLowerBound = 4;
+            generatingTeacherUpperBound = 18;
+            generatingTeacherLowerBound = 0;
             generatingTeacherUpperBound = 9;
 
             //generating time
-            generatingTimerUpperBound = 80001;
+            generatingTimerLowerBound = 4000;
+            generatingTimerUpperBound = 8001;
         }
         else if(msecs <= GAME_DURATION * 3/4)
         {
             //teacher kind
-            generatingTeacherUpperBound = 11;
+            generatingTeacherUpperBound = 20;
+            generatingTeacherLowerBound = 4;
 
             //generating time
+            generatingTimerLowerBound = 2000;
+            generatingTimerUpperBound = 4001;
+        }
+        else
+        {
+            generatingTeacherUpperBound = 20;
+            generatingTeacherLowerBound = 10;
+
             generatingTimerLowerBound = 1000;
-            generatingTimerUpperBound = 3001;
+            generatingTimerUpperBound = 2001;
         }
     }
 }
@@ -223,19 +236,19 @@ void Game::generateTeacher()
 {
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
     int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
-    if(num >= 0 && num <= 4)
+    if(num >= 0 && num <= 9)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::OVERWORKED_TA);
     }
-    if(num >= 5 && num <= 6)
+    if(num >= 10 && num <= 13)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::PANG);
     }
-    if(num >= 7 && num <= 8)
+    if(num >= 14 && num <= 17)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::KELVIN);
     }
-    if(num == 9)
+    if(num >= 18 && num <= 20)
     {
         if(!desmond)
             rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);

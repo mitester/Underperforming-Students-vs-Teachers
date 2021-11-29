@@ -4,6 +4,7 @@
 #include "clickablelabel.h"
 #include <QWidget>
 #include "timevariant.h"
+#include <QMediaPlayer>
 
 /***    ---- Description ----
  *
@@ -32,6 +33,7 @@ protected:
 
 private:
     bool selected = false;
+    QMediaPlayer* player;
 };
 
 #endif // SPRITECARD_H

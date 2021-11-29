@@ -138,7 +138,8 @@ void Row::addTeacher(TimeVariant::Type type) {  //the logic is identical to the 
         label->setPixmap(*Desmond::PIC_0);
         game->desmond = new Desmond(label, this);
         t = game->desmond;
-        game->player.setMedia(QUrl("qrc:/sounds/bgm_0.mp3"));   //plays a strong bgm when Desmond shows up
+        if(game->player.media() != QUrl("qrc:/sounds/bgm_0.mp3"))
+            game->player.setMedia(QUrl("qrc:/sounds/bgm_0.mp3"));   //plays a strong bgm when Desmond shows up
         game->player.play();
         break;
     default:

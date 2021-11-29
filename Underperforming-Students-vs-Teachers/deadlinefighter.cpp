@@ -82,6 +82,7 @@ void DeadlineFighter::update()
             {
                 widget->setPixmap(*PIC_2);
                 row->addAssignment(this, damage);
+                player->play();
                 timeConcept = 0;
             }
         }

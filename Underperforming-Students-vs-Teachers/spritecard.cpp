@@ -49,6 +49,9 @@ SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags 
     setObjectName("SpriteCard");
 
     connect(this, &ClickableLabel::clicked, this, &SpriteCard::on_clicked);
+
+    player = new QMediaPlayer(this);
+    player->setMedia(QUrl("qrc:/sounds/electric_pop.wav"));
 }
 
 QPixmap getTransPicPath(TimeVariant::Type type) {
@@ -87,7 +90,9 @@ void SpriteCard::on_clicked() {
             game->selectedSprite = TimeVariant::Type::EMPTY;
             this->setStyleSheet("color: white;");
 
-        } else if(game->getRedbullNum() >= game->getCost(this->type)){        // if another card was previously selected
+        } else if(game->getRedbullNum() < game->getCost(this->type)){ // if another card was previously selected, but no enough budget
+            player->play();
+        } else {    //if another card was previously selected
             emit game->selectedCard->clicked();
             game->selectedCard = this;
             game->selectedSprite = type;
