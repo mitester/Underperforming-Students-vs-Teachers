@@ -9,6 +9,7 @@
 #include "teacher.h"
 #include "game.h"
 #include "timevariant.h"
+#include <QQueue>
 
 /***
  * Date: 11/15/2021
@@ -45,7 +46,9 @@ public:
      *  The right most position is NUMBER_OF_COLUMNS - 1
      * **/
 
-    Row(int yPos, int size, QWidget *parent = nullptr);
+    friend class Game;
+
+    Row(int id, int yPos, int size, QWidget *parent = nullptr);
 
     /** Static Constant Fields **/
 
@@ -77,7 +80,8 @@ public:
     int getGridSize() const;            // the size of the grid
     bool hasReachedEnd() const;         // if any teacher has reached the end of this row
     int getYPos() const;                // the y position of the row
-    bool hasStudentAt(int pos) const;   //returns true if has student at position pos.
+    bool hasStudentAt(int pos) const;   // returns true if has student at position pos.
+    int getId() const;                  // return the unique id of this row
 
     /** Utilities **/
     void updateLeftMostTeacher();       // A utility function to update the leftmost teacher
@@ -87,6 +91,7 @@ public:
                                         // We will check if the given function modifies distance parameters (not allowed)
 
     Student** grid; //stores a pointer pointing to each student.
+
 
     ~Row();
 
@@ -121,6 +126,8 @@ private:
     void addStudent(Student* const s, int pos);         // register a student at certain pos
     void addAssignment(Assignment* const a);            // register an assignment
     void addTeacher(Teacher* const t);                  // register a teacher to the row
+
+    int id; // 0 starts from the top
 
     int yPos;
     QWidget* parent;

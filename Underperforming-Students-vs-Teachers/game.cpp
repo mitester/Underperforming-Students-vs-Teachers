@@ -53,7 +53,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
-        rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
+        rows[i] = new Row(i, GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
     player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
 }
@@ -283,6 +283,3 @@ int Game::getCost(TimeVariant::Type student) {
         return 0;
     }
 }
-
-
-
