@@ -161,48 +161,44 @@ void Game::update()
     }
 
     int msecs = GAME_DURATION - currentTimeLeft.msecsSinceStartOfDay();
-    if(msecs > 0)
+    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+    if(msecs <= GAME_DURATION * 1/4)
     {
-        currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
-        qDebug() << msecs;
-        if(msecs <= GAME_DURATION * 1/4)
-        {
-            //teacher kind
-            generatingTeacherUpperBound = 9;
+        //teacher kind
+        generatingTeacherUpperBound = 9;
 
-            //generating time
-            generatingTimerLowerBound = 4000;
-            generatingTimerUpperBound = 10001;
-        }
-        else if(msecs <= GAME_DURATION * 1/2)
-        {
-            //teacher kind
-            generatingTeacherUpperBound = 18;
-            generatingTeacherLowerBound = 0;
-            generatingTeacherUpperBound = 9;
+        //generating time
+        generatingTimerLowerBound = 4000;
+        generatingTimerUpperBound = 10001;
+    }
+    else if(msecs <= GAME_DURATION * 1/2)
+    {
+        //teacher kind
+        generatingTeacherUpperBound = 18;
+        generatingTeacherLowerBound = 0;
+        generatingTeacherUpperBound = 9;
 
-            //generating time
-            generatingTimerLowerBound = 4000;
-            generatingTimerUpperBound = 8001;
-        }
-        else if(msecs <= GAME_DURATION * 3/4)
-        {
-            //teacher kind
-            generatingTeacherUpperBound = 20;
-            generatingTeacherLowerBound = 4;
+        //generating time
+        generatingTimerLowerBound = 4000;
+        generatingTimerUpperBound = 10001;
+    }
+    else if(msecs <= GAME_DURATION * 3/4)
+    {
+        //teacher kind
+        generatingTeacherUpperBound = 20;
+        generatingTeacherLowerBound = 4;
 
-            //generating time
-            generatingTimerLowerBound = 2000;
-            generatingTimerUpperBound = 4001;
-        }
-        else
-        {
-            generatingTeacherUpperBound = 20;
-            generatingTeacherLowerBound = 10;
+        //generating time
+        generatingTimerLowerBound = 2000;
+        generatingTimerUpperBound = 6001;
+    }
+    else
+    {
+        generatingTeacherUpperBound = 20;
+        generatingTeacherLowerBound = 10;
 
-            generatingTimerLowerBound = 1000;
-            generatingTimerUpperBound = 2001;
-        }
+        generatingTimerLowerBound = 1000;
+        generatingTimerUpperBound = 2001;
     }
 }
 
