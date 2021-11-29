@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "game.h"
+#include <QPoint>
 
 namespace Ui {
 class GameWindow;
@@ -16,10 +17,13 @@ public:
     explicit GameWindow(QWidget *parent = nullptr);
     ~GameWindow();
 
+    static QPoint getClosestGridPos(QPoint p);
+
 protected:
     void resizeEvent(QResizeEvent* ev);
     void paintEvent(QPaintEvent* ev);
     void mousePressEvent(QMouseEvent* ev);
+    void mouseMoveEvent(QMouseEvent* ev);
 
 private:
     Ui::GameWindow *ui;

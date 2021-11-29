@@ -2,6 +2,7 @@
 #include "timevariant.h"
 #include "clickablelabel.h"
 #include "game.h"
+#include "gamewindow.h"
 #include "human.h"
 #include "sleepdeprivedstudent.h"
 #include "student.h"
@@ -49,11 +50,35 @@ SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags 
     connect(this, &ClickableLabel::clicked, this, &SpriteCard::on_clicked);
 }
 
+QPixmap getTransPicPath(TimeVariant::Type type) {
+    switch (type) {
+    case TimeVariant::Type::CGA_GOD:
+        return QPixmap(":/images/students/stu_cga_trans.png");
+    case TimeVariant::Type::DEADLINE_FIGHTER:
+        return QPixmap(":/images/students/stu_deadline_trans.png");
+    case TimeVariant::Type::GBUS_STUDENT:
+        return QPixmap(":/images/students/stu_gbus_trans.png");
+    case TimeVariant::Type::SHAMELESS_STUDENT:
+        return QPixmap(":/images/students/stu_shameless_trans.png");
+    case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
+        return QPixmap(":/images/students/stu_sleep_trans.png");
+    case TimeVariant::Type::TEACHERS_PET:
+        return QPixmap(":/images/students/stu_pet_trans.png");
+    case TimeVariant::Type::EMPTY:
+        return QPixmap();
+    default:
+        qDebug() << "invalid type passed in getTransPicPath()" << endl;
+        return QPixmap();
+    }
+}
+
 void SpriteCard::on_clicked() {
     Game* game = Game::getInstance();
+
     if(game->selectedCard == nullptr) {   //if no card is currently selected
         game->selectedSprite = type;
         game->selectedCard = this;
+
         this->setStyleSheet("#" + objectName() +"{ color: white; border: 3px solid yellow;}");
     } else {
         if(game->selectedCard == this) {   //if yourself is the card selected
@@ -68,4 +93,5 @@ void SpriteCard::on_clicked() {
             this->setStyleSheet("#" + objectName() +"{ color: white; border: 3px solid yellow;}");
         }
     }
+    game->transLabel->setPixmap(getTransPicPath(game->selectedSprite));
 }

@@ -234,7 +234,7 @@ int Row::getGridSize() const {
 bool Row::hasReachedEnd() const {
     if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size() || teacherList.empty())
         return false;
-    return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() == 0; // check the leftmost position
+    return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() < 10; // check the leftmost position
 }
 
 void Row::printTeacherList() {

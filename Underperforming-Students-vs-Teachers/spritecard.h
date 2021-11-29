@@ -24,6 +24,7 @@ public:
     const static int COST_Y = 97;
     SpriteCard(TimeVariant::Type type, QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
     void on_clicked(); //the slot function for being clicked.
+    QLabel* costLabel = nullptr;
 
 protected:
     TimeVariant::Type type;
@@ -31,7 +32,6 @@ protected:
 
 private:
     bool selected = false;
-    QLabel* costLabel = nullptr;
 };
 
 #endif // SPRITECARD_H
