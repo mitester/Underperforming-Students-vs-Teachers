@@ -5,6 +5,16 @@
 #include <QWidget>
 #include "timevariant.h"
 
+/***    ---- Description ----
+ *
+ *  SpriteCards are the student cards shown in the sprite selection board (on the left of the game scene)
+ *  It is a subclass of ClickableLabel.
+ *
+ *  When being clicked, it checks whether it was clicked before, and do corresponding behaviour. (stylesheet change)
+ *
+ *
+ * */
+
 class SpriteCard : public ClickableLabel
 {
 public:

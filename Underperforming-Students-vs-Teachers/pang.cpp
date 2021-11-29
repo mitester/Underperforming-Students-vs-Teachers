@@ -31,7 +31,7 @@ void Pang::update() {
     if(!widget->isEnabled())
         return ;
 
-    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {
+    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {//when the teacher is outside of the leftmost distance.
         row->removeTeacher(this);
         return ;
     }
@@ -78,8 +78,8 @@ void Pang::update() {
         preRemove->deleteLater();
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
 
-        player->setMedia(QUrl("qrc:/sounds/hit.wav"));
-        player->play();
+        //player->setMedia(QUrl("qrc:/sounds/hit.wav"));
+        //player->play();
 
     }
 

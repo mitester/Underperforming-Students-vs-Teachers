@@ -85,7 +85,7 @@ void Desmond::update() {
     if(!widget->isEnabled())
         return ;
 
-    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {
+    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {//when the teacher is outside of the leftmost distance.
         row->removeTeacher(this);
         return ;
     }
@@ -206,7 +206,7 @@ void Desmond::update() {
         counterSkill = 0;
     }
 
-    if(speedIncreased && countdown++ >= SPEED_INCREASE_COUNTDOWN) {
+    if(speedIncreased && countdown++ >= SPEED_INCREASE_COUNTDOWN) { // the cool down for speed increment effect
         countdown = 0;
         for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
             game->getRowAt(i)->modifyTeachers(halveSpeed);

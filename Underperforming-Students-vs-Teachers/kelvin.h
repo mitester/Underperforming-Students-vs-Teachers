@@ -4,8 +4,10 @@
 #include "teacher.h"
 
 /***
-    Author: Tse Wai Chung
     Date: 11/13/2021
+    The class of Teacher Kelvin.
+    It is a subclass of Teacher, which represents the Kelvin.
+    All its parameters & pictures are stored as static memeber of the class.
 */
 
 class Kelvin : public Teacher

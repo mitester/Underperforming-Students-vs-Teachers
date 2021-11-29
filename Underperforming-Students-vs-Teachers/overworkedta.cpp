@@ -31,7 +31,7 @@ void OverworkedTA::update() {
     if(!widget->isEnabled())
         return ;
 
-    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {
+    if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {   //when the teacher is outside of the leftmost distance.
         row->removeTeacher(this);
         return ;
     }

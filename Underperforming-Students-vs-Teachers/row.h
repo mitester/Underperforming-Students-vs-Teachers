@@ -11,17 +11,15 @@
 #include "timevariant.h"
 
 /***
- * Author: Tse Wai Chung
  * Date: 11/15/2021
  *
  * ---- Description -----
  * A Row Maintains all the objects (Student, Assignment, Teacher) in a row using three heaps and an array.
  * Row provides fast accessors/mutators, but removing specific elements can be expensive.
- * Objects should be created outside, and be added to row only after creation.
- * Row will manage it and delete it properly.
+ * Row will manage all generated objects and delete it properly.
  * Please do not delete objects in a row from outside. It will create serious trouble.
+ * Also, do not modify the position of objects in a row, it disturbs the internal order of the heap.
  *
- * !!! - this version has not been proven to be bug-free - !!!
  *
  * Update 1 11/15/2021
  * Teachers are now maintained using vector instead of heap
@@ -49,7 +47,7 @@ public:
 
     Row(int yPos, int size, QWidget *parent = nullptr);
 
-    /** Static Constant Fields **/ // All numbers used are in "percentage coordinate"
+    /** Static Constant Fields **/
 
     /** RightMost operations **/
     const Student* getRightMostStudent() const;         // returns a const reference of right most student.
@@ -72,20 +70,21 @@ public:
     void removeTeacher(Teacher* teacher);               // deregister a teacher from the row, it will also be deleted.
 
     /** Status accessors **/
-    bool isEmptyStudent() const;        // whether this row does not have any student
-    bool isEmptyAssignment() const;     // whether this row does not have any assignment
+    bool isEmptyStudent() const;        // whether this row has any student
+    bool isEmptyAssignment() const;     // whether this row has any assignment
     int getNumStudent() const;          // how many students are in this row
     int getNumAssignment() const;       // how many assignments are in this row
     int getGridSize() const;            // the size of the grid
     bool hasReachedEnd() const;         // if any teacher has reached the end of this row
-    int getYPos() const;
-    bool hasStudentAt(int pos) const; //returns true if has student
+    int getYPos() const;                // the y position of the row
+    bool hasStudentAt(int pos) const;   //returns true if has student at position pos.
 
     /** Utilities **/
-    void updateLeftMostTeacher();
-    void printTeacherList();
+    void updateLeftMostTeacher();       // A utility function to update the leftmost teacher
+    void printTeacherList();            // print all teachers (for debug)
     void modifyTeachers(void (*f)(Teacher* t));
-    Desmond* getDesmond() const; //returns nullptr if not found
+                                        // Provides a way to modify teachers. For safety reasons, function pointer is used.
+                                        // We will check if the given function modifies distance parameters (not allowed)
 
     Student** grid; //stores a pointer pointing to each student.
 
@@ -119,9 +118,9 @@ private:
     void deregisterFromGrid(Student* s);
     QLabel* generateQLabelAtPos(int x); //generate a null
 
-    void addStudent(Student* const s, int pos);         // add a student at certain pos
-    void addAssignment(Assignment* const a);            // add an assignment
-    void addTeacher(Teacher* const t);                  // add a teacher to the row
+    void addStudent(Student* const s, int pos);         // register a student at certain pos
+    void addAssignment(Assignment* const a);            // register an assignment
+    void addTeacher(Teacher* const t);                  // register a teacher to the row
 
     int yPos;
     QWidget* parent;
