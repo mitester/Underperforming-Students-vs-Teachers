@@ -407,6 +407,10 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
         }
 
         emit game->notifyAddRedbull();  //notify the game to add redbull.
+
+        if(game->getRedbullNum() < game->getCost(game->selectedSprite)) {
+            emit game->selectedCard->clicked();
+        }
     }
     else
     {
