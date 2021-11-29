@@ -31,6 +31,7 @@ protected:
 
 private:
     bool selected = false;
+    QLabel* costLabel = nullptr;
 };
 
 #endif // SPRITECARD_H
