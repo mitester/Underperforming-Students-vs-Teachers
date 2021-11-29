@@ -90,6 +90,8 @@ void Desmond::update() {
         return ;
     }
 
+    Game* game = Game::getInstance();
+
     if(deadCounter >= 1) { //enters the "explosion mode"
         //this->widget->setDisabled(true);
         if(counter % 10 == 0) {
@@ -98,6 +100,11 @@ void Desmond::update() {
                 player->setMedia(QUrl("qrc:/sounds/explosion.wav"));
                 player->play();
                 widget->setPixmap(*Item::EXPLOSION_0);
+                if(speedIncreased) {
+                    for(int i = 0; i < Game::NUMBER_OF_ROW; i++)
+                        game->getRowAt(i)->modifyTeachers(halveSpeed);
+                }
+                game->desmond = nullptr;
             }
             if(deadCounter == 2)
                 widget->setPixmap(*Item::EXPLOSION_1);
@@ -132,8 +139,7 @@ void Desmond::update() {
         preRemove->deleteLater();
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
 
-//        player->setMedia(QUrl("qrc:/sounds/hit.wav"));
-//        player->play();
+        player->play();
 
     }
 
@@ -175,7 +181,6 @@ void Desmond::update() {
 
     }
 
-    Game* game = Game::getInstance();
     if(counterSkill >= skillSpeed) {
 
         int k = QRandomGenerator::securelySeeded().bounded(0, 10);

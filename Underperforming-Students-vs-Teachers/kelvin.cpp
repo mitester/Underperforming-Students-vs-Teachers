@@ -80,9 +80,7 @@ void Kelvin::update() {
         preRemove->deleteLater();
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
 
-//        if(player->mediaChanged())
-//            player->setMedia(QUrl("qrc:/sounds/hit.wav"));
-//        player->play();
+        player->play();
 
     }
 
