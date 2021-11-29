@@ -174,7 +174,7 @@ void Game::update()
     else if(msecs <= GAME_DURATION * 1/2)
     {
         //teacher kind
-        generatingTeacherUpperBound = 18;
+        generatingTeacherUpperBound = 17;
         generatingTeacherLowerBound = 0;
         generatingTeacherUpperBound = 9;
 
