@@ -51,7 +51,7 @@ public:
     static QPixmap* GAME_SCENE_PASS;
 
     const static int GAME_DURATION{180000}; //game duration in msecs
-    static Desmond* desmond;
+    Desmond* desmond = nullptr;
 
     static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
