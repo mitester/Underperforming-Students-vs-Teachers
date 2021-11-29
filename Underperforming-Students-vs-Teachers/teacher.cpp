@@ -13,7 +13,7 @@
 Teacher::Teacher(QLabel *widget, Row* row, QString name, int maxHp, int speed, int damage) :
     Human(widget, row, name, maxHp), speed(speed), damage(damage)
 {
-
+    player->setMedia(QUrl("qrc:/sounds/hit.wav"));
 }
 
 TimeVariant::Category Teacher::getCategory() const {return TimeVariant::Category::TEACHER;}

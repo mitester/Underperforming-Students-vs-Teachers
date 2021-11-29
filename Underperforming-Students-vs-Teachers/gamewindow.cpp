@@ -199,6 +199,15 @@ GameWindow::GameWindow(QWidget *parent) :
     //starts the game after everything is ready
     //so it must be the last line
     game->start();
+
+    QLabel* transparentSprite = new QLabel(this);
+    transparentSprite->setFixedSize(Student::SPRITE_WIDTH,Student::SPRITE_HEIGHT);
+    transparentSprite->setScaledContents(true);
+    transparentSprite->hide();
+    game->transLabel = transparentSprite;
+
+    setMouseTracking(true);
+    ui->centralwidget->setMouseTracking(true);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *ev) {
@@ -338,6 +347,30 @@ GameWindow::~GameWindow()
     delete ui;
 }
 
+QPoint GameWindow::getClosestGridPos(QPoint p) {
+    Game* game = Game::getInstance();
+    // Finding the closest row that matches the YPosition of the clicking
+    int minYIdx = 0;
+    for(int i = 0; i < Game::NUMBER_OF_ROW; i++)    //compare the y position to every row's yPos
+        if(abs(game->getRowAt(i)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y())
+         < abs(game->getRowAt(minYIdx)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y()))
+            minYIdx = i;
+    Row* row = game->getRowAt(minYIdx);
+
+    // Finding the closest tile in the row that matches the XPosition of the clicking
+    int minXPos = Game::GRID_LEFT;
+    int minXIdx = 0;
+    for(int i = 0; i < Game::NUMBER_OF_COLUMN; i++) {
+        int xPos = Game::GRID_LEFT + (Game::GRID_INTERVAL_HORIZONTAL/2) + i * Game::GRID_INTERVAL_HORIZONTAL;
+        if(abs(xPos - p.x()) < abs(minXPos - p.x())) {
+            minXPos = xPos;
+            minXIdx = i;
+        }
+    }
+
+    return QPoint(minXIdx, minYIdx);
+}
+
 void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEvent. Mostly for sprite card placement
     QPoint p = ev->pos();
     Game* game = Game::getInstance();
@@ -347,23 +380,12 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
        game->selectedCard != nullptr) { //only when the click is within the grid area, we do further judgement
 
         // Finding the closest row that matches the YPosition of the clicking
-        int minYIdx = 0;
-        for(int i = 0; i < Game::NUMBER_OF_ROW; i++)    //compare the y position to every row's yPos
-            if(abs(game->getRowAt(i)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y())
-             < abs(game->getRowAt(minYIdx)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y()))
-                minYIdx = i;
-        Row* row = game->getRowAt(minYIdx);
 
-        // Finding the closest tile in the row that matches the XPosition of the clicking
-        int minXPos = Game::GRID_LEFT;
-        int minXIdx = 0;
-        for(int i = 0; i < Game::NUMBER_OF_COLUMN; i++) {
-            int xPos = Game::GRID_LEFT + (Game::GRID_INTERVAL_HORIZONTAL/2) + i * Game::GRID_INTERVAL_HORIZONTAL;
-            if(abs(xPos - p.x()) < abs(minXPos - p.x())) {
-                minXPos = xPos;
-                minXIdx = i;
-            }
-        }
+        QPoint gridPos = getClosestGridPos(p);
+        int minYIdx = gridPos.y();
+        int minXIdx = gridPos.x();
+        Row* row = game->getRowAt(minYIdx);
+        int minXPos = Game::GRID_LEFT + (Game::GRID_INTERVAL_HORIZONTAL/2) + minXIdx * Game::GRID_INTERVAL_HORIZONTAL;
 
         // If the selected type is Empty, but there is card selected (implies expel)
         if(game->selectedSprite == TimeVariant::Type::EMPTY) {
@@ -384,10 +406,28 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
             row->addStudent(game->selectedSprite, minXIdx); // add the student to corresponding row
         }
 
-        emit game->notifyAddRedbull();  //notify the game to add redbull.
+        if(game->getRedbullNum() < game->getCost(game->selectedSprite)) {
+            emit game->selectedCard->clicked();
+        }
     }
     else
     {
         QMainWindow::mousePressEvent(ev);
+    }
+}
+
+void GameWindow::mouseMoveEvent(QMouseEvent *ev) {
+    QPoint p = ev->pos();
+    Game* game = Game::getInstance();
+    if(p.x() > Game::GRID_LEFT && p.x() < Game::GRID_RIGHT &&
+       p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN && game->selectedSprite != TimeVariant::Type::EMPTY) {
+        QPoint pos = getClosestGridPos(p);
+        int xPos = pos.x() * Game::GRID_INTERVAL_HORIZONTAL + Game::GRID_LEFT;
+        int yPos = pos.y() * Game::GRID_INTERVAL_VERTICAL + Game::GRID_UP;
+        game->transLabel->move(xPos, yPos);
+        game->transLabel->show();
+    } else {
+        game->transLabel->hide();
+        QMainWindow::mouseMoveEvent(ev);
     }
 }

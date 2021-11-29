@@ -28,7 +28,6 @@ void SleepDeprivedStudent::update()
         {
             widget->setPixmap(*PIC_2);
             row->addAssignment(this, damage);
-            player->setMedia(QUrl("qrc:/sounds/shoot.wav"));
             player->play();
             timeConcept = 0;
         }

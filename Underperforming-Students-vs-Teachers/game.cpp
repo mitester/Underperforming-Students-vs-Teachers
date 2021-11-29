@@ -28,7 +28,6 @@ QPixmap* Game::GAME_SCENE_PASS = nullptr;
 
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
 QSize Game::currentSize;
-Desmond* Game::desmond = nullptr;
 
 void Game::move(QWidget *w, double xPercent, double yPercent) {
     w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
@@ -54,9 +53,18 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
-        rows[i] = new Row(GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
+        rows[i] = new Row(i, GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
     player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
+
+    for(int i = 0; i < NUMBER_OF_ROW - 1; i++)
+    {
+        sentinels[i] = new QWidget(parent);
+        sentinels[i]->setGeometry(0,0,0,0);
+
+        if(i == 0) sentinels[i]->lower();
+        else if(i == NUMBER_OF_ROW - 2) sentinels[i]->raise();
+    }
 }
 
 Game::~Game()
@@ -152,36 +160,45 @@ void Game::update()
         lb_game_ended->show();
     }
 
-    int msecs = currentTimeLeft.msecsSinceStartOfDay();
-    if(msecs > 0)
+    int msecs = GAME_DURATION - currentTimeLeft.msecsSinceStartOfDay();
+    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
+    if(msecs <= GAME_DURATION * 1/4)
     {
-        currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
-        if(msecs <= GAME_DURATION * 1/4)
-        {
-            //teacher kind
-            generatingTeacherUpperBound = 7;
+        //teacher kind
+        generatingTeacherUpperBound = 9;
 
-            //generating time
-            generatingTimerLowerBound = 4000;
-        }
-        else if(msecs <= GAME_DURATION * 1/2)
-        {
-            //teacher kind
-            generatingTeacherLowerBound = 4;
-            generatingTeacherUpperBound = 9;
+        //generating time
+        generatingTimerLowerBound = 4000;
+        generatingTimerUpperBound = 10001;
+    }
+    else if(msecs <= GAME_DURATION * 1/2)
+    {
+        //teacher kind
+        generatingTeacherUpperBound = 18;
+        generatingTeacherLowerBound = 0;
+        generatingTeacherUpperBound = 9;
 
-            //generating time
-            generatingTimerUpperBound = 80001;
-        }
-        else if(msecs <= GAME_DURATION * 3/4)
-        {
-            //teacher kind
-            generatingTeacherUpperBound = 11;
+        //generating time
+        generatingTimerLowerBound = 4000;
+        generatingTimerUpperBound = 10001;
+    }
+    else if(msecs <= GAME_DURATION * 3/4)
+    {
+        //teacher kind
+        generatingTeacherUpperBound = 20;
+        generatingTeacherLowerBound = 4;
 
-            //generating time
-            generatingTimerLowerBound = 1000;
-            generatingTimerUpperBound = 3001;
-        }
+        //generating time
+        generatingTimerLowerBound = 2000;
+        generatingTimerUpperBound = 6001;
+    }
+    else
+    {
+        generatingTeacherUpperBound = 20;
+        generatingTeacherLowerBound = 10;
+
+        generatingTimerLowerBound = 1000;
+        generatingTimerUpperBound = 2001;
     }
 }
 
@@ -224,19 +241,19 @@ void Game::generateTeacher()
 {
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
     int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
-    if(num >= 0 && num <= 4)
+    if(num >= 0 && num <= 9)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::OVERWORKED_TA);
     }
-    if(num >= 5 && num <= 6)
+    if(num >= 10 && num <= 13)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::PANG);
     }
-    if(num >= 7 && num <= 8)
+    if(num >= 14 && num <= 17)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::KELVIN);
     }
-    if(num == 9)
+    if(num >= 18 && num <= 20)
     {
         if(!desmond)
             rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
@@ -285,5 +302,24 @@ int Game::getCost(TimeVariant::Type student) {
     }
 }
 
+void Game::adjustHumanLayer(Human* h, int rowId)
+{
+    if(rowId < 0 || rowId > NUMBER_OF_ROW - 1)
+    {
+        qDebug() << "Game::adjustHumanLayer(Human* h, int rowId): invalid rowId";
+        return;
+    }
 
-
+    if(rowId == 0)
+    {
+        h->getWidget()->lower();
+    }
+    else if(rowId == Game::NUMBER_OF_ROW - 1)
+    {
+        h->getWidget()->raise();
+    }
+    else
+    {
+        h->getWidget()->stackUnder(sentinels[rowId - 1]);
+    }
+}

@@ -9,6 +9,7 @@
 #include "timevariant.h"
 #include "teacher.h"
 #include "row.h"
+#include "redbull.h"
 
 #include <QTimer>
 #include <QProgressBar>
@@ -29,7 +30,7 @@ public:
     static const QString GAME_NAME;
     static const int BASIC_TIME_UNIT{20};           //it is the basic time unit of QTimer
                                                     //emit timeout() signal in 50Hz
-    static const int DEFAULT_REDBULL_NUMBER{1000};    // it is the default redbull number
+    static const int DEFAULT_REDBULL_NUMBER{30};    // it is the default redbull number
     static const int NUMBER_OF_ROW{5};              //it is the number of row of the map
     static const int NUMBER_OF_COLUMN{9};
     static const int MAX{INT_MAX}; //the maximum integer
@@ -51,7 +52,7 @@ public:
     static QPixmap* GAME_SCENE_PASS;
 
     const static int GAME_DURATION{180000}; //game duration in msecs
-    static Desmond* desmond;
+    Desmond* desmond = nullptr;
 
     static QPoint REDBULL_POS;
 //    const static int SPRITE_HEIGHT {128};
@@ -73,7 +74,7 @@ public:
 
     //getter and setter of redbullNum
     int getRedbullNum() const;
-    bool addRedbull(int n = 1); //default value of n is 1. Decrease it by passing a negative value
+    bool addRedbull(int n = Redbull::DEFAULT_ENERGY); //default value of n is 1. Decrease it by passing a negative value
                                 //return true if added sucessfully, otherwise, false
 
     //the timeVariant will be linked with the timer
@@ -103,6 +104,10 @@ public:
     static int getCost(TimeVariant::Type student); //return the cost of the given type
 
     QMediaPlayer player{this};
+
+    QLabel* transLabel = nullptr;
+
+    void adjustHumanLayer(Human* h, int rowId);
 
 private:
     explicit Game(QWidget* parent = nullptr);
@@ -144,6 +149,8 @@ private:
     void setParent(QObject *parent); // overload father's setParent to private
 
     QTime currentTimeLeft;
+
+    QWidget* sentinels[NUMBER_OF_ROW - 1]; //human stack management layer splits
 
 signals:
     void notifyAddRedbull();

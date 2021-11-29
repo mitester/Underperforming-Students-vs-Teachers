@@ -2,6 +2,7 @@
 #include "timevariant.h"
 #include "clickablelabel.h"
 #include "game.h"
+#include "gamewindow.h"
 #include "human.h"
 #include "sleepdeprivedstudent.h"
 #include "student.h"
@@ -40,20 +41,48 @@ SpriteCard::SpriteCard(TimeVariant::Type type, QWidget* parent, Qt::WindowFlags 
     this->show();
 
     costLabel = new QLabel(this);
-    costLabel->setText(QString::number(Game::getCost(type)));
+    int cost = Game::getCost(type);
+    costLabel->setText(cost != 0 ? QString::number(cost) : "");
     costLabel->setStyleSheet("color: black; font-size: 19px; font: bold;");
     costLabel->move(COST_X, COST_Y);
 
     setObjectName("SpriteCard");
 
     connect(this, &ClickableLabel::clicked, this, &SpriteCard::on_clicked);
+
+    player = new QMediaPlayer(this);
+    player->setMedia(QUrl("qrc:/sounds/electric_pop.wav"));
+}
+
+QPixmap getTransPicPath(TimeVariant::Type type) {
+    switch (type) {
+    case TimeVariant::Type::CGA_GOD:
+        return QPixmap(":/images/students/stu_cga_trans.png");
+    case TimeVariant::Type::DEADLINE_FIGHTER:
+        return QPixmap(":/images/students/stu_deadline_trans.png");
+    case TimeVariant::Type::GBUS_STUDENT:
+        return QPixmap(":/images/students/stu_gbus_trans.png");
+    case TimeVariant::Type::SHAMELESS_STUDENT:
+        return QPixmap(":/images/students/stu_shameless_trans.png");
+    case TimeVariant::Type::SLEEP_DEPRIVED_STUDENT:
+        return QPixmap(":/images/students/stu_sleep_trans.png");
+    case TimeVariant::Type::TEACHERS_PET:
+        return QPixmap(":/images/students/stu_pet_trans.png");
+    case TimeVariant::Type::EMPTY:
+        return QPixmap();
+    default:
+        qDebug() << "invalid type passed in getTransPicPath()" << endl;
+        return QPixmap();
+    }
 }
 
 void SpriteCard::on_clicked() {
     Game* game = Game::getInstance();
-    if(game->selectedCard == nullptr) {   //if no card is currently selected
+
+    if(game->selectedCard == nullptr && game->getRedbullNum() >= game->getCost(this->type)) {   //if no card is currently selected
         game->selectedSprite = type;
         game->selectedCard = this;
+
         this->setStyleSheet("#" + objectName() +"{ color: white; border: 3px solid yellow;}");
     } else {
         if(game->selectedCard == this) {   //if yourself is the card selected
@@ -61,11 +90,14 @@ void SpriteCard::on_clicked() {
             game->selectedSprite = TimeVariant::Type::EMPTY;
             this->setStyleSheet("color: white;");
 
-        } else {                     // if another card was previously selected
+        } else if(game->getRedbullNum() < game->getCost(this->type)){ // if another card was previously selected, but no enough budget
+            player->play();
+        } else {    //if another card was previously selected
             emit game->selectedCard->clicked();
             game->selectedCard = this;
             game->selectedSprite = type;
             this->setStyleSheet("#" + objectName() +"{ color: white; border: 3px solid yellow;}");
         }
     }
+    game->transLabel->setPixmap(getTransPicPath(game->selectedSprite));
 }

@@ -3,12 +3,13 @@
 
 #include "item.h"
 #include "clickablelabel.h"
+#include <QMediaPlayer>
 
 class Redbull : public Item
 {
     Q_OBJECT
 public:
-    static const int DEFAULT_ENERGY = 10;
+    static const int DEFAULT_ENERGY = 2;
     static const int DEFAULT_INITIAL_VELOCITY_X{3};
     static const int DEFAULT_INITIAL_VELOCITY_Y{-14};
     static const int DEFAULT_INITIAL_ACCELERATION_Y{1};
@@ -47,6 +48,8 @@ private:
     bool isPressed = false;
 
     ClickableLabel* widget;
+
+    QMediaPlayer player;
 
 };
 

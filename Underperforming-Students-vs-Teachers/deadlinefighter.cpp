@@ -67,7 +67,6 @@ void DeadlineFighter::update()
             {
                 widget->setPixmap(*PIC_5);
                 row->addAssignment(this, damage, *Assignment::PIC_1);
-                player->setMedia(QUrl("qrc:/sounds/shoot.wav"));
                 player->play();
                 timeConcept = 0;
             }
@@ -83,6 +82,7 @@ void DeadlineFighter::update()
             {
                 widget->setPixmap(*PIC_2);
                 row->addAssignment(this, damage);
+                player->play();
                 timeConcept = 0;
             }
         }

@@ -17,7 +17,7 @@
 #include <QDebug>
 #include <QObject>
 
-Row::Row(int yPos, int size, QWidget *parent) : yPos(yPos), grid_size(size), QObject(parent), parent(parent)
+Row::Row(int id, int yPos, int size, QWidget *parent) : id(id), yPos(yPos), grid_size(size), QObject(parent), parent(parent)
 {
     grid = new Student*[size];
     for(int i = 0; i < size; i++) {
@@ -114,6 +114,7 @@ void Row::addStudent(TimeVariant::Type type, int tile_pos) {
     label->show();
     Game* game = Game::getInstance();
     addStudent(s, tile_pos); //register student to the grid
+    game->adjustHumanLayer(s, s->getRow()->getId());
     game->registerTimeVariant(s);   //register it as a timevariant object (its update will be called)
 }
 
@@ -138,7 +139,8 @@ void Row::addTeacher(TimeVariant::Type type) {  //the logic is identical to the 
         label->setPixmap(*Desmond::PIC_0);
         game->desmond = new Desmond(label, this);
         t = game->desmond;
-        game->player.setMedia(QUrl("qrc:/sounds/bgm_0.mp3"));   //plays a strong bgm when Desmond shows up
+        if(game->player.media() != QUrl("qrc:/sounds/bgm_0.mp3"))
+            game->player.setMedia(QUrl("qrc:/sounds/bgm_0.mp3"));   //plays a strong bgm when Desmond shows up
         game->player.play();
         break;
     default:
@@ -151,6 +153,7 @@ void Row::addTeacher(TimeVariant::Type type) {  //the logic is identical to the 
     label->lower();
     label->show();
     addTeacher(t);
+    game->adjustHumanLayer(t, t->getRow()->getId());
     game->registerTimeVariant(t);
 }
 
@@ -234,7 +237,7 @@ int Row::getGridSize() const {
 bool Row::hasReachedEnd() const {
     if(leftMostTeacherIndex < 0 || leftMostTeacherIndex >= teacherList.size() || teacherList.empty())
         return false;
-    return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() == 0; // check the leftmost position
+    return teacherList[leftMostTeacherIndex]->getDistanceFromLeft() < 10; // check the leftmost position
 }
 
 void Row::printTeacherList() {
@@ -319,7 +322,10 @@ bool Row::hasStudentAt(int pos) const { //check if there is student at pos
     return false;
 }
 
-
+int Row::getId() const
+{
+    return id;
+}
 
 
 
