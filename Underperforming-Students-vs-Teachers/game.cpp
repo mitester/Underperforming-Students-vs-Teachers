@@ -109,11 +109,13 @@ void Game::registerTimeVariant(TimeVariant *timeVariant)
     mainTimer->callOnTimeout(timeVariant, &TimeVariant::update);
 }
 
+//return the Row object at the index i
 Row* Game::getRowAt(int i) const
 {
     return rows[i];
 }
 
+//it starts the game
 bool Game::start()
 {
     if(gameStatus != GameStatus::PAUSED) return false; //game is unable to re-start
@@ -126,6 +128,7 @@ bool Game::start()
     return true;
 }
 
+//it pauses the game
 bool Game::pause()
 {
     if(gameStatus == GameStatus::PAUSED) return false; //game is unable to pause if not started
@@ -140,41 +143,45 @@ bool Game::pause()
     return true;
 }
 
+//it is also binded with mainTimer
 void Game::update()
 {
+    //if the game has ended
     if(checkTerminated())
     {
         pause(); //pause the game immediately cuz nobody should move
-        //some dialog should pop up afterwards
 
+        //initialization of game_ended label
         QLabel* lb_game_ended = new QLabel(parent);
         lb_game_ended->setScaledContents(true);
         lb_game_ended->setGeometry(GAME_ENDED_LABEL_X, GAME_ENDED_LABEL_Y,
                                    GAME_ENDED_LABEL_WIDTH, GAME_ENDED_LABEL_HEIGHT);
         lb_game_ended->setPixmap(QPixmap());
-        lb_game_ended->raise();
         lb_game_ended->hide();
 
+        //if student has won
         if(gameStatus == GameStatus::STUDENT_WON)
         {
-            lb_game_ended->setPixmap(*GAME_SCENE_PASS);
-            player.setMedia(QUrl("qrc:/sounds/victory.mp3"));
+            lb_game_ended->setPixmap(*GAME_SCENE_PASS); //show the game won label
+            player.setMedia(QUrl("qrc:/sounds/victory.mp3")); //play the victory sound
             player.play();
         }
+        //if teacher won
         else if(gameStatus == GameStatus::TEACHER_WON)
         {
-            lb_game_ended->setPixmap(*GAME_SCENE_FAIL);
-            player.setMedia(QUrl("qrc:/sounds/lose.mp3"));
+            lb_game_ended->setPixmap(*GAME_SCENE_FAIL); //show the game lose label
+            player.setMedia(QUrl("qrc:/sounds/lose.mp3")); //play the lose sound
             player.play();
 
         }
-        lb_game_ended->raise();
-        lb_game_ended->show();
+        lb_game_ended->raise(); //raise the label
+        lb_game_ended->show(); //show the label
     }
 
+    //get the milliseconds passed
     int msecs = GAME_DURATION - currentTimeLeft.msecsSinceStartOfDay();
-    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT);
-    if(msecs <= GAME_DURATION * 1/4)
+    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT); //decreasing currentTimeLeft
+    if(msecs <= GAME_DURATION * 1/4) //when the game passed 1/4
     {
         //teacher kind
         generatingTeacherUpperBound = 9;
@@ -183,10 +190,9 @@ void Game::update()
         generatingTimerLowerBound = 4000;
         generatingTimerUpperBound = 10001;
     }
-    else if(msecs <= GAME_DURATION * 1/2)
+    else if(msecs <= GAME_DURATION * 1/2) //when the game passed 1/2
     {
         //teacher kind
-        generatingTeacherUpperBound = 17;
         generatingTeacherLowerBound = 0;
         generatingTeacherUpperBound = 9;
 
@@ -194,7 +200,7 @@ void Game::update()
         generatingTimerLowerBound = 4000;
         generatingTimerUpperBound = 10001;
     }
-    else if(msecs <= GAME_DURATION * 3/4)
+    else if(msecs <= GAME_DURATION * 3/4) //when the game passed 3/4
     {
         //teacher kind
         generatingTeacherUpperBound = 20;
