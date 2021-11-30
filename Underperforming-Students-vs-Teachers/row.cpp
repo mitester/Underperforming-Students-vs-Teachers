@@ -151,28 +151,28 @@ void Row::addTeacher(TimeVariant::Type type) {  //the logic is identical to the 
     if(type == TimeVariant::Type::DESMOND)  //Desmond has bigger size
         label->setGeometry(Game::TEA_GEN_POS, yPos, Teacher::SPRITE_WIDTH * 1.2, Teacher::SPRITE_HEIGHT * 1.2);
     label->lower();
-    label->show();
-    addTeacher(t);
-    game->adjustHumanLayer(t, t->getRow()->getId());
-    game->registerTimeVariant(t);
+    label->show();  //show the wdiget
+    addTeacher(t);  //register teacher to a grid
+    game->adjustHumanLayer(t, t->getRow()->getId());    //this is for stack management
+    game->registerTimeVariant(t);   //register it to the game manager as a TimeVariant object
 }
 
 void Row::addAssignment(Student* shooter, int damage, QPixmap pixmap) { // add an assignment
-    if(shooter == nullptr) {
+    if(shooter == nullptr) {    // check if the argument passed in is invalid
         qDebug() << "attempt to add assignment at null tile";
         return ;
     }
 
     Game* game = Game::getInstance();
-    QLabel* label = new QLabel(game->getParent());
+    QLabel* label = new QLabel(game->getParent());  // Generate the widget for the assignment
     label->setPixmap(pixmap);
-    label->setGeometry(shooter->getDistanceFromLeft() + Student::SPRITE_WIDTH*0.5,
+    label->setGeometry(shooter->getDistanceFromLeft() + Student::SPRITE_WIDTH*0.5,  //Adjust the shooting position
                        yPos + Student::SPRITE_HEIGHT * 0.3, Assignment::SPRITE_WIDTH,
                        Assignment::SPRITE_HEIGHT);
     // The shooting position is 0.3 * student width to the right
 
 
-    Assignment* a = new Assignment(label, this, damage);
+    Assignment* a = new Assignment(label, this, damage);    // instantiate the assignment object, link it to the label
     addAssignment(a); //the assignment also needs to be registered.
     game->registerTimeVariant(a);
     label->show();
@@ -187,7 +187,7 @@ void Row::removeStudent(int pos) {
     // After the removal, all students are put back to the queue again.
     // This way can the structure of the queue be not distrubed
 
-    if(!inBound(pos))
+    if(!inBound(pos))   //check pos
         return;
 
     while(!studentQueue.empty()) { // empty out the queue before removal

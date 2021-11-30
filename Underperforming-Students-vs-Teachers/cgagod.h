@@ -14,10 +14,10 @@ class CgaGod : public AttackStudent
 public:
     //some constants defined the CgaGod properties
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{3000};
-    static const int DEFAULT_SKILL_SPEED{2000};
+    static const int DEFAULT_MAX_HP{1500};
+    static const int DEFAULT_SKILL_SPEED{2500};
     static const int DEFAULT_COST{30};
-    static const int DEFAULT_DAMAGE{50};
+    static const int DEFAULT_DAMAGE{40};
 
     //sprite pictures for assignment
     //preloaded in GameWindow

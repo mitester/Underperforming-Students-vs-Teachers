@@ -14,7 +14,7 @@ class GbusStudent : public SupportStudent
 public:
     //some constants defined the GbusStudent
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{1000};
+    static const int DEFAULT_MAX_HP{500};
     static const int DEFAULT_SKILL_SPEED{5000};
     static const int DEFAULT_COST{10};
 

@@ -34,12 +34,7 @@ void Teacher::setSpeed(int speed) {
     this->speed = speed;
 }
 
-//TODO
-void Teacher::attack(Student& s) {
-
-}
-
-void Teacher::update() {
+void Teacher::update() {    // a null implementation.
 
 }
 

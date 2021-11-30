@@ -347,7 +347,14 @@ GameWindow::~GameWindow()
     delete ui;
 }
 
+// Find the closest grid id given a position on the map.
 QPoint GameWindow::getClosestGridPos(QPoint p) {
+
+    // The general idea of the matching:
+    // 1. loop over y-coordinates of rows, and match the row with the closest y-coordinate. (row i)
+    // 2. loop over x-coordinates of the tiles on the row, match the coordinate to the closest tile (tile j)
+    // return the result as a QPoint (i,j)
+
     Game* game = Game::getInstance();
     // Finding the closest row that matches the YPosition of the clicking
     int minYIdx = 0;
@@ -355,12 +362,11 @@ QPoint GameWindow::getClosestGridPos(QPoint p) {
         if(abs(game->getRowAt(i)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y())
          < abs(game->getRowAt(minYIdx)->getYPos() + (Game::GRID_INTERVAL_VERTICAL) - p.y()))
             minYIdx = i;
-    Row* row = game->getRowAt(minYIdx);
 
     // Finding the closest tile in the row that matches the XPosition of the clicking
     int minXPos = Game::GRID_LEFT;
     int minXIdx = 0;
-    for(int i = 0; i < Game::NUMBER_OF_COLUMN; i++) {
+    for(int i = 0; i < Game::NUMBER_OF_COLUMN; i++) {   //compare the x position to every tiles's xPos
         int xPos = Game::GRID_LEFT + (Game::GRID_INTERVAL_HORIZONTAL/2) + i * Game::GRID_INTERVAL_HORIZONTAL;
         if(abs(xPos - p.x()) < abs(minXPos - p.x())) {
             minXPos = xPos;
@@ -372,6 +378,13 @@ QPoint GameWindow::getClosestGridPos(QPoint p) {
 }
 
 void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEvent. Mostly for sprite card placement
+    // The logic:
+    //  Only if the click position is within the grid and there is a card selected, we handle it, otherwise, it give it back to the default
+    //
+    //  1. Use getClosestGridPos() to find the corresponding tile that the user is clicking
+    //  2. For student placement, we check wether there is enough redbull / the tile is empty or not and add the student to the Row.
+    //  3. For student expellation, we check wether the tile has student, if it has, we remove that guy.
+    //
     QPoint p = ev->pos();
     Game* game = Game::getInstance();
 
@@ -379,23 +392,23 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
        p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN &&
        game->selectedCard != nullptr) { //only when the click is within the grid area, we do further judgement
 
-        // Finding the closest row that matches the YPosition of the clicking
-
+        // 1. Finding the closest tile that the user is clicking
         QPoint gridPos = getClosestGridPos(p);
         int minYIdx = gridPos.y();
         int minXIdx = gridPos.x();
         Row* row = game->getRowAt(minYIdx);
         int minXPos = Game::GRID_LEFT + (Game::GRID_INTERVAL_HORIZONTAL/2) + minXIdx * Game::GRID_INTERVAL_HORIZONTAL;
 
-        // If the selected type is Empty, but there is card selected (implies expel)
+        // 3. If the selected type is Empty, but there is card selected (implies expel)
         if(game->selectedSprite == TimeVariant::Type::EMPTY) {
             if(row->hasStudentAt(minXIdx))
-                row->removeStudent(minXIdx);
+                row->removeStudent(minXIdx);    // remove the student
             return;
         }
 
         int cost = game->getCost(game->selectedSprite);
 
+        // 2. The placement of student
         if(game->getRedbullNum() >= cost && !row->hasStudentAt(minXIdx)) {  // check if cost is enough & hasStudent
 
             if(row->getLeftMostTeacher()) // not allowed to put student to the right of teachers
@@ -406,6 +419,8 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
             row->addStudent(game->selectedSprite, minXIdx); // add the student to corresponding row
         }
 
+        // If after placement there is no enough budget to place more this type of student,
+        // we cancel the player's selection
         if(game->getRedbullNum() < game->getCost(game->selectedSprite)) {
             emit game->selectedCard->clicked();
         }
@@ -416,17 +431,32 @@ void GameWindow::mousePressEvent(QMouseEvent *ev) { // rewrite the mousePressEve
     }
 }
 
+// This function is rewrited to provide the transparent hovering effect.
 void GameWindow::mouseMoveEvent(QMouseEvent *ev) {
+    // Logic:
+    //  Only when the mouse is within the grid, and there is a card selected, then we respond
+    //
+    //  1. Use getClosestGridPos() to find the tile corresponding to the player's cursor position
+    //  2. Move the transparent label to the corresponding position
+    //  3. Show the label. (its pixmap has been set properly in the sprite selection section
+
     QPoint p = ev->pos();
     Game* game = Game::getInstance();
+
+    //only react when the cursor is within the grid
     if(p.x() > Game::GRID_LEFT && p.x() < Game::GRID_RIGHT &&
        p.y() > Game::GRID_UP && p.y() < Game::GRID_DOWN && game->selectedSprite != TimeVariant::Type::EMPTY) {
+
+        //1. find the corresponding position
         QPoint pos = getClosestGridPos(p);
         int xPos = pos.x() * Game::GRID_INTERVAL_HORIZONTAL + Game::GRID_LEFT;
         int yPos = pos.y() * Game::GRID_INTERVAL_VERTICAL + Game::GRID_UP;
+
+        //2&3. Move and show the label
         game->transLabel->move(xPos, yPos);
         game->transLabel->show();
-    } else {
+
+    } else { // if moved outside the grid, hide the label and use default mouseMoveEvent.
         game->transLabel->hide();
         QMainWindow::mouseMoveEvent(ev);
     }

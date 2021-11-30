@@ -14,7 +14,7 @@ class SleepDeprivedStudent : public AttackStudent
 
 public:
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{2000};
+    static const int DEFAULT_MAX_HP{500};
     static const int DEFAULT_SKILL_SPEED{2000};
     static const int DEFAULT_COST{10};
     static const int DEFAULT_DAMAGE{10};
