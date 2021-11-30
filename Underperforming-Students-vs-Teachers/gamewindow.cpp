@@ -194,10 +194,7 @@ GameWindow::GameWindow(QWidget *parent) :
     ui->gridLayout->addWidget(card6,1,1);
     ui->gridLayout->addWidget(card7,2,1);
 
-
-    //ATTENTION
-    //starts the game after everything is ready
-    //so it must be the last line
+    //please prepare labels after the game starts
     game->start();
 
     QLabel* transparentSprite = new QLabel(this);

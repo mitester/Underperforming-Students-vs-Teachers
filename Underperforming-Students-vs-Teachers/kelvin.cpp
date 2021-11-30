@@ -30,14 +30,19 @@ TimeVariant::Type Kelvin::getType() const {return TimeVariant::Type::KELVIN;}
 
 void Kelvin::update() {
     // initialization (get all the references)
+
+    // Logic of Kelvin's update:
+    //
     if(!widget->isEnabled())
         return ;
 
+    // Self destruction (after reached the right end)
     if(this->getDistanceFromLeft() > Game::TEA_GEN_POS) {//when the teacher is outside of the leftmost distance.
         row->removeTeacher(this);
         return ;
     }
 
+    // Explosion Animator
     if(deadCounter >= 1) { //enters the "explosion mode"
         //this->widget->setDisabled(true);
         if(counter % 10 == 0) {
@@ -59,39 +64,47 @@ void Kelvin::update() {
         return;
     }
 
+    // Get all necessary information for the teacher to detect collision
     QRect shape = widget->geometry();
     const Teacher* leftTeacher = this->row->getLeftMostTeacher();
     const Assignment* rightAssignment = this->row->getRightMostAssignment();
     const Student* rightStudent = this->row->getRightMostStudent();
 
-    if(this != leftTeacher && shape.intersects(leftTeacher->getWidget()->geometry())) { // a teacher intersects with the leftmost teacher
 
+    // the teacher intersects with the leftmost teacher, update the left most teacher position
+    if(this != leftTeacher && shape.intersects(leftTeacher->getWidget()->geometry()))
         row->updateLeftMostTeacher();
 
-    }
 
-    if (rightAssignment && shape.intersects(rightAssignment->getWidget()->geometry())) { // hit an assignment
+    // the teacher hits an assignment,
+    if (rightAssignment && shape.intersects(rightAssignment->getWidget()->geometry())) {
 
+        // reduce the teacher's hp
         this->hp -= rightAssignment->getDamage();
         if(this->hp <= 0)
-            deadCounter++;
+            deadCounter++;  // if no more hp, enters the "explosion" animation
 
+        // remove the assignment
         Assignment* preRemove = row->popRightMostAssignment();
         preRemove->deleteLater();
         widget->move(widget->x() - speed / 2, widget->y()); // speed reduced after being hit
 
+        // play the sound effect of being hit
         player->play();
-
     }
 
-    if (rightStudent && shape.intersects(rightStudent->getWidget()->geometry())) {   // hit a student
 
+    // the teacher hits a student
+    if (rightStudent && shape.intersects(rightStudent->getWidget()->geometry())) {
+
+        // if the student is Teacher's pet (we need to turn back)
         if(rightStudent->getType() == TimeVariant::Type::TEACHERS_PET) {
             speed = -speed;
             row->setRightMostStudentHp(0);
-        } else
+        } else  // otherwise just attack the student
             row->setRightMostStudentHp(rightStudent->getHp() - damage);
 
+        // if the student has no hp after our attack, delete it
         if(rightStudent->getHp() <= 0) {
             Student* preRemove = row->popRightMostStudent();
             preRemove->deleteLater();
@@ -99,22 +112,23 @@ void Kelvin::update() {
 
     } else { // hit nothing, move forward.
 
-        if(counter % 3 == 0)  {
+        // The move animation setter
+        if(counter % 3 == 0)  { // speed control
             widget->move(widget->x() - speed, widget->y());
 
-            if(counter >= abs(speed) * 5) {
-                if(speed > 0) {
+            if(counter >= abs(speed) * 5) { // the speed is abs() because it may be negative (moving backward)
+                if(speed > 0) { // moving in right direction, use the corresponding pixmap
                     if(firstLeg)
                         widget->setPixmap(*Kelvin::PIC_1);
                     else
                         widget->setPixmap(*Kelvin::PIC_0);
-                } else {
+                } else {    // moving in reversed direction, use the reversed pixmap
                     if(firstLeg)
                         widget->setPixmap(*Kelvin::PIC_3);
                     else
                         widget->setPixmap(*Kelvin::PIC_2);
                 }
-                firstLeg = !firstLeg;
+                firstLeg = !firstLeg;   // change the leg after moving
                 counter = 0;
             }
         }
