@@ -88,7 +88,7 @@ Game* Game::getInstance(QWidget *parent)
 
 int Game::getRedbullNum() const {return redbullNum;}
 
-//add n Redbull
+//add n Redbull (default n is Redbull:DEFAULT_ENERGY)
 //return true if it adds successfully
 //return false if it failed
 bool Game::addRedbull(int n)
@@ -115,32 +115,41 @@ Row* Game::getRowAt(int i) const
     return rows[i];
 }
 
-//it starts the game
+// it starts the game
+// return true if successfully start
+// otherwise, false
 bool Game::start()
 {
     if(gameStatus != GameStatus::PAUSED) return false; //game is unable to re-start
 
     //game start init
-    mainTimer->start();
-    generatingTimer->start();
-    gameStatus = GameStatus::BATTLING;
-    player.play();
-    return true;
+    mainTimer->start(); //start to count time
+    generatingTimer->start(); //start to generate teachers
+    gameStatus = GameStatus::BATTLING; //mark the status to battling
+    player.play(); //start to play bgm
+    return true; //return true if successfully starts
 }
 
-//it pauses the game
+// it pauses the game
+// return true if successfully paused
+// return false otherwise
 bool Game::pause()
 {
     if(gameStatus == GameStatus::PAUSED) return false; //game is unable to pause if not started
 
     mainTimer->stop(); //timer will not reset after stop(). Therefore, it is a pause.
     generatingTimer->stop();
+
+    // if it is battling, it turns to paused
+    // the other cases are TEACHER_WON & STUDENT_WON
+    // shouldn't change the status if they're the current status
+    // but still let them pause the game
     if(gameStatus == GameStatus::BATTLING)
     {
         gameStatus = GameStatus::PAUSED;
     }
-    player.pause();
-    return true;
+    player.pause(); //stop playing the bgm
+    return true; //return true if successfully starts
 }
 
 //it is also binded with mainTimer
@@ -156,8 +165,8 @@ void Game::update()
         lb_game_ended->setScaledContents(true);
         lb_game_ended->setGeometry(GAME_ENDED_LABEL_X, GAME_ENDED_LABEL_Y,
                                    GAME_ENDED_LABEL_WIDTH, GAME_ENDED_LABEL_HEIGHT);
-        lb_game_ended->setPixmap(QPixmap());
-        lb_game_ended->hide();
+        lb_game_ended->setPixmap(QPixmap()); //set it will a empty pixmap
+        lb_game_ended->hide(); //set it to be unseen
 
         //if student has won
         if(gameStatus == GameStatus::STUDENT_WON)
@@ -174,14 +183,18 @@ void Game::update()
             player.play();
 
         }
-        lb_game_ended->raise(); //raise the label
         lb_game_ended->show(); //show the label
+        lb_game_ended->raise(); //raise the label so that it's on the top layer
     }
 
-    //get the milliseconds passed
-    int msecs = GAME_DURATION - currentTimeLeft.msecsSinceStartOfDay();
-    currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT); //decreasing currentTimeLeft
-    if(msecs <= GAME_DURATION * 1/4) //when the game passed 1/4
+    //if current time left is greater than 0
+    if(currentTimeLeft.msecsSinceStartOfDay() > 0)
+        currentTimeLeft = currentTimeLeft.addMSecs(-Game::BASIC_TIME_UNIT); //decreasing currentTimeLeft
+
+    int msecs = currentTimeLeft.msecsSinceStartOfDay(); //how much time left in milliseconds
+
+    //using interval notation for the following range explanation
+    if(msecs >= GAME_DURATION * 3/4) // [3/4, 4/4)
     {
         //teacher kind
         generatingTeacherUpperBound = 9;
@@ -190,7 +203,7 @@ void Game::update()
         generatingTimerLowerBound = 4000;
         generatingTimerUpperBound = 10001;
     }
-    else if(msecs <= GAME_DURATION * 1/2) //when the game passed 1/2
+    else if(msecs >= GAME_DURATION * 1/2) //[2/4, 3/4]
     {
         //teacher kind
         generatingTeacherLowerBound = 0;
@@ -200,7 +213,7 @@ void Game::update()
         generatingTimerLowerBound = 4000;
         generatingTimerUpperBound = 10001;
     }
-    else if(msecs <= GAME_DURATION * 3/4) //when the game passed 3/4
+    else if(msecs >= GAME_DURATION * 1/4) //[1/4, 2/4]
     {
         //teacher kind
         generatingTeacherUpperBound = 20;
@@ -210,7 +223,7 @@ void Game::update()
         generatingTimerLowerBound = 2000;
         generatingTimerUpperBound = 6001;
     }
-    else
+    else                                  //(0, 1/4]
     {
         generatingTeacherUpperBound = 20;
         generatingTeacherLowerBound = 10;
@@ -220,45 +233,59 @@ void Game::update()
     }
 }
 
+// it checks if the game has ended
+// the criteria are either student won or teacher won
+// return true if it is ended
+// false otherwise
 bool Game::checkTerminated()
 {
 
-    if(currentTimeLeft == QTime(0,0)) //TODO: student cleared all teacher
+    //if time is up, student won the game
+    if(currentTimeLeft == QTime(0,0))
     {
-        gameStatus = GameStatus::STUDENT_WON;
-        return true;
+        gameStatus = GameStatus::STUDENT_WON; //mark the status as student won
+        return true; //true if ended
     }
 
     for(int i = 0; i < NUMBER_OF_ROW; i++)
     {
-        if(rows[i]->hasReachedEnd()) //teacher cleared one row
+        if(rows[i]->hasReachedEnd()) //a teacher cleared one row
         {
-            gameStatus = GameStatus::TEACHER_WON;
-            return true;
+            gameStatus = GameStatus::TEACHER_WON; //mark the status as teacher won
+            return true; //true if ended
         }
     }
-    return false;
+    return false; //false if not ended
 }
 
 int Game::getRandomInterval() const
 {
+    // generate a random interval for teacher generation
+    // since teacher is generated in a random period
     return QRandomGenerator::securelySeeded().bounded(generatingTimerLowerBound, generatingTimerUpperBound);
 }
 
+//getter of gameStatus
 Game::GameStatus Game::getGameStatus() const
 {
     return gameStatus;
 }
 
+//setter of gameStatus
 void Game::setGameStatus(GameStatus status)
 {
     gameStatus = status;
 }
 
+//generate per generatingTimer interval
 void Game::generateTeacher()
 {
+    //get a teacher kind with this generator
     int num = QRandomGenerator::securelySeeded().bounded(generatingTeacherLowerBound, generatingTeacherUpperBound);
+    //get a row number for which row the teacher is gonna be
     int rowNum = QRandomGenerator::securelySeeded().bounded(0, NUMBER_OF_ROW);
+
+    //determining which kind of teacher should be generated
     if(num >= 0 && num <= 9)
     {
         rows[rowNum]->addTeacher(TimeVariant::Type::OVERWORKED_TA);
@@ -273,6 +300,9 @@ void Game::generateTeacher()
     }
     if(num >= 18 && num <= 20)
     {
+        // for the game balancing purpose, there will be only one desmond in the same time
+        // so if there is no desmond, we put a desmond
+        // otherwise, nothing to do
         if(!desmond)
         {
             rows[rowNum]->addTeacher(TimeVariant::Type::DESMOND);
@@ -280,29 +310,43 @@ void Game::generateTeacher()
         }
 
     }
+
+    //reset another generating teacher interval for the next generation
     generatingTimer->setInterval(getRandomInterval());
 }
 
+//getter of parent
 QWidget* Game::getParent() const
 {
     return parent;
 }
 
+//setter of parent
 void Game::setParent(QObject *parent)
 {
     QObject::setParent(parent);
 }
 
+//getter of mainTimer
+//for someone outside which is not TimeVariant who wanna binds with its timeout()
 QTimer* Game::getMainTimer() const
 {
     return mainTimer;
 }
 
+//return the current time left in mm:ss
 QString Game::getCurrentTimeLeft() const
 {
     return currentTimeLeft.toString("mm:ss");
 }
 
+//return the current time left in milliseconds
+int Game::getCurrentMsLeft() const
+{
+    return currentTimeLeft.msecsSinceStartOfDay();
+}
+
+//get the cost of each student by an enumeration
 int Game::getCost(TimeVariant::Type student) {
     switch (student) {
     case TimeVariant::Type::CGA_GOD:
@@ -323,19 +367,29 @@ int Game::getCost(TimeVariant::Type student) {
     }
 }
 
+// it is for ui layout stacking management
+// it makes the bottom row of Human stacking on the top
+// the top row of Human stacking on the bottom
+// it fits the general sense of aesthetics
 void Game::adjustHumanLayer(Human* h, int rowId)
 {
+    //if the rowId is out of bound, error msg printed and return
     if(rowId < 0 || rowId > NUMBER_OF_ROW - 1)
     {
         qDebug() << "Game::adjustHumanLayer(Human* h, int rowId): invalid rowId";
         return;
     }
 
+    // if it is the last row, the human should be raised to the top
+    // and since Desmond has to be the top of that layer
+    // we need to raise Desmond after other widget is raised to the top
     if(rowId == NUMBER_OF_ROW - 1)
     {
         h->getWidget()->raise();
         if(desmond && desmondRowId == rowId) desmond->getWidget()->raise();
     }
+    // otherwise, for any row not the bottom one, it should be stacked under the row below
+    // and again, Desmond has to be stacked again after some Human in the same row is above him
     else
     {
         h->getWidget()->stackUnder(sentinels[rowId]);
