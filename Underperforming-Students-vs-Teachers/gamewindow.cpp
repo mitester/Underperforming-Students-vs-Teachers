@@ -33,6 +33,8 @@ GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow)
 {
+    this->game = Game::getInstance(this); //get the Singleton Game object
+
     ui->setupUi(this);
     setWindowTitle(Game::GAME_NAME);
 
@@ -102,8 +104,6 @@ GameWindow::GameWindow(QWidget *parent) :
 
     Game::GAME_SCENE_FAIL = new QPixmap(":/images/scene/game_scene_fail.png");
     Game::GAME_SCENE_PASS = new QPixmap(":/images/scene/game_scene_pass.png");
-
-    this->game = Game::getInstance(this); //get the Singleton Game object
 
     ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
     ui->widget_right->raise();

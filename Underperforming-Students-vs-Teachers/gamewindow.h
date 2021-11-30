@@ -14,12 +14,15 @@ class GameWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    //constructor
     explicit GameWindow(QWidget *parent = nullptr);
     ~GameWindow();
 
+    //return the the QPoint on the grid nearest to p
     static QPoint getClosestGridPos(QPoint p);
 
 protected:
+    //overrided QMainWindow's events
     void resizeEvent(QResizeEvent* ev);
     void paintEvent(QPaintEvent* ev);
     void mousePressEvent(QMouseEvent* ev);
