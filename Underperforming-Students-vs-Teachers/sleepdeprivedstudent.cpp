@@ -1,7 +1,6 @@
 #include "sleepdeprivedstudent.h"
 #include "game.h"
 #include <QDebug>
-#include <QThread>
 
 const QString SleepDeprivedStudent::DEFAULT_NAME = "Sleep Deprived Student";
 QPixmap* SleepDeprivedStudent::PIC_0 = nullptr;
@@ -18,6 +17,7 @@ TimeVariant::Type SleepDeprivedStudent::getType() const {return TimeVariant::Typ
 void SleepDeprivedStudent::update()
 {
     //there is at least one teacher approaching
+    //this is just the basic version of implementation of every attack student
     if(row->getLeftMostTeacher())
     {
         if(timeConcept == skillSpeed / 2)

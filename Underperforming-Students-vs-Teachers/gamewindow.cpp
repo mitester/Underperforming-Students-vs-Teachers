@@ -36,11 +36,12 @@ GameWindow::GameWindow(QWidget *parent) :
     this->game = Game::getInstance(this); //get the Singleton Game object
 
     ui->setupUi(this);
-    setWindowTitle(Game::GAME_NAME);
+    setWindowTitle(Game::GAME_NAME); //set the window title to the game name
 
+    //initialize the rebull place which let redbull to fly to
     Game::REDBULL_POS = ui->lb_redbull_pic->mapToGlobal(QPoint(0,0));
 
-    setFixedSize(windowWidth, windowHeight);
+    setFixedSize(windowWidth, windowHeight); //not letting users to resize
 
     // ======== All pictures are preloaded for efficiency improvement ========
 
@@ -105,15 +106,22 @@ GameWindow::GameWindow(QWidget *parent) :
     Game::GAME_SCENE_FAIL = new QPixmap(":/images/scene/game_scene_fail.png");
     Game::GAME_SCENE_PASS = new QPixmap(":/images/scene/game_scene_pass.png");
 
-    ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
-    ui->widget_right->raise();
+    // ========================================================================
 
+    //set the default redbull number on the redbull label
+    ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
+    ui->widget_right->raise(); //raise the redbull and the time labels so that no teachers will cover them
+
+    //*** All signal and slot implementations below are using Lambda Function ***
+
+    //notifyAddRedbull is emitted from game which notify label to add redbull number
     connect(game, &Game::notifyAddRedbull, this,
             [=]()
             {
                 ui->lb_redbull_num->setText(QString::number(game->getRedbullNum()));
             });
 
+    //the redbull and the time labels have to be raised repeatedly so that no teachers will cover them
     connect(game->getMainTimer(), &QTimer::timeout,
             this,
             [=]()
@@ -122,6 +130,7 @@ GameWindow::GameWindow(QWidget *parent) :
                 ui->widget_right->raise();
             });
 
+    //starting and pausing the game
     connect(ui->lb_pause, &ClickableLabel::clicked, this,
             [=]()
             {
@@ -143,6 +152,8 @@ GameWindow::GameWindow(QWidget *parent) :
         parentWidget()->show();
         deleteLater();
     });
+
+    //************************************************************************
 
 //    game->getRowAt(0)->addStudent(TimeVariant::Type::SLEEP_DEPRIVED_STUDENT, 0);
 //    game->getRowAt(0)->addStudent(TimeVariant::Type::DEADLINE_FIGHTER, 1);
@@ -171,6 +182,7 @@ GameWindow::GameWindow(QWidget *parent) :
 //    game->getRowAt(4)->addStudent(TimeVariant::Type::TEACHERS_PET, 4);
 
 
+    //placing the vending machine with some of its properties
     QLabel* label = new QLabel(this);
     label->setPixmap(*VendingMachine::PIC_0);
     label->setFixedSize(VendingMachine::SPRITE_WIDTH, VendingMachine::SPRITE_HEIGHT);
@@ -194,9 +206,6 @@ GameWindow::GameWindow(QWidget *parent) :
     ui->gridLayout->addWidget(card6,1,1);
     ui->gridLayout->addWidget(card7,2,1);
 
-    //please prepare labels after the game starts
-    game->start();
-
     QLabel* transparentSprite = new QLabel(this);
     transparentSprite->setFixedSize(Student::SPRITE_WIDTH,Student::SPRITE_HEIGHT);
     transparentSprite->setScaledContents(true);
@@ -205,20 +214,33 @@ GameWindow::GameWindow(QWidget *parent) :
 
     setMouseTracking(true);
     ui->centralwidget->setMouseTracking(true);
+
+    //**********ATTENTION!!!!!!***************
+    //we will starts the game after everything is ready
+    //so it must be the last line of this constructor
+    //****************************
+    /***/    game->start();  /***/
+    //****************************
 }
 
+// since we did it before we decided to fix the size
+// this is kept though it won't be called
 void GameWindow::resizeEvent(QResizeEvent *ev) {
     QMainWindow::resizeEvent(ev);
     this->game->currentSize = ev->size();
 
 }
 
+// will be called once after the window is opened
+// draw the background
 void GameWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.drawPixmap(this->rect(), QPixmap(":/images/scene/game_scene.png"));
 }
 
+// delete all preloaded pixmap
+// nullify all pixmap pointers
 GameWindow::~GameWindow()
 {
     delete SleepDeprivedStudent::PIC_0;
