@@ -453,6 +453,12 @@ void GameWindow::mouseMoveEvent(QMouseEvent *ev) {
         int yPos = pos.y() * Game::GRID_INTERVAL_VERTICAL + Game::GRID_UP;
 
         //2&3. Move and show the label
+        Teacher* leftmost = game->getRowAt(pos.y())->getLeftMostTeacher();
+        if(leftmost && leftmost->getDistanceFromLeft() <= xPos) { //no placement on the right of teacher
+            game->transLabel->hide();
+            QMainWindow::mouseMoveEvent(ev);
+            return;
+        }
         game->transLabel->move(xPos, yPos);
         game->transLabel->show();
 
