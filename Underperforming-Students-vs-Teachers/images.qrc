@@ -58,5 +58,7 @@
         <file>images/students/stu_shameless_trans.png</file>
         <file>images/students/stu_sleep_trans.png</file>
         <file>images/scene/game_scene_mainwindow.png</file>
+        <file>images/logo/logo.png</file>
+        <file>images/logo/logo_0.png</file>
     </qresource>
 </RCC>
