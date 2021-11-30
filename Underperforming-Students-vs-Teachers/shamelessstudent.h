@@ -14,7 +14,7 @@ class ShamelessStudent : public SupportStudent
 public:
     //some constants defined the ShamelessStudent
     static const QString DEFAULT_NAME;
-    static const int DEFAULT_MAX_HP{10000};
+    static const int DEFAULT_MAX_HP{6000};
     static const int DEFAULT_SKILL_SPEED{1000};
     static const int DEFAULT_COST{20};
 

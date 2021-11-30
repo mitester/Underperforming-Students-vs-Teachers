@@ -36,7 +36,6 @@ public:
     void setDamage(int damage);
 
     // the default attack behaviour of teacher
-    virtual void attack(Student& s);
     virtual void update();      //all teachers must be able to update themselves
 
     TimeVariant::Category getCategory() const;
