@@ -3,9 +3,11 @@
 
 TimeVariant::TimeVariant(QLabel* widget, Row* row) : QObject(widget), widget(widget), row(row)
 {
-    widget->setScaledContents(true);
+    widget->setScaledContents(true); //all labels should be scaledContents
 }
 
+//when a TimeVariant is deleted
+//the widget has to be also deleted
 TimeVariant::~TimeVariant()
 {
     widget->hide();

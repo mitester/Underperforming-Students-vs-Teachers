@@ -104,8 +104,11 @@ public:
 
     QTimer* getMainTimer() const;
 
-    //return current time left in hh:mm form
+    //return current time left in mm:ss form
     QString getCurrentTimeLeft() const;
+
+    //return the current time left in milliseconds
+    int getCurrentMsLeft() const;
 
     static int getCost(TimeVariant::Type student); //return the cost of the given type
 
