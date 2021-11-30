@@ -25,14 +25,14 @@ public:
     const static int COST_Y = 97;
     SpriteCard(TimeVariant::Type type, QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
     void on_clicked(); //the slot function for being clicked.
-    QLabel* costLabel = nullptr;
+    QLabel* costLabel = nullptr;    //the label storing the redbull cost
 
 protected:
-    TimeVariant::Type type;
+    TimeVariant::Type type;     //the type of the spriteCard.
 
 
 private:
-    bool selected = false;
+    bool selected = false;  // if yourself is selected, default is false
     QMediaPlayer* player;
 };
 

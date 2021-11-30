@@ -37,10 +37,6 @@ void Desmond::setSkillSpeed(int skillSpeed) {
 
 TimeVariant::Type Desmond::getType() const {return TimeVariant::Type::DESMOND;}
 
-void Desmond::skill() {
-
-}
-
 void doubleSpeed(Teacher *t) {
     int speed = 0;
     switch (t->getType()) {

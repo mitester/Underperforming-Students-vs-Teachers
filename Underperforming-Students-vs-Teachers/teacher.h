@@ -37,7 +37,7 @@ public:
 
     // the default attack behaviour of teacher
     virtual void attack(Student& s);
-    virtual void update();
+    virtual void update();      //all teachers must be able to update themselves
 
     TimeVariant::Category getCategory() const;
 
@@ -45,8 +45,8 @@ protected:
     explicit Teacher(QLabel *widget, Row* row, QString name, int maxHp, int speed, int damage);
     int speed;
     int damage;
-    int counter = 0;
-    int deadCounter = 0;
+    int counter = 0;        //the general counter
+    int deadCounter = 0;        //To count the explosion effect
     bool firstLeg = true;
 private:
 

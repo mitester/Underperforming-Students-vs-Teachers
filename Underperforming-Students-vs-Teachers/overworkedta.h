@@ -30,7 +30,7 @@ public:
     static const int DEFAULT_SPEED{2};
     static const int DEFAULT_DAMAGE{10};
 
-    static QPixmap* PIC_0;
+    static QPixmap* PIC_0;  //preloaded pictures of the pixmap
     static QPixmap* PIC_1;
     static QPixmap* PIC_2;
     static QPixmap* PIC_3;
@@ -39,8 +39,8 @@ public:
                           QString name = DEFAULT_NAME, int maxHp = DEFAULT_MAX_HP,
                           int speed = DEFAULT_SPEED, int damage = DEFAULT_DAMAGE);
 
-    TimeVariant::Type getType() const;
-    void update();
+    TimeVariant::Type getType() const;  //virtual function implemented
+    void update();  //virtual function implemented
 };
 
 #endif // OVERWORKEDTA_H
