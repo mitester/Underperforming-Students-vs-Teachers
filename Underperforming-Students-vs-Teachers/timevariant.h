@@ -47,6 +47,7 @@ public:
     void setWidget(QLabel *widget);
 
     //restricting all subclasses to react with the global timer signal
+    //it is called per BASIC_TIME_UNIT defined in Game.h
     virtual void update() = 0;
 
     //restricting all subclasses to provide an interface to return back their type & category
@@ -62,7 +63,6 @@ public:
 
 protected:
     //constructor
-    //it takes a
     TimeVariant(QLabel *widget, Row* row);
     ~TimeVariant();
 

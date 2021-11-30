@@ -19,44 +19,52 @@
 #include <QPoint>
 
 
-//default value for Game::instance
-Game* Game::instance = nullptr;
-QPoint Game::REDBULL_POS = {};
-QPixmap* Game::GAME_SCENE_FAIL = nullptr;
-QPixmap* Game::GAME_SCENE_PASS = nullptr;
+//default value for Game static variables
+Game* Game::instance = nullptr; //save the only instance
+QPoint Game::REDBULL_POS = {}; //save the position of redbull place which redbulls need to go
+QPixmap* Game::GAME_SCENE_FAIL = nullptr; //will preload the fail game_scene in GameWindow
+QPixmap* Game::GAME_SCENE_PASS = nullptr; //will preload the pass game_scene in GameWindow
 
-
+//default game name for this game
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
-QSize Game::currentSize;
+QSize Game::currentSize; //save the current window size of this game
 
+//deprecated since we will use the move with absolute coordinates
 void Game::move(QWidget *w, double xPercent, double yPercent) {
     w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
 }
 
+//constructor
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     currentSize = parent->size(); //save the size of parent
 
 
-    currentTimeLeft = QTime(0, 0);
-    currentTimeLeft = currentTimeLeft.addMSecs(GAME_DURATION);
+    currentTimeLeft = QTime(0, 0); //initialize the currentTimeLeft by 0h 0m
+    currentTimeLeft = currentTimeLeft.addMSecs(GAME_DURATION); //add GAME_DURATION milliseconds
 
+    //initialize the timer
     mainTimer = new QTimer(parent);
-    mainTimer->setInterval(BASIC_TIME_UNIT);
+    mainTimer->setInterval(BASIC_TIME_UNIT); //set it to emit timeout() per BASIC_TIME_UNIT
 
     //it bounds with the slot which guards the game progress
     mainTimer->callOnTimeout(this, &Game::update);
 
+    //generatingTimer is for generating teachers
     generatingTimer = new QTimer(parent);
     generatingTimer->setInterval(getRandomInterval());
-    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
+    generatingTimer->callOnTimeout(this, &Game::generateTeacher); //binds Game::generateTeacher() with timeout() using signals and slots
 
 
+    //initialize the 4 rows object
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(i, GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
+    //sets the bgm resource file to play after it starts
     player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
 
+    //sentinels act as the widget layer split
+    //it divdes layers
     for(int i = 0; i < NUMBER_OF_ROW - 1; i++)
     {
         sentinels[i] = new QWidget(parent);
@@ -64,6 +72,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     }
 }
 
+//destructor
 Game::~Game()
 {
     instance = nullptr;
@@ -79,6 +88,9 @@ Game* Game::getInstance(QWidget *parent)
 
 int Game::getRedbullNum() const {return redbullNum;}
 
+//add n Redbull
+//return true if it adds successfully
+//return false if it failed
 bool Game::addRedbull(int n)
 {
     int temp = redbullNum + n;
@@ -90,6 +102,8 @@ bool Game::addRedbull(int n)
     return true;
 }
 
+//binds update() of timeVariant with timeout() of mainTimer
+//since Qt implements dynamic binding. The update() function of the corresponding class is called
 void Game::registerTimeVariant(TimeVariant *timeVariant)
 {
     mainTimer->callOnTimeout(timeVariant, &TimeVariant::update);
@@ -138,6 +152,7 @@ void Game::update()
         lb_game_ended->setGeometry(GAME_ENDED_LABEL_X, GAME_ENDED_LABEL_Y,
                                    GAME_ENDED_LABEL_WIDTH, GAME_ENDED_LABEL_HEIGHT);
         lb_game_ended->setPixmap(QPixmap());
+        lb_game_ended->raise();
         lb_game_ended->hide();
 
         if(gameStatus == GameStatus::STUDENT_WON)
