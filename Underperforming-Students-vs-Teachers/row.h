@@ -15,7 +15,7 @@
  * Date: 11/15/2021
  *
  * ---- Description -----
- * A Row Maintains all the objects (Student, Assignment, Teacher) in a row using three heaps and an array.
+ * A Row Maintains all the objects (Student, Assignment, Teacher) in a row using two heaps, a vector and an array.
  * Row provides fast accessors/mutators, but removing specific elements can be expensive.
  * Row will manage all generated objects and delete it properly.
  * Please do not delete objects in a row from outside. It will create serious trouble.

@@ -20,7 +20,7 @@ public:
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{1000};
     static const int DEFAULT_SPEED{1};
-    static const int DEFAULT_DAMAGE{10};
+    static const int DEFAULT_DAMAGE{0};
     static const int DEFAULT_SKILL_SPEED{600};
     static const int SPEED_INCREASE_COUNTDOWN{500}; // the countdown for desmond's speed increment skill
 
