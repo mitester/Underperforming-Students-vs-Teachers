@@ -15,7 +15,7 @@ public:
     //some constants defined the CgaGod properties
     static const QString DEFAULT_NAME;
     static const int DEFAULT_MAX_HP{1500};
-    static const int DEFAULT_SKILL_SPEED{2500};
+    static const int DEFAULT_SKILL_SPEED{2400}; //this must be a multiple of 2 * BASIC_GAME_UNIT
     static const int DEFAULT_COST{30};
     static const int DEFAULT_DAMAGE{40};
 

@@ -19,30 +19,33 @@
 #include <QPoint>
 
 
-//default value for Game::instance
-Game* Game::instance = nullptr;
-QPoint Game::REDBULL_POS = {};
-QPixmap* Game::GAME_SCENE_FAIL = nullptr;
-QPixmap* Game::GAME_SCENE_PASS = nullptr;
+//default value for Game static variables
+Game* Game::instance = nullptr; //save the only instance
+QPoint Game::REDBULL_POS = {}; //save the position of redbull place which redbulls need to go
+QPixmap* Game::GAME_SCENE_FAIL = nullptr; //will preload the fail game_scene in GameWindow
+QPixmap* Game::GAME_SCENE_PASS = nullptr; //will preload the pass game_scene in GameWindow
 
-
+//default game name for this game
 const QString Game::GAME_NAME = "Underperforming Students VS Teachers";
-QSize Game::currentSize;
+QSize Game::currentSize; //save the current window size of this game
 
+//deprecated since we will use the move with absolute coordinates
 void Game::move(QWidget *w, double xPercent, double yPercent) {
     w->move(xPercent / 100.0 * currentSize.width(), yPercent / 100.0 * currentSize.height());
 }
 
+//constructor
 Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 {
     currentSize = parent->size(); //save the size of parent
 
 
-    currentTimeLeft = QTime(0, 0);
-    currentTimeLeft = currentTimeLeft.addMSecs(GAME_DURATION);
+    currentTimeLeft = QTime(0, 0); //initialize the currentTimeLeft by 0h 0m
+    currentTimeLeft = currentTimeLeft.addMSecs(GAME_DURATION); //add GAME_DURATION milliseconds
 
+    //initialize the timer
     mainTimer = new QTimer(parent);
-    mainTimer->setInterval(BASIC_TIME_UNIT);
+    mainTimer->setInterval(BASIC_TIME_UNIT); //set
 
     //it bounds with the slot which guards the game progress
     mainTimer->callOnTimeout(this, &Game::update);
@@ -138,6 +141,7 @@ void Game::update()
         lb_game_ended->setGeometry(GAME_ENDED_LABEL_X, GAME_ENDED_LABEL_Y,
                                    GAME_ENDED_LABEL_WIDTH, GAME_ENDED_LABEL_HEIGHT);
         lb_game_ended->setPixmap(QPixmap());
+        lb_game_ended->raise();
         lb_game_ended->hide();
 
         if(gameStatus == GameStatus::STUDENT_WON)

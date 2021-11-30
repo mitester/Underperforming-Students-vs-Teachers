@@ -47,7 +47,9 @@ void Redbull::update()
     }
     else
     {
-        widget->raise();
+        if(Game::getInstance()->getCurrentTimeLeft() > Game::GAME_DURATION)
+            widget->raise();
+
         if(vy == -vy_initial) return; //parabola completed
         widget->show();
         widget->move(widget->x() + vx, widget->y() + vy);

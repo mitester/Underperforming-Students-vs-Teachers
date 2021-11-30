@@ -2,6 +2,7 @@
 #include "row.h"
 #include <QDebug>
 
+//initialization of name and pics
 const QString DeadlineFighter::DEFAULT_NAME = "Deadline Fighter";
 
 QPixmap* DeadlineFighter::PIC_0 = nullptr;
@@ -22,14 +23,17 @@ DeadlineFighter::DeadlineFighter(QLabel* widget, Row* row, QString name, int max
 
 TimeVariant::Type DeadlineFighter::getType() const {return TimeVariant::Type::DEADLINE_FIGHTER;}
 
+//return if its rage mode is triggered
 bool DeadlineFighter::isTriggered() const
 {
     return triggered;
 }
 
+//react to the timeout() signal per BASIC_TIME_UNIT
 void DeadlineFighter::update()
 {
 
+    //if there is at least teacher approaching
     if(row->getLeftMostTeacher())
     {
         /***
@@ -37,42 +41,42 @@ void DeadlineFighter::update()
         * it is not guaranteed that timeConcept will be restored. However, it needs to be.
         * It is the reason for this code to exist
         */
-        //previous state is different from the current state
-        //qDebug() << (row->getLeftMostTeacher()->getDistanceFromLeft());
+        //if previous state is different from the current state
         if(triggered ^ (row->getLeftMostTeacher()->getDistanceFromLeft() - getDistanceFromLeft() <= triggerSkillDistance))
         {
-            triggered = !triggered;
+            triggered = !triggered; //triggered needs to be changed
 
             if(triggered)
             {
-                widget->setPixmap(*PIC_3);
+                widget->setPixmap(*PIC_3); //set to triggered pics
             }
             else
             {
-                widget->setPixmap(*PIC_0);
+                widget->setPixmap(*PIC_0); //set to the normal pics
 
             }
 
-            timeConcept = 0;
+            timeConcept = 0; //reset timeConcept since
         }
-        if(triggered)
+        if(triggered) //if it is in rage mode
         {
-            skillSpeed = triggeredSkillSpeed;
+            skillSpeed = triggeredSkillSpeed; //change the skillspeed to the triggered skill speed
 
             if(timeConcept == skillSpeed / 2)
             {
-                widget->setPixmap(*PIC_4);
+                widget->setPixmap(*PIC_4); //set to rage prepare pics
             }
             else if(timeConcept == skillSpeed)
             {
-                widget->setPixmap(*PIC_5);
-                row->addAssignment(this, damage, *Assignment::PIC_1);
-                player->play();
-                timeConcept = 0;
+                widget->setPixmap(*PIC_5); //set to rage attack pics
+                row->addAssignment(this, damage, *Assignment::PIC_1); //create assignment
+                player->play(); //play shoot.mp3
+                timeConcept = 0; //reset it to 0
             }
         }
         else
         {
+            //same as the above but just different assignment pics
             skillSpeed = normalSkillSpeed;
             if(timeConcept == skillSpeed / 2)
             {
@@ -87,10 +91,11 @@ void DeadlineFighter::update()
             }
         }
 
-        timeConcept += Game::BASIC_TIME_UNIT;
+        timeConcept += Game::BASIC_TIME_UNIT; //count the time
     }
     else
     {
+        //restore everything to default when idle
         timeConcept = 0;
         widget->setPixmap(*PIC_0);
         triggered = false;
