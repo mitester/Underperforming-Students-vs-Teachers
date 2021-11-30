@@ -45,21 +45,26 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
 
     //initialize the timer
     mainTimer = new QTimer(parent);
-    mainTimer->setInterval(BASIC_TIME_UNIT); //set
+    mainTimer->setInterval(BASIC_TIME_UNIT); //set it to emit timeout() per BASIC_TIME_UNIT
 
     //it bounds with the slot which guards the game progress
     mainTimer->callOnTimeout(this, &Game::update);
 
+    //generatingTimer is for generating teachers
     generatingTimer = new QTimer(parent);
     generatingTimer->setInterval(getRandomInterval());
-    generatingTimer->callOnTimeout(this, &Game::generateTeacher);
+    generatingTimer->callOnTimeout(this, &Game::generateTeacher); //binds Game::generateTeacher() with timeout() using signals and slots
 
 
+    //initialize the 4 rows object
     for(int i = 0; i < NUMBER_OF_ROW; i++)
         rows[i] = new Row(i, GRID_UP + i*GRID_INTERVAL_VERTICAL,NUMBER_OF_COLUMN,parent);
 
+    //sets the bgm resource file to play after it starts
     player.setMedia(QUrl("qrc:/sounds/bgm.mp3"));
 
+    //sentinels act as the widget layer split
+    //it divdes layers
     for(int i = 0; i < NUMBER_OF_ROW - 1; i++)
     {
         sentinels[i] = new QWidget(parent);
@@ -67,6 +72,7 @@ Game::Game(QWidget* parent) : QObject(parent), parent(parent)
     }
 }
 
+//destructor
 Game::~Game()
 {
     instance = nullptr;
@@ -82,6 +88,9 @@ Game* Game::getInstance(QWidget *parent)
 
 int Game::getRedbullNum() const {return redbullNum;}
 
+//add n Redbull
+//return true if it adds successfully
+//return false if it failed
 bool Game::addRedbull(int n)
 {
     int temp = redbullNum + n;
@@ -93,6 +102,8 @@ bool Game::addRedbull(int n)
     return true;
 }
 
+//binds update() of timeVariant with timeout() of mainTimer
+//since Qt implements dynamic binding. The update() function of the corresponding class is called
 void Game::registerTimeVariant(TimeVariant *timeVariant)
 {
     mainTimer->callOnTimeout(timeVariant, &TimeVariant::update);
